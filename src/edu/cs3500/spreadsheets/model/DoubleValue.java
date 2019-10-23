@@ -2,20 +2,21 @@ package edu.cs3500.spreadsheets.model;
 
 /**
  * Container for an double.
- * @param <Double> integer to contain
+
  */
-public class DoubleContainer<Double> implements ValueContainer {
+public class DoubleValue implements Value {
   Double value;
 
   /**
    * Constructs a new double container.
    * @param value int to contain
    */
-  public DoubleContainer(Double value){
+  public DoubleValue(Double value){
     this.value = value;
   }
+
   @Override
-  public Double getValue() {
-    return this.value;
+  public Value evaluate() {
+    return this;
   }
 }
