@@ -5,5 +5,11 @@ package edu.cs3500.spreadsheets.model;
  */
 public interface Value extends Formula {
 
+  /**
+   * Accepts a value visitor and returns R
+   * @param visitor
+   * @param <R>
+   * @return the desired value R
+   */
   <R> R accept(ValueVisitor<R> visitor);
 }
