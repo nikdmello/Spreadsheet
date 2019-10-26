@@ -6,10 +6,7 @@ import edu.cs3500.spreadsheets.sexp.Sexp;
 import edu.cs3500.spreadsheets.sexp.SexpVisitor;
 
 /**
- * Represents a value which is one of:
- * A boolean
- * A double
- * A String
+ * Represents a visitor function object for processing a Sexp to Formula.
  */
 public class SexpToFormula implements SexpVisitor<Formula> {
 
@@ -25,7 +22,7 @@ public class SexpToFormula implements SexpVisitor<Formula> {
 
   @Override
   public Formula visitSymbol(String s) {
-    return s;
+    return null;
     // TODO
   }
 
@@ -37,7 +34,7 @@ public class SexpToFormula implements SexpVisitor<Formula> {
   @Override
   public Formula visitSList(List l) {
     // TODO
-    return l;
+    return null;
   }
 }
 
