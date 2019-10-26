@@ -4,13 +4,13 @@ package edu.cs3500.spreadsheets.model;
  * Container for an double.
  */
 public class DoubleValue implements Value {
-  private Double value;
+  private final double value;
 
   /**
    * Constructs a new double container.
    * @param value int to contain
    */
-  public DoubleValue(Double value){
+  public DoubleValue(double value){
     this.value = value;
   }
 

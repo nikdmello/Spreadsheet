@@ -9,7 +9,7 @@ package edu.cs3500.spreadsheets.model;
 public interface Formula {
 
   /**
-   *
+   * Evaluates the formula into a single value.
    * @return  a Value
    */
   public Value evaluate();

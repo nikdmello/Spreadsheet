@@ -3,7 +3,7 @@ package edu.cs3500.spreadsheets.model;
 /**
  * Container for a boolean.
  */
-public class BoolValue implements Value {
+public final class BoolValue implements Value {
   private Boolean b;
 
   BoolValue(Boolean b){
