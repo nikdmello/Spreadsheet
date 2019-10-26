@@ -14,4 +14,9 @@ public class BoolValue implements Value {
   public Value evaluate() {
     return this;
   }
+
+  @Override
+  ValueVisitor accept(ValueVisitor<Boolean> value){
+    return value.visitBoolean();
+  }
 }
