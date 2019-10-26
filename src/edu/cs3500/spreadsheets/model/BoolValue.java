@@ -4,9 +4,9 @@ package edu.cs3500.spreadsheets.model;
  * Container for a boolean.
  */
 public class BoolValue implements Value {
-  Boolean b;
+  private Boolean b;
 
-  public BoolValue(Boolean b){
+  BoolValue(Boolean b){
     this.b = b;
   }
 

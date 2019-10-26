@@ -1,9 +1,9 @@
 package edu.cs3500.spreadsheets.model;
 
 public class StringValue implements Value {
-  String s;
+  private String s;
 
-  public StringValue(String s){
+  StringValue(String s){
     this.s = s;
   }
 

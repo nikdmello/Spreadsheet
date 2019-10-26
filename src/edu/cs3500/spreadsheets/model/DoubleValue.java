@@ -2,10 +2,9 @@ package edu.cs3500.spreadsheets.model;
 
 /**
  * Container for an double.
-
  */
 public class DoubleValue implements Value {
-  Double value;
+  private Double value;
 
   /**
    * Constructs a new double container.
