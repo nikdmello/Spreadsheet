@@ -16,7 +16,7 @@ public class BoolValue implements Value {
   }
 
   @Override
-  ValueVisitor accept(ValueVisitor<Boolean> value){
-    return value.visitBoolean();
+  public <R> R accept(ValueVisitor<R> visitor) {
+    return visitor.visitBoolean(this.b);
   }
 }

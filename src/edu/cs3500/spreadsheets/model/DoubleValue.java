@@ -18,4 +18,9 @@ public class DoubleValue implements Value {
   public Value evaluate() {
     return this;
   }
+
+  @Override
+  public <R> R accept(ValueVisitor<R> visitor) {
+    return visitor.visitDouble(this.value);
+  }
 }
