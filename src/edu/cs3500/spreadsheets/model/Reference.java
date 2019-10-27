@@ -41,19 +41,14 @@ public class Reference implements Formula {
     return "ref";
   }
 
-
-//  public ArrayList<Formula> getCellContents() {
-//    int rowMin = Integer.min(c1.row, c2.row);
-//    int rowMax = Integer.max(c1.row, c2.row);
-//
-//    int colMin = Integer.min(c1.col, c2.col);
-//    int colMax = Integer.max(c1.col, c2.col);
-//
-//
-//    for (int i = rowMin; i < rowMax; i++) {
-//      for (int j = colMin; j < colMax; j++) {
-//
-//      }
-//    }
-//  }
+  public ArrayList<Formula> getCellFormulas() {
+    ArrayList<Formula> formulaList = new ArrayList<>();
+    for (int i = c1.col; i < c2.col; i++) {
+      for (int j = c1.row; j < c2.row; j++) {
+        Formula formula = sheet.getCellAt(new Coord(i, j)).getFormula();
+        formulaList.add(formula);
+      }
+    }
+    return formulaList;
+  }
 }
