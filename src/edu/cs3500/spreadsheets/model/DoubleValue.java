@@ -23,4 +23,14 @@ public class DoubleValue implements Value {
   public <R> R accept(ValueVisitor<R> visitor) {
     return visitor.visitDouble(this.value);
   }
+
+  @Override
+  public boolean isNumeric() {
+    return true;
+  }
+
+  @Override
+  public double numberForm() {
+    return value;
+  }
 }

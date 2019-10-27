@@ -16,4 +16,14 @@ public class StringValue implements Value {
   public <R> R accept(ValueVisitor<R> visitor) {
     return visitor.visitString(this.s);
   }
+
+  @Override
+  public boolean isNumeric() {
+    return false;
+  }
+
+  @Override
+  public double numberForm() {
+    return 0;
+  }
 }
