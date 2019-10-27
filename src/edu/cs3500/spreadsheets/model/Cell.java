@@ -14,6 +14,10 @@ final public class Cell {
     this.f = f;
   }
 
+  /**
+   * Evaluates the contents in a cell to a single Value.
+   * @return the Value evaluated to
+   */
   public Value evaluateCell() {
     return f.evaluate();
   }

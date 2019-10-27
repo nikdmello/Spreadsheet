@@ -19,4 +19,14 @@ public final class BoolValue implements Value {
   public <R> R accept(ValueVisitor<R> visitor) {
     return visitor.visitBoolean(this.b);
   }
+
+  @Override
+  public boolean isNumeric() {
+    return false;
+  }
+
+  @Override
+  public double numberForm() {
+    return 0;
+  }
 }
