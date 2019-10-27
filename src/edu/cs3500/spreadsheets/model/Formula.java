@@ -7,7 +7,6 @@ package edu.cs3500.spreadsheets.model;
  * - A function applied to one or more formulas as its arguments
  */
 public interface Formula {
-
   /**
    * Evaluates the formula into a single value.
    * @return  a Value
