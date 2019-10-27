@@ -4,14 +4,14 @@ package edu.cs3500.spreadsheets.model;
  * Represents a cell in a spreadsheet containing a formula.
  */
 final public class Cell {
-  final private Formula f;
+   private Formula form;
 
   /**
    * Constructs a cell containing a formula.
    * @param f the formula for the cell
    */
   public Cell(Formula f) {
-    this.f = f;
+    this.form = f;
   }
 
   /**
@@ -19,6 +19,11 @@ final public class Cell {
    * @return the Value evaluated to
    */
   public Value evaluateCell() {
-    return f.evaluate();
+    return form.evaluate();
+  }
+
+  public Formula getFormula() {
+    return this.form;
   }
 }
+
