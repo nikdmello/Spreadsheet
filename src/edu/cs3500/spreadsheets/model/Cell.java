@@ -24,4 +24,8 @@ final public class Cell {
     }
     return f.evaluate();
   }
+
+  public Formula getFormula() {
+    return this.form;
+  }
 }
