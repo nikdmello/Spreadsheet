@@ -1,12 +1,14 @@
 package edu.cs3500.spreadsheets.model;
 
+import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
+
 /**
  * Container for a boolean.
  */
 public final class BoolValue implements Value {
   private Boolean b;
 
-  BoolValue(Boolean b){
+  public BoolValue(Boolean b){
     this.b = b;
   }
 

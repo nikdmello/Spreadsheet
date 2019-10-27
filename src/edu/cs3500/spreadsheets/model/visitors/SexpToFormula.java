@@ -1,7 +1,11 @@
-package edu.cs3500.spreadsheets.model;
+package edu.cs3500.spreadsheets.model.visitors;
 
 import java.util.List;
 
+import edu.cs3500.spreadsheets.model.BoolValue;
+import edu.cs3500.spreadsheets.model.DoubleValue;
+import edu.cs3500.spreadsheets.model.Formula;
+import edu.cs3500.spreadsheets.model.StringValue;
 import edu.cs3500.spreadsheets.sexp.Sexp;
 import edu.cs3500.spreadsheets.sexp.SexpVisitor;
 

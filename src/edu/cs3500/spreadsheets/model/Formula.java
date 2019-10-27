@@ -1,5 +1,7 @@
 package edu.cs3500.spreadsheets.model;
 
+import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
+
 /**
  * Represents a formula, which is one of:
  * - A value
@@ -13,5 +15,16 @@ public interface Formula {
    */
   public Value evaluate();
 
+  /**
+   * Accepts a FormulaVisitor visitor and returns R.
+   * @param visitor
+   * @return the desired value R
+   */
+  <R> R accept(FormulaVisitor<R> visitor);
+
+  /**
+   * Returns a string telling the type of formula it is.
+   * @return string type
+   */
   String type();
 }

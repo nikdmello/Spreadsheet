@@ -12,13 +12,6 @@ public interface Value extends Formula {
   Value evaluate();
 
   /**
-   * Accepts a value visitor and returns R.
-   * @param visitor
-   * @return the desired value R
-   */
-  <R> R accept(FormulaVisitor<R> visitor);
-
-  /**
    * Checks to see if the Value is a numeric value.
    * @return true if numeric
    */

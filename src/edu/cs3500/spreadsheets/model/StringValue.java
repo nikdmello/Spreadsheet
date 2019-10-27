@@ -1,9 +1,11 @@
 package edu.cs3500.spreadsheets.model;
 
+import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
+
 public class StringValue implements Value {
   private final String s;
 
-  StringValue(String s){
+  public StringValue(String s){
     this.s = s;
   }
 

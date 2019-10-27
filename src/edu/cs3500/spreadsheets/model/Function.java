@@ -2,10 +2,13 @@ package edu.cs3500.spreadsheets.model;
 
 import java.util.ArrayList;
 
+import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
+import edu.cs3500.spreadsheets.model.visitors.RefVisitor;
+
 /**
  * Enumerates the different type of functions that are supported.
  */
-enum FunctionType{SUM, PRODUCT, LT}
+enum FunctionType{SUM, PRODUCT, LT, CAT}
 
 /**
  * A function which can be applied to one or more formulas as its arguments.
@@ -20,8 +23,8 @@ public class Function implements Formula {
    */
   public Function(FunctionType type, ArrayList<Formula> args){
     for(Formula f : args){
-      if(f.visitFormuala(f).equals("ref")){
-        this.args.addAll((Reference)f.getCellContents);
+      if(f.type().equals("ref")){
+        this.args.addAll(f.accept(new RefVisitor()));
       }
       else {
         this.args.add(f);
@@ -35,8 +38,14 @@ public class Function implements Formula {
       case SUM: return sum();
       case PRODUCT: return product();
       case LT: return lessthan();
+      case CAT: return concat();
       default: throw new IllegalArgumentException("Function not found.");
     }
+  }
+
+  @Override
+  public <R> R accept(FormulaVisitor<R> visitor) {
+    return null;
   }
 
   @Override
@@ -52,7 +61,9 @@ public class Function implements Formula {
     }
 
     for(Formula f : args){
-      sum += f.evaluate().numberForm();
+      if(f != null) {
+        sum += f.evaluate().numberForm();
+      }
     }
 
     return new DoubleValue(sum);
@@ -66,7 +77,7 @@ public class Function implements Formula {
     }
 
     for(Formula f : args){
-      if(f.evaluate().isNumeric()){
+      if(f != null && f.evaluate().isNumeric()){
         prod *= f.evaluate().numberForm();
       }
     }
@@ -76,7 +87,8 @@ public class Function implements Formula {
 
   private Value lessthan(){
     boolean b = false;
-    if(args.size() > 2 || !args.get(0).evaluate().isNumeric() || !args.get(1).evaluate().isNumeric()){
+    if(args.size() != 2 || args.get(0) == null && !args.get(0).evaluate().isNumeric()
+            || args.get(1) == null && !args.get(1).evaluate().isNumeric()){
       throw new IllegalArgumentException("Invalid arguments for less than");
     }
 
@@ -84,15 +96,27 @@ public class Function implements Formula {
     return new BoolValue(b);
   }
 
+  private StringValue concat(){
+    for(Formula f : args){
+      if(f == null){
+        throw new IllegalArgumentException("Error");
+      }
+      try{
+        String s = "";
+        s += f.evalu;
+      }catch (IllegalArgumentException){
+
+      }
+    }
+  }
+
   private boolean allNonNumeric(ArrayList<Formula> arr){
     for(Formula f : arr){
-      if(!f.evaluate().isNumeric()){
+      if(f != null && !f.evaluate().isNumeric()){
         return false;
       }
     }
 
     return true;
   }
-
-
 }

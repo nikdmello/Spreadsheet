@@ -1,5 +1,7 @@
 package edu.cs3500.spreadsheets.model;
 
+import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
+
 /**
  * Container for an double.
  */

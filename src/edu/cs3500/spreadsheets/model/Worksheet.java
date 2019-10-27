@@ -5,5 +5,6 @@ package edu.cs3500.spreadsheets.model;
  */
 public interface Worksheet {
   void initGrid();
+  void createCell(int col, int row, Formula f);
   Cell getCellAt(Coord c);
 }

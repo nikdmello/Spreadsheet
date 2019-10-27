@@ -1,4 +1,8 @@
-package edu.cs3500.spreadsheets.model;
+package edu.cs3500.spreadsheets.model.visitors;
+
+import edu.cs3500.spreadsheets.model.Function;
+import edu.cs3500.spreadsheets.model.Reference;
+import edu.cs3500.spreadsheets.model.Value;
 
 /**
  * An abstracted function object for processing any {@link Value}.
@@ -25,4 +29,18 @@ public interface FormulaVisitor<R> {
    * @return the desired result
    */
   R visitString(String s);
+
+  /**
+   * Processes a Reference value.
+   * @param r the value
+   * @return the desired result
+   */
+  R visitReference(Reference r);
+
+  /**
+   * Processes a Function value.
+   * @param f the value
+   * @return the desired result
+   */
+  R visitFunc(Function f);
 }
