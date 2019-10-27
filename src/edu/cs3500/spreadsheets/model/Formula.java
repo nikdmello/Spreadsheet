@@ -12,4 +12,6 @@ public interface Formula {
    * @return  a Value
    */
   public Value evaluate();
+
+  String type();
 }

@@ -18,9 +18,9 @@ public class Function implements Formula {
    * Constructs a function and its arguments.
    * @param args the formulas to be operated on.
    */
-  public Function(FunctionType type, Formula ... args){
+  public Function(FunctionType type, ArrayList<Formula> args){
     for(Formula f : args){
-      if(f instanceof Reference){
+      if(f.visitFormuala(f).equals("ref")){
         this.args.addAll((Reference)f.getCellContents);
       }
       else {
@@ -37,6 +37,11 @@ public class Function implements Formula {
       case LT: return lessthan();
       default: throw new IllegalArgumentException("Function not found.");
     }
+  }
+
+  @Override
+  public String type() {
+    return "func";
   }
 
   private DoubleValue sum(){

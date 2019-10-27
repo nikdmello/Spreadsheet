@@ -16,7 +16,7 @@ public interface Value extends Formula {
    * @param visitor
    * @return the desired value R
    */
-  <R> R accept(ValueVisitor<R> visitor);
+  <R> R accept(FormulaVisitor<R> visitor);
 
   /**
    * Checks to see if the Value is a numeric value.

@@ -13,7 +13,7 @@ public class StringValue implements Value {
   }
 
   @Override
-  public <R> R accept(ValueVisitor<R> visitor) {
+  public <R> R accept(FormulaVisitor<R> visitor) {
     return visitor.visitString(this.s);
   }
 

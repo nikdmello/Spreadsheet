@@ -16,7 +16,12 @@ public final class BoolValue implements Value {
   }
 
   @Override
-  public <R> R accept(ValueVisitor<R> visitor) {
+  public String type() {
+    return "bool";
+  }
+
+  @Override
+  public <R> R accept(FormulaVisitor<R> visitor) {
     return visitor.visitBoolean(this.b);
   }
 

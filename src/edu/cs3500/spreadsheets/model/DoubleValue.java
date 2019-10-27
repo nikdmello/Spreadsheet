@@ -20,7 +20,12 @@ public class DoubleValue implements Value {
   }
 
   @Override
-  public <R> R accept(ValueVisitor<R> visitor) {
+  public String type() {
+    return "double";
+  }
+
+  @Override
+  public <R> R accept(FormulaVisitor<R> visitor) {
     return visitor.visitDouble(this.value);
   }
 

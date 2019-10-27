@@ -4,7 +4,7 @@ package edu.cs3500.spreadsheets.model;
  * An abstracted function object for processing any {@link Value}.
  * @param <R> The return type of this function
  */
-public interface ValueVisitor<R> {
+public interface FormulaVisitor<R> {
   /**
    * Process a boolean value.
    * @param b the value

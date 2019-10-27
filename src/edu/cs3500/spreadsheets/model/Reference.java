@@ -15,6 +15,11 @@ public class Reference implements Formula {
     return null;
   }
 
+  @Override
+  public String type() {
+    return "ref";
+  }
+
 
 //  public ArrayList<Formula> getCellContents() {
 //    int rowMin = Integer.min(c1.row, c2.row);
