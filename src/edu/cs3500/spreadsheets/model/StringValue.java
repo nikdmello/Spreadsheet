@@ -20,6 +20,11 @@ public class StringValue implements Value {
   }
 
   @Override
+  public String type() {
+    return "string";
+  }
+
+  @Override
   public boolean isNumeric() {
     return false;
   }

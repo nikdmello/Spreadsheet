@@ -2,6 +2,7 @@ package edu.cs3500.spreadsheets.model;
 
 import java.util.ArrayList;
 
+import edu.cs3500.spreadsheets.model.visitors.AsStringVisitor;
 import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
 import edu.cs3500.spreadsheets.model.visitors.RefVisitor;
 
@@ -14,7 +15,7 @@ enum FunctionType{SUM, PRODUCT, LT, CAT}
  * A function which can be applied to one or more formulas as its arguments.
  */
 public class Function implements Formula {
-  private ArrayList<Formula> args;
+  public final ArrayList<Formula> args;
   FunctionType type;
 
   /**
@@ -22,6 +23,7 @@ public class Function implements Formula {
    * @param args the formulas to be operated on.
    */
   public Function(FunctionType type, ArrayList<Formula> args){
+    this.args = new ArrayList<Formula>();
     for(Formula f : args){
       if(f.type().equals("ref")){
         this.args.addAll(f.accept(new RefVisitor()));
@@ -32,6 +34,7 @@ public class Function implements Formula {
     }
 
   }
+
   @Override
   public Value evaluate() {
     switch(this.type){
@@ -45,7 +48,7 @@ public class Function implements Formula {
 
   @Override
   public <R> R accept(FormulaVisitor<R> visitor) {
-    return null;
+    return visitor.visitFunc(this);
   }
 
   @Override
@@ -53,13 +56,16 @@ public class Function implements Formula {
     return "func";
   }
 
+  /**
+   * Sums up all arguments passed to the function, ignores non-numeric values.
+   * @return the sum of the arguments
+   */
   private DoubleValue sum(){
     double sum = 0;
 
     if(allNonNumeric(args)){
       return new DoubleValue(0);
     }
-
     for(Formula f : args){
       if(f != null) {
         sum += f.evaluate().numberForm();
@@ -69,6 +75,10 @@ public class Function implements Formula {
     return new DoubleValue(sum);
   }
 
+  /**
+   * Multiplies all of arguments passed to the function, ignores non-numeric values.
+   * @return the product of all the arguments
+   */
   private DoubleValue product(){
     double prod = 1;
 
@@ -85,7 +95,12 @@ public class Function implements Formula {
     return new DoubleValue(prod);
   }
 
-  private Value lessthan(){
+  /**
+   * Taking in only two arguments, returns true if the first is less than the second.
+   * @return true if the first argument is less than the second
+   * @throws IllegalArgumentException if there are not exactly two arguments
+   */
+  private Value lessthan() throws IllegalArgumentException{
     boolean b = false;
     if(args.size() != 2 || args.get(0) == null && !args.get(0).evaluate().isNumeric()
             || args.get(1) == null && !args.get(1).evaluate().isNumeric()){
@@ -96,20 +111,26 @@ public class Function implements Formula {
     return new BoolValue(b);
   }
 
-  private StringValue concat(){
-    for(Formula f : args){
-      if(f == null){
+  /**
+   * Concatenates a string version of each argument to one string.
+   * @return A string value containing the concatenated string
+   */
+  private StringValue concat() {
+    String s = "";
+    for (Formula f : args) {
+      if (f == null) {
         throw new IllegalArgumentException("Error");
       }
-      try{
-        String s = "";
-        s += f.evalu;
-      }catch (IllegalArgumentException){
-
-      }
+      s += f.accept(new AsStringVisitor());
     }
+    return new StringValue(s);
   }
 
+  /**
+   * Checks to see if all the evaluations in an array list of formulas return numeric values
+   * @param arr array list of formulas
+   * @return true if all values are numeric
+   */
   private boolean allNonNumeric(ArrayList<Formula> arr){
     for(Formula f : arr){
       if(f != null && !f.evaluate().isNumeric()){
