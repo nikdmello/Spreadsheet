@@ -13,7 +13,7 @@ public interface Formula {
    * Evaluates the formula into a single value.
    * @return  a Value
    */
-  public Value evaluate();
+  Value evaluate();
 
   /**
    * Accepts a FormulaVisitor visitor and returns R.

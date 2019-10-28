@@ -10,6 +10,9 @@ public class BasicWorksheetModel implements Worksheet{
   private Hashtable<Coord, Cell> hashtable;
   private ArrayList<ArrayList<Cell>> cells;
 
+  public BasicWorksheetModel() {
+  }
+
   @Override
   public void initGrid() {
     hashtable = new Hashtable<>();
@@ -26,4 +29,11 @@ public class BasicWorksheetModel implements Worksheet{
   public Cell getCellAt(Coord c) {
     return hashtable.get(c);
   }
+
+  @Override
+  public void deleteCellAt(Coord c) {
+    hashtable.remove(c);
+  }
+
+
 }

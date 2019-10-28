@@ -34,7 +34,6 @@ public class Reference implements Formula {
     if(c1.equals(c2)){
       return sheet.getCellAt(c1).evaluateCell();
     }
-
     throw new IllegalArgumentException("Nothing to evaluate");
   }
 
@@ -56,7 +55,7 @@ public class Reference implements Formula {
     return "ref";
   }
 
-  public ArrayList<Formula> getCellFormulas() {
+  private ArrayList<Formula> getCellFormulas() {
     ArrayList<Formula> formulaList = new ArrayList<>();
     for (int i = c1.col; i < c2.col; i++) {
       for (int j = c1.row; j < c2.row; j++) {

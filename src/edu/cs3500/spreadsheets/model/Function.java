@@ -15,8 +15,8 @@ enum FunctionType{SUM, PRODUCT, LT, CAT}
  * A function which can be applied to one or more formulas as its arguments.
  */
 public class Function implements Formula {
-  public final ArrayList<Formula> args;
-  FunctionType type;
+  private ArrayList<Formula> args;
+  private FunctionType type;
 
   /**
    * Constructs a function and its arguments.
@@ -34,15 +34,19 @@ public class Function implements Formula {
     }
 
   }
-
   @Override
   public Value evaluate() {
     switch(this.type){
-      case SUM: return sum();
-      case PRODUCT: return product();
-      case LT: return lessthan();
-      case CAT: return concat();
-      default: throw new IllegalArgumentException("Function not found.");
+      case SUM:
+        return sum();
+      case PRODUCT:
+        return product();
+      case LT:
+        return lessthan();
+      case CAT:
+        return concat();
+      default:
+        throw new IllegalArgumentException("Function not found.");
     }
   }
 
@@ -56,16 +60,13 @@ public class Function implements Formula {
     return "func";
   }
 
-  /**
-   * Sums up all arguments passed to the function, ignores non-numeric values.
-   * @return the sum of the arguments
-   */
   private DoubleValue sum(){
     double sum = 0;
 
     if(allNonNumeric(args)){
       return new DoubleValue(0);
     }
+
     for(Formula f : args){
       if(f != null) {
         sum += f.evaluate().numberForm();
