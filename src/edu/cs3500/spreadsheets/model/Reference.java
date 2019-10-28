@@ -1,5 +1,6 @@
 package edu.cs3500.spreadsheets.model;
 
+import java.sql.Ref;
 import java.util.ArrayList;
 
 import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
@@ -13,12 +14,12 @@ public class Reference implements Formula {
   private ArrayList<Formula> cellContents;
   private Worksheet sheet;
 
-  public Reference(Coord c1, Coord c2){
+  public Reference(Coord c1, Coord c2) {
     this.c1 = c1;
     this.c2 = c2;
   }
 
-  public Reference(Coord c){
+  public Reference(Coord c) {
     this.c1 = c;
     this.c2 = c;
   }
@@ -41,7 +42,7 @@ public class Reference implements Formula {
     return "ref";
   }
 
-  public ArrayList<Formula> getCellFormulas() {
+  private ArrayList<Formula> getCellFormulas() {
     ArrayList<Formula> formulaList = new ArrayList<>();
     for (int i = c1.col; i < c2.col; i++) {
       for (int j = c1.row; j < c2.row; j++) {

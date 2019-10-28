@@ -2,21 +2,15 @@ package edu.cs3500.spreadsheets.model;
 
 import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
 
-public class StringValue implements Value {
-  private final String s;
-
-  public StringValue(String s){
-    this.s = s;
-  }
-
+public class SymbolValue implements Value {
   @Override
   public Value evaluate() {
-    return this;
+    return null;
   }
 
   @Override
   public <R> R accept(FormulaVisitor<R> visitor) {
-    return visitor.visitString(this.s);
+    return null;
   }
 
   @Override
@@ -33,4 +27,5 @@ public class StringValue implements Value {
   public double numberForm() {
     return 0;
   }
+
 }

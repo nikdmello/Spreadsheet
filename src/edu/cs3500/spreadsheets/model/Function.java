@@ -15,7 +15,7 @@ enum FunctionType{SUM, PRODUCT, LT, CAT}
  */
 public class Function implements Formula {
   private ArrayList<Formula> args;
-  FunctionType type;
+  private FunctionType type;
 
   /**
    * Constructs a function and its arguments.
@@ -35,11 +35,16 @@ public class Function implements Formula {
   @Override
   public Value evaluate() {
     switch(this.type){
-      case SUM: return sum();
-      case PRODUCT: return product();
-      case LT: return lessthan();
-      case CAT: return concat();
-      default: throw new IllegalArgumentException("Function not found.");
+      case SUM:
+        return sum();
+      case PRODUCT:
+        return product();
+      case LT:
+        return lessthan();
+      case CAT:
+        return concat();
+      default:
+        throw new IllegalArgumentException("Function not found.");
     }
   }
 

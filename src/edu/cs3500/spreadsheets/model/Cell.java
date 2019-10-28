@@ -26,6 +26,6 @@ final public class Cell {
   }
 
   public Formula getFormula() {
-    return this.form;
+    return this.f;
   }
 }
