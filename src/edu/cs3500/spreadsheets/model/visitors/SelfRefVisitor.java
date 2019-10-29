@@ -58,4 +58,6 @@ public class SelfRefVisitor implements FormulaVisitor<Boolean>{
   @Override
   public Boolean visitFunc(Function f) {
     //TODO: think more simply
+    return false;
+  }
 }

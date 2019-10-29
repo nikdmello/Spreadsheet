@@ -42,7 +42,7 @@ public class Reference implements Formula {
    * @return true if the reference references itself
    */
   private boolean hasRepeat() {
-
+    return false;
   }
 
   @Override
