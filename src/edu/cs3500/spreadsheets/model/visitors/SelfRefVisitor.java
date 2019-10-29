@@ -7,15 +7,29 @@ import edu.cs3500.spreadsheets.model.Formula;
 import edu.cs3500.spreadsheets.model.Function;
 import edu.cs3500.spreadsheets.model.Reference;
 
-public class SelfRefVisitor implements FormulaVisitor<Boolean>{
-  private ArrayList<Coord> banned;
+/**
+ * A visitor to determine whether a reference is self-referential in any way.
+ */
+public class SelfRefVisitor implements FormulaVisitor<Boolean> {
+  private ArrayList<Formula> banned;
 
-  public SelfRefVisitor(Coord c){
-    banned = new ArrayList<Coord>();
-    banned.add(c);
+  /**
+   * Constructs a SelfRefVisitor with an initial Formula f which should not be referenced.
+   *
+   * @param f Formula of banned cell
+   */
+  public SelfRefVisitor(Formula f) {
+    banned = new ArrayList<Formula>();
+    banned.add(f);
   }
 
-  private SelfRefVisitor(Coord c, ArrayList<Coord> soFar){
+  /**
+   * Constructs a SelfRefVisitor with the coordinate to ban and a list of already banned Coords.
+   *
+   * @param f     formula to ban
+   * @param soFar formulas banned so far
+   */
+  private SelfRefVisitor(Formula f, ArrayList<Formula> soFar) {
     banned.addAll(soFar);
   }
 
@@ -36,19 +50,12 @@ public class SelfRefVisitor implements FormulaVisitor<Boolean>{
 
   @Override
   public Boolean visitReference(Reference r) {
-    for(Coord c : banned){
-      if(r.getCellCoords().contains(c)){
+    for (Coord c : r.getCellCoords()) {
+      if (this.banned.contains(r.sheet.getCellAt(c).getFormula())) {
         return true;
-      }
-    }
-    for(Coord c : r.getCellCoords()){
-      try {
-        if (r.sheet.getCellAt(c) != null) {
-          if(r.sheet.getCellAt(c).evaluateCell().accept(new SelfRefVisitor(c, banned))) {
-            return true;
-          }
-        }
-      } catch (IllegalArgumentException e){
+      } else if (r.sheet.getCellAt(c)
+              .getFormula()
+              .accept(new SelfRefVisitor(r.sheet.getCellAt(c).getFormula(), this.banned))) {
         return true;
       }
     }
@@ -57,7 +64,11 @@ public class SelfRefVisitor implements FormulaVisitor<Boolean>{
 
   @Override
   public Boolean visitFunc(Function f) {
-    //TODO: think more simply
+    for (Formula formula : f.args) {
+      if (formula.accept(this)) {
+        return true;
+      }
+    }
     return false;
   }
 }
