@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.util.Scanner;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetBuilder;
+import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
 
 /**
@@ -32,36 +33,29 @@ public class BeyondGood {
       - report any errors, or print the evaluated value of the requested cell.
     */
 
-
-    Readable r = new InputStreamReader(System.in);
     Appendable a = new OutputStreamWriter(System.out);
 
     // Parse data inside spreadsheet
-    scanner = new Scanner(r);
+//    scanner = new Scanner(r);
 
     // Obtain filename and cell name
-    if (args.length > 0) {
+    if (args.length >= 3) {
       fileName = args[1];
       cellName = args[3];
     }
     else {
       throw new IllegalArgumentException("Invalid command.");
     }
+    // TODO: check each arg
 
-    int i;
     // Read file using first two arguments
     try {
       file = new FileReader(fileName);
-      while ((i = file.read()) != -1) {
-        System.out.println((char) i);
-      }
     }
     catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File not found.");
     }
 
-    WorksheetReader.read(builder, r);
-
-
+    BasicWorksheetModel model = WorksheetReader.read(builder, file);
   }
 }

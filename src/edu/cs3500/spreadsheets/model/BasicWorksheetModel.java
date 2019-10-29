@@ -18,6 +18,10 @@ public class BasicWorksheetModel implements Worksheet{
     hashtable = new Hashtable<>();
   }
 
+  public Hashtable<Coord, Cell> getHashtable() {
+    return hashtable;
+  }
+
   @Override
   public void createCell(int col, int row, Formula f) {
     Coord c = new Coord(col, row);
