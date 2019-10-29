@@ -3,6 +3,7 @@ package edu.cs3500.spreadsheets.model;
 import java.util.ArrayList;
 
 import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
+import edu.cs3500.spreadsheets.model.visitors.SelfRefVisitor;
 
 /**
  * Represents a reference to a rectangular region of cells in the spreadsheet.
@@ -42,7 +43,7 @@ public class Reference implements Formula {
    * @return true if the reference references itself
    */
   private boolean hasRepeat() {
-
+    return this.accept(new SelfRefVisitor(this));
   }
 
   @Override

@@ -15,7 +15,7 @@ enum FunctionType{SUM, PRODUCT, LT, CAT}
  * A function which can be applied to one or more formulas as its arguments.
  */
 public class Function implements Formula {
-  private ArrayList<Formula> args;
+  public final ArrayList<Formula> args;
   private FunctionType type;
 
   /**
