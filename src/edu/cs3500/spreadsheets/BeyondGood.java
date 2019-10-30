@@ -19,7 +19,7 @@ public class BeyondGood {
    * The main entry point.
    * @param args any command-line arguments
    */
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args){ //throws IOException {
     String fileName = "";
     String cellName = "";
     FileReader file;

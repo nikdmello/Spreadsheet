@@ -13,6 +13,12 @@ public class BasicWorksheetBuilder implements WorksheetReader.WorksheetBuilder<B
 
   @Override
   public WorksheetReader.WorksheetBuilder<BasicWorksheetModel> createCell(int col, int row, String contents) {
+    if(contents == null){
+      throw new IllegalArgumentException("Bad Cell");
+    }
+    if(contents.substring(0, 1).equals("=")){
+      contents = contents.substring(1);
+    }
     Sexp sexp = Parser.parse(contents);
     Formula f = sexp.accept(new SexpToFormula());
     sheet.createCell(col, row, f);
