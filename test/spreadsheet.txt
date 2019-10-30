@@ -4,7 +4,6 @@ C1 9
 D1 12
 
 
-A5 =(E3)
 # Computes delta-x^2
 A2 =(SUM C1 A1)
 

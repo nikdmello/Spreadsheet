@@ -56,9 +56,8 @@ public class BeyondGood {
     int coordRow = Integer.parseInt(cellName.substring(1));
     Coord coord = new Coord(coordCol, coordRow);
 
-    System.out.println(coordCol);
-    System.out.println(coordRow);
-
     Cell cell = model.getCellAt(coord);
+    cell.evaluateCell();
+    System.out.println(cell);
   }
 }

@@ -24,7 +24,6 @@ public class Function implements Formula {
         this.args.add(f);
       }
     }
-
   }
 
   @Override

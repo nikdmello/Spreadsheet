@@ -60,8 +60,6 @@ public class SexpToFormula implements SexpVisitor<Formula> {
 
   @Override
   public Formula visitSList(List<Sexp> l) {
-    System.out.println(l);
-    System.out.println(l.get(0).toString());
     if(l.size() > 1) {
       ArrayList<Formula> arr = new ArrayList<Formula>();
       for (int i = 1; i < l.size(); i++) {

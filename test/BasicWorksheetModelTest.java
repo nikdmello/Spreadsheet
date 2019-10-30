@@ -62,6 +62,11 @@ public class BasicWorksheetModelTest {
   }
 
   @Test
+  public void testCellEmpty() {
+
+  }
+
+  @Test
   public void testCellFormula() {
 
   }
