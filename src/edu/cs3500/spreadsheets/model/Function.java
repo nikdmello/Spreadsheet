@@ -16,6 +16,7 @@ public class Function implements Formula {
    */
   public Function(FunctionType type, ArrayList<Formula> args) {
     this.args = new ArrayList<>();
+    this.type = type;
     for (Formula f : args) {
       if (f.type().equals("ref")) {
         this.args.addAll(f.accept(new RefVisitor()));

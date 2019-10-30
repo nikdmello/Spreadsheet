@@ -47,7 +47,11 @@ public class BeyondGood {
     }
 
     BasicWorksheetModel model = WorksheetReader.read(builder, file);
-    model.evalAll();
+    Coord errorCell = model.evalAll();
+    if(errorCell != null){
+      System.out.println("Error at cell " + Coord.colIndexToName(errorCell.col) + errorCell.row);
+    }
+
     int coordCol = Coord.colNameToIndex(cellName.substring(0,1));
     int coordRow = Integer.parseInt(cellName.substring(1));
     Coord coord = new Coord(coordCol, coordRow);

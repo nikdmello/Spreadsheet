@@ -15,6 +15,15 @@ import edu.cs3500.spreadsheets.sexp.SexpVisitor;
  * Represents a visitor function object for processing a Sexp to Formula.
  */
 public class SexpToFormula implements SexpVisitor<Formula> {
+  Worksheet currentSheet;
+
+  /**
+   * Constructs a SexpToFormula visitor with a rference sheet to use.
+   * @param sheet the reference sheet
+   */
+  public SexpToFormula(Worksheet sheet){
+    this.currentSheet = sheet;
+  }
 
   @Override
   public Formula visitBoolean(boolean b) {
@@ -37,10 +46,10 @@ public class SexpToFormula implements SexpVisitor<Formula> {
       int coordRow2 = Integer.parseInt(s.substring(4,5));
       Coord secondCoord = new Coord(coordCol2, coordRow2);
 
-      return new Reference(firstCoord, secondCoord);
+      return new Reference(this.currentSheet, firstCoord, secondCoord);
     }
     else {
-      return new Reference(firstCoord);
+      return new Reference(this.currentSheet, firstCoord);
     }
   }
 
