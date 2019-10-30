@@ -131,10 +131,10 @@ public class Function implements Formula {
   private boolean allNonNumeric(ArrayList<Formula> arr) {
     for (Formula f : arr) {
       if (f != null && !f.evaluate().isNumeric()) {
-        return false;
+        return true;
       }
     }
 
-    return true;
+    return false;
   }
 }

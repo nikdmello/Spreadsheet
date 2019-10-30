@@ -1,6 +1,7 @@
 package edu.cs3500.spreadsheets.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Represents a reference to a rectangular region of cells in the spreadsheet.
@@ -69,6 +70,9 @@ public class Reference implements Formula {
   }
 
   ArrayList<Formula> getCellFormulas() {
+    if(this.c1.equals(c2)){
+      return new ArrayList<Formula>(Arrays.asList(sheet.getCellAt(c1).getFormula()));
+    }
     ArrayList<Formula> formulaList = new ArrayList<>();
     for (int i = c1.col; i < c2.col; i++) {
       for (int j = c1.row; j < c2.row; j++) {
