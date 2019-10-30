@@ -12,6 +12,9 @@ final public class Cell {
    * @param f the formula for the cell
    */
   public Cell(Formula f) {
+    if(f == null){
+      throw new IllegalArgumentException("Cell can not be created with a null formula");
+    }
     this.f = f;
   }
 

@@ -117,7 +117,7 @@ public class Function implements Formula {
       if (f == null) {
         throw new IllegalArgumentException("Error");
       }
-      s += f.accept(new AsStringVisitor());
+      s += f.evaluate().accept(new AsStringVisitor());
     }
     return new StringValue(s);
   }

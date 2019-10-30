@@ -29,9 +29,6 @@ public class BasicWorksheetModel implements Worksheet {
 
   @Override
   public void createCell(int col, int row, Formula f) {
-    if (f == null) {
-      return;
-    }
     Coord c = new Coord(col, row);
     Cell cell = new Cell(f);
     hashtable.put(c, cell);
@@ -48,10 +45,15 @@ public class BasicWorksheetModel implements Worksheet {
   }
 
   @Override
-  public void evalAll() {
+  public Coord evalAll() {
     for(Map.Entry<Coord, Cell> e : hashtable.entrySet()){
-      e.getValue().evaluateCell();
+      try {
+        e.getValue().evaluateCell();
+      } catch (IllegalArgumentException iae){
+        return e.getKey();
+      }
     }
+    return null;
   }
 
 

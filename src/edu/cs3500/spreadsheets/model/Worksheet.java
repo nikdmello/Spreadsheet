@@ -29,7 +29,9 @@ public interface Worksheet {
   void deleteCellAt(Coord c);
 
   /**
-   * Evaluates all cells so that the value within may be retrieved.
+   * Evaluates all the cells containing formulas.
+   *
+   * @return null on success and a Coord of a broken cell if there is an error
    */
-  void evalAll();
+  Coord evalAll();
 }
