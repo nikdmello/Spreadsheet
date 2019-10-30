@@ -20,6 +20,9 @@ public class BasicWorksheetModel implements Worksheet{
 
   @Override
   public void createCell(int col, int row, Formula f) {
+    if(f == null){
+      return;
+    }
     Coord c = new Coord(col, row);
     Cell cell = new Cell(f);
     hashtable.put(c, cell);
