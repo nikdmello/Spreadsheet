@@ -33,7 +33,7 @@ public class Reference implements Formula {
     }
 
     if(c1.equals(c2)){
-      return sheet.getCellAt(c1).evaluateCell();
+      return sheet.getCellAt(c1).getFormula().evaluate();
     }
     throw new IllegalArgumentException("Nothing to evaluate");
   }

@@ -24,4 +24,9 @@ public interface Worksheet {
    * @param c the coord of the desired cell
    */
   void deleteCellAt(Coord c);
+
+  /**
+   * Evaluates all cells so that the value within may be retrieved.
+   */
+  void evalAll();
 }
