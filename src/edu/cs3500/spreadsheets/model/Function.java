@@ -9,7 +9,7 @@ import edu.cs3500.spreadsheets.model.visitors.RefVisitor;
 /**
  * Enumerates the different type of functions that are supported.
  */
-enum FunctionType{SUM, PRODUCT, LT, CAT}
+enum FunctionType {SUM, PRODUCT, LT, CAT}
 
 /**
  * A function which can be applied to one or more formulas as its arguments.
@@ -42,7 +42,7 @@ public class Function implements Formula {
       case PRODUCT:
         return product();
       case LT:
-        return lessthan();
+        return lessThan();
       case CAT:
         return concat();
       default:
@@ -101,7 +101,7 @@ public class Function implements Formula {
    * @return true if the first argument is less than the second
    * @throws IllegalArgumentException if there are not exactly two arguments
    */
-  private Value lessthan() throws IllegalArgumentException{
+  private Value lessThan() throws IllegalArgumentException{
     boolean b = false;
     if(args.size() != 2 || args.get(0) == null && !args.get(0).evaluate().isNumeric()
             || args.get(1) == null && !args.get(1).evaluate().isNumeric()){

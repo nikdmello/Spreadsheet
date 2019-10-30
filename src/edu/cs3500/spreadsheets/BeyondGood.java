@@ -2,10 +2,7 @@ package edu.cs3500.spreadsheets;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Scanner;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetBuilder;
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
@@ -19,8 +16,8 @@ public class BeyondGood {
    * The main entry point.
    * @param args any command-line arguments
    */
-  public static void main(String[] args) throws IOException {
-    String fileName = "";
+  public static void main(String[] args) {
+    String fileName;
     String cellName = "";
     FileReader file;
     BasicWorksheetBuilder builder = new BasicWorksheetBuilder();
@@ -42,7 +39,6 @@ public class BeyondGood {
     else {
       throw new IllegalArgumentException("Invalid command.");
     }
-    // TODO: check each arg
 
     try {
       file = new FileReader(fileName);

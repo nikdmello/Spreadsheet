@@ -3,10 +3,8 @@ package edu.cs3500.spreadsheets.model;
 import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
 
 /**
- * Represents a formula, which is one of:
- * - A value
- * - A reference to a region of cells in the spreadsheet
- * - A function applied to one or more formulas as its arguments
+ * Represents a formula, which is either a value, a reference to a region of cells in the
+ * spreadsheet, or a function applied to one or more formulas as its arguments.
  */
 public interface Formula {
   /**

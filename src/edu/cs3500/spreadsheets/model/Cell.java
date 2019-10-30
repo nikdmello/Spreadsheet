@@ -19,7 +19,7 @@ final public class Cell {
    * @return the Value evaluated to
    */
   public Value evaluateCell() {
-    if(f == null){
+    if (f == null) {
       return null;
     }
     return f.evaluate();
