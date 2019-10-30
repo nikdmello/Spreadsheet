@@ -4,7 +4,7 @@ package edu.cs3500.spreadsheets.model;
  * Represents a cell in a spreadsheet containing a formula.
  */
 final public class Cell {
-  final private Formula f;
+  private Formula f;
 
   /**
    * Constructs a cell containing a formula.
@@ -18,11 +18,11 @@ final public class Cell {
    * Evaluates the contents in a cell to a single Value.
    * @return the Value evaluated to
    */
-  public Value evaluateCell() {
+  public void evaluateCell() {
     if(f == null){
-      return null;
+      return;
     }
-    return f.evaluate();
+    this.f = f.evaluate();
   }
 
   public Formula getFormula() {

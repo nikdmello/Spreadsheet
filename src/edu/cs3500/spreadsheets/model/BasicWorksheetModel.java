@@ -2,13 +2,13 @@ package edu.cs3500.spreadsheets.model;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Map;
 
 /**
  * Represents a basic spreadsheet model.
  */
 public class BasicWorksheetModel implements Worksheet{
   private Hashtable<Coord, Cell> hashtable;
-  private ArrayList<ArrayList<Cell>> cells;
 
   public BasicWorksheetModel() {
     this.hashtable = new Hashtable<>();
@@ -36,6 +36,13 @@ public class BasicWorksheetModel implements Worksheet{
   @Override
   public void deleteCellAt(Coord c) {
     hashtable.remove(c);
+  }
+
+  @Override
+  public void evalAll() {
+    for(Map.Entry<Coord, Cell> e : hashtable.entrySet()){
+      e.getValue().evaluateCell();
+    }
   }
 
 
