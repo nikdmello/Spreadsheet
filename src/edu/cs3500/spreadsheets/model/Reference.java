@@ -9,26 +9,25 @@ public class Reference implements Formula {
   private Coord c1;
   private Coord c2;
   private ArrayList<Formula> cellContents;
-  public final Worksheet sheet;
+  public final Worksheet sheet = new BasicWorksheetModel();
 
   /**
    * Represents a constructor for a Reference with two coordinates, the starting point of the range
    * of cells and the ending point of the range of cells.
    */
-  public Reference(Coord c1, Coord c2, Worksheet sheet) {
+  public Reference(Coord c1, Coord c2) {
     this.c1 = c1;
     this.c2 = c2;
-    this.sheet = sheet;
+    //TODO
   }
 
   /**
    * Represents a constructor with only one coordinate, meaning that this reference only refers to
    * one cell instead of a range of cells.
    */
-  public Reference(Coord c, Worksheet sheet) {
+  public Reference(Coord c) {
     this.c1 = c;
     this.c2 = c;
-    this.sheet = sheet;
   }
 
   @Override

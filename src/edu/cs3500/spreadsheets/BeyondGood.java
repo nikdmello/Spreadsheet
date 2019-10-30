@@ -6,6 +6,8 @@ import java.io.OutputStreamWriter;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetBuilder;
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
+import edu.cs3500.spreadsheets.model.Cell;
+import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
 
 /**
@@ -30,8 +32,6 @@ public class BeyondGood {
       - report any errors, or print the evaluated value of the requested cell.
     */
 
-    Appendable a = new OutputStreamWriter(System.out);
-
     // Obtain filename and cell name
     if (args.length == 4 && args[0].equals("-in") && args[2].equals("-eval")) {
       fileName = args[1];
@@ -47,6 +47,14 @@ public class BeyondGood {
     }
 
     BasicWorksheetModel model = WorksheetReader.read(builder, file);
+    model.evalAll();
+    int coordCol = Coord.colNameToIndex(cellName.substring(0,1));
+    int coordRow = Integer.parseInt(cellName.substring(1));
+    Coord coord = new Coord(coordCol, coordRow);
 
+    System.out.println(coordCol);
+    System.out.println(coordRow);
+
+    Cell cell = model.getCellAt(coord);
   }
 }
