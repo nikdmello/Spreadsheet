@@ -1,10 +1,13 @@
 package edu.cs3500.spreadsheets.model;
 
+import java.util.Objects;
+
 /**
  * Represents a cell in a spreadsheet containing a formula.
  */
 final public class Cell {
   private Formula f;
+  //TODO handle blank cells
 
   /**
    * Constructs a cell containing a formula.
@@ -12,7 +15,7 @@ final public class Cell {
    * @param f the formula for the cell
    */
   public Cell(Formula f) {
-    if(f == null){
+    if (f == null) {
       throw new IllegalArgumentException("Cell can not be created with a null formula");
     }
     this.f = f;
@@ -20,17 +23,44 @@ final public class Cell {
 
   /**
    * Evaluates the contents in a cell to a single Value.
-   *
-   * @return the Value evaluated to
    */
   public void evaluateCell() {
-    if(f == null){
+    if (f == null) {
       return;
+      //TODO fix return
     }
     this.f = f.evaluate();
   }
 
+  /**
+   * Getter method ONLY used for testing purposes.
+   * @return the formula
+   */
   public Formula getFormula() {
     return this.f;
+  }
+
+  //TODO fix toString
+  @Override
+  public String toString() {
+    return this.f.toString();
+  }
+
+  @Override
+  public boolean equals(Object that) {
+    if (this == that) {
+      return true;
+    }
+
+    if (!(that instanceof Cell)) {
+      return false;
+    }
+
+    return ((Cell) that).f == (this.f);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(f);
   }
 }

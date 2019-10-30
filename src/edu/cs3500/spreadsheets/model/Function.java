@@ -15,7 +15,7 @@ public class Function implements Formula {
    * @param args the formulas to be operated on.
    */
   public Function(FunctionType type, ArrayList<Formula> args) {
-    this.args = new ArrayList<Formula>();
+    this.args = new ArrayList<>();
     for (Formula f : args) {
       if (f.type().equals("ref")) {
         this.args.addAll(f.accept(new RefVisitor()));
@@ -112,14 +112,14 @@ public class Function implements Formula {
    * @return A string value containing the concatenated string
    */
   private StringValue concat() {
-    String s = "";
+    StringBuilder s = new StringBuilder();
     for (Formula f : args) {
       if (f == null) {
         throw new IllegalArgumentException("Error");
       }
-      s += f.evaluate().accept(new AsStringVisitor());
+      s.append(f.evaluate().accept(new AsStringVisitor()));
     }
-    return new StringValue(s);
+    return new StringValue(s.toString());
   }
 
   /**

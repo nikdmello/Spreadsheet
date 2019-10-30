@@ -30,4 +30,6 @@ public class SlistValue implements Value {
   public String type() {
     return null;
   }
+
+  //TODO override methods
 }

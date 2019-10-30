@@ -26,4 +26,15 @@ public interface Value extends Formula {
    * @return numeric form of Value
    */
   double numberForm();
+
+  /**
+   * Overrides the toString method to display the Value within the Cell.
+   *
+   * @return Value as a String
+   */
+  String toString();
+
+  boolean equals(Object that);
+
+  int hashCode();
 }

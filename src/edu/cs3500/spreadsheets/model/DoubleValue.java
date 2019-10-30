@@ -1,5 +1,7 @@
 package edu.cs3500.spreadsheets.model;
 
+import java.util.Objects;
+
 /**
  * Container for an double.
  */
@@ -39,4 +41,28 @@ public class DoubleValue implements Value {
   public double numberForm() {
     return value;
   }
+
+  @Override
+  public String toString() {
+    return String.valueOf(value);
+  }
+
+  @Override
+  public boolean equals(Object that) {
+    if (this == that) {
+      return true;
+    }
+
+    if (!(that instanceof DoubleValue)) {
+      return false;
+    }
+
+    return ((DoubleValue) that).value == (this.value);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(value);
+  }
 }
+

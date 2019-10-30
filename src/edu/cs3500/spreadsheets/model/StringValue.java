@@ -1,5 +1,7 @@
 package edu.cs3500.spreadsheets.model;
 
+import java.util.Objects;
+
 /**
  * Represents a container for a String value.
  */
@@ -33,5 +35,28 @@ public class StringValue implements Value {
   @Override
   public double numberForm() {
     return 0;
+  }
+
+  @Override
+  public String toString() {
+    return s;
+  }
+
+  @Override
+  public boolean equals(Object that) {
+    if (this == that) {
+      return true;
+    }
+
+    if (!(that instanceof StringValue)) {
+      return false;
+    }
+
+    return ((StringValue) that).s.equals(this.s);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(s);
   }
 }

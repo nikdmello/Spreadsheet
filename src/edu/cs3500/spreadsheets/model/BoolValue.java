@@ -1,9 +1,11 @@
 package edu.cs3500.spreadsheets.model;
 
+import java.util.Objects;
+
 /**
  * Container for a boolean.
  */
-public final class BoolValue implements Value {
+public class BoolValue implements Value {
   private Boolean b;
 
   public BoolValue(Boolean b) {
@@ -33,5 +35,28 @@ public final class BoolValue implements Value {
   @Override
   public double numberForm() {
     return 0;
+  }
+
+  @Override
+  public String toString() {
+    return String.valueOf(b);
+  }
+
+  @Override
+  public boolean equals(Object that) {
+    if (this == that) {
+      return true;
+    }
+
+    if (!(that instanceof BoolValue)) {
+      return false;
+    }
+
+    return ((BoolValue) that).b == (this.b);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(b);
   }
 }
