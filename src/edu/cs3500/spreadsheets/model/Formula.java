@@ -1,7 +1,5 @@
 package edu.cs3500.spreadsheets.model;
 
-import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
-
 /**
  * Represents a formula, which is either a value, a reference to a region of cells in the
  * spreadsheet, or a function applied to one or more formulas as its arguments.
@@ -9,12 +7,14 @@ import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
 public interface Formula {
   /**
    * Evaluates the formula into a single value.
-   * @return  a Value
+   *
+   * @return a Value
    */
   Value evaluate();
 
   /**
    * Accepts a FormulaVisitor visitor and returns R.
+   *
    * @param visitor
    * @return the desired value R
    */
@@ -22,6 +22,7 @@ public interface Formula {
 
   /**
    * Returns a string telling the type of formula it is.
+   *
    * @return string type
    */
   String type();

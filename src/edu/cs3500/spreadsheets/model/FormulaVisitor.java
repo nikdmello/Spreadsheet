@@ -1,4 +1,4 @@
-package edu.cs3500.spreadsheets.model.visitors;
+package edu.cs3500.spreadsheets.model;
 
 import edu.cs3500.spreadsheets.model.Function;
 import edu.cs3500.spreadsheets.model.Reference;
@@ -6,11 +6,13 @@ import edu.cs3500.spreadsheets.model.Value;
 
 /**
  * An abstracted function object for processing any {@link Value}.
+ *
  * @param <R> The return type of this function
  */
 public interface FormulaVisitor<R> {
   /**
    * Process a boolean value.
+   *
    * @param b the value
    * @return the desired result
    */
@@ -18,6 +20,7 @@ public interface FormulaVisitor<R> {
 
   /**
    * Process a double value.
+   *
    * @param d the value
    * @return the desired result
    */
@@ -25,6 +28,7 @@ public interface FormulaVisitor<R> {
 
   /**
    * Process a String value.
+   *
    * @param s the value
    * @return the desired result
    */
@@ -32,6 +36,7 @@ public interface FormulaVisitor<R> {
 
   /**
    * Processes a Reference value.
+   *
    * @param r the value
    * @return the desired result
    */
@@ -39,6 +44,7 @@ public interface FormulaVisitor<R> {
 
   /**
    * Processes a Function value.
+   *
    * @param f the value
    * @return the desired result
    */

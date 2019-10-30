@@ -11,8 +11,8 @@ public class BasicWorksheetModel implements Worksheet {
   private Hashtable<Coord, Cell> hashtable;
 
   /**
-   * Constructor that initializes the hashtable, which will serve as the grid of cells.
-   * Within this hashtable will be the Coord and Cell key-value pairs.
+   * Constructor that initializes the hashtable, which will serve as the grid of cells. Within this
+   * hashtable will be the Coord and Cell key-value pairs.
    */
   public BasicWorksheetModel() {
     this.hashtable = new Hashtable<>();
@@ -20,6 +20,7 @@ public class BasicWorksheetModel implements Worksheet {
 
   /**
    * Getter method ONLY used for testing purposes.
+   *
    * @return hashtable of coord and cell
    */
   public Hashtable<Coord, Cell> getHashtable() {

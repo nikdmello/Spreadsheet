@@ -8,6 +8,7 @@ final public class Cell {
 
   /**
    * Constructs a cell containing a formula.
+   *
    * @param f the formula for the cell
    */
   public Cell(Formula f) {
@@ -16,6 +17,7 @@ final public class Cell {
 
   /**
    * Evaluates the contents in a cell to a single Value.
+   *
    * @return the Value evaluated to
    */
   public void evaluateCell() {

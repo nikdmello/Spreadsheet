@@ -1,11 +1,6 @@
-package edu.cs3500.spreadsheets.model.visitors;
+package edu.cs3500.spreadsheets.model;
 
 import java.util.ArrayList;
-
-import edu.cs3500.spreadsheets.model.Coord;
-import edu.cs3500.spreadsheets.model.Formula;
-import edu.cs3500.spreadsheets.model.Function;
-import edu.cs3500.spreadsheets.model.Reference;
 
 /**
  * A visitor to determine whether a reference is self-referential in any way.

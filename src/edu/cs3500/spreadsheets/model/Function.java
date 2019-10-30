@@ -2,15 +2,6 @@ package edu.cs3500.spreadsheets.model;
 
 import java.util.ArrayList;
 
-import edu.cs3500.spreadsheets.model.visitors.AsStringVisitor;
-import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
-import edu.cs3500.spreadsheets.model.visitors.RefVisitor;
-
-/**
- * Enumerates the different type of functions that are supported.
- */
-enum FunctionType {SUM, PRODUCT, LT, CAT}
-
 /**
  * A function which can be applied to one or more formulas as its arguments.
  */
@@ -20,23 +11,24 @@ public class Function implements Formula {
 
   /**
    * Constructs a function and its arguments.
+   *
    * @param args the formulas to be operated on.
    */
-  public Function(FunctionType type, ArrayList<Formula> args){
+  public Function(FunctionType type, ArrayList<Formula> args) {
     this.args = new ArrayList<Formula>();
-    for(Formula f : args){
-      if(f.type().equals("ref")){
+    for (Formula f : args) {
+      if (f.type().equals("ref")) {
         this.args.addAll(f.accept(new RefVisitor()));
-      }
-      else {
+      } else {
         this.args.add(f);
       }
     }
 
   }
+
   @Override
   public Value evaluate() {
-    switch(this.type){
+    switch (this.type) {
       case SUM:
         return sum();
       case PRODUCT:
@@ -60,15 +52,15 @@ public class Function implements Formula {
     return "func";
   }
 
-  private DoubleValue sum(){
+  private DoubleValue sum() {
     double sum = 0;
 
-    if(allNonNumeric(args)){
+    if (allNonNumeric(args)) {
       return new DoubleValue(0);
     }
 
-    for(Formula f : args){
-      if(f != null) {
+    for (Formula f : args) {
+      if (f != null) {
         sum += f.evaluate().numberForm();
       }
     }
@@ -78,17 +70,18 @@ public class Function implements Formula {
 
   /**
    * Multiplies all of arguments passed to the function, ignores non-numeric values.
+   *
    * @return the product of all the arguments
    */
-  private DoubleValue product(){
+  private DoubleValue product() {
     double prod = 1;
 
-    if(allNonNumeric(args)){
+    if (allNonNumeric(args)) {
       return new DoubleValue(0);
     }
 
-    for(Formula f : args){
-      if(f != null && f.evaluate().isNumeric()){
+    for (Formula f : args) {
+      if (f != null && f.evaluate().isNumeric()) {
         prod *= f.evaluate().numberForm();
       }
     }
@@ -98,13 +91,14 @@ public class Function implements Formula {
 
   /**
    * Taking in only two arguments, returns true if the first is less than the second.
+   *
    * @return true if the first argument is less than the second
    * @throws IllegalArgumentException if there are not exactly two arguments
    */
-  private Value lessThan() throws IllegalArgumentException{
+  private Value lessThan() throws IllegalArgumentException {
     boolean b = false;
-    if(args.size() != 2 || args.get(0) == null && !args.get(0).evaluate().isNumeric()
-            || args.get(1) == null && !args.get(1).evaluate().isNumeric()){
+    if (args.size() != 2 || args.get(0) == null && !args.get(0).evaluate().isNumeric()
+        || args.get(1) == null && !args.get(1).evaluate().isNumeric()) {
       throw new IllegalArgumentException("Invalid arguments for less than");
     }
 
@@ -114,6 +108,7 @@ public class Function implements Formula {
 
   /**
    * Concatenates a string version of each argument to one string.
+   *
    * @return A string value containing the concatenated string
    */
   private StringValue concat() {
@@ -128,13 +123,14 @@ public class Function implements Formula {
   }
 
   /**
-   * Checks to see if all the evaluations in an array list of formulas return numeric values
+   * Checks to see if all the evaluations in an array list of formulas return numeric values.
+   *
    * @param arr array list of formulas
    * @return true if all values are numeric
    */
-  private boolean allNonNumeric(ArrayList<Formula> arr){
-    for(Formula f : arr){
-      if(f != null && !f.evaluate().isNumeric()){
+  private boolean allNonNumeric(ArrayList<Formula> arr) {
+    for (Formula f : arr) {
+      if (f != null && !f.evaluate().isNumeric()) {
         return false;
       }
     }

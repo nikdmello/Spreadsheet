@@ -1,7 +1,5 @@
 package edu.cs3500.spreadsheets.model;
 
-import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
-
 /**
  * Container for an double.
  */
@@ -10,9 +8,10 @@ public class DoubleValue implements Value {
 
   /**
    * Constructs a new double container.
+   *
    * @param value int to contain
    */
-  public DoubleValue(double value){
+  public DoubleValue(double value) {
     this.value = value;
   }
 

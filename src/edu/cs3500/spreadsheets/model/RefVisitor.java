@@ -1,11 +1,10 @@
-package edu.cs3500.spreadsheets.model.visitors;
+package edu.cs3500.spreadsheets.model;
 
 import java.util.ArrayList;
 
-import edu.cs3500.spreadsheets.model.Formula;
-import edu.cs3500.spreadsheets.model.Function;
-import edu.cs3500.spreadsheets.model.Reference;
-
+/**
+ * A visitor function object that processes a Formula to a Reference.
+ */
 public class RefVisitor implements FormulaVisitor<ArrayList<Formula>> {
 
   @Override

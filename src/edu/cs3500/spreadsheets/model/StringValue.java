@@ -1,11 +1,12 @@
 package edu.cs3500.spreadsheets.model;
 
-import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
-
+/**
+ * Represents a container for a String value.
+ */
 public class StringValue implements Value {
   private final String s;
 
-  public StringValue(String s){
+  public StringValue(String s) {
     this.s = s;
   }
 

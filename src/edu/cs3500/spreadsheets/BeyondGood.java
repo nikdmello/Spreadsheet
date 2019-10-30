@@ -14,6 +14,7 @@ import edu.cs3500.spreadsheets.model.WorksheetReader;
 public class BeyondGood {
   /**
    * The main entry point.
+   *
    * @param args any command-line arguments
    */
   public static void main(String[] args) {
@@ -35,18 +36,17 @@ public class BeyondGood {
     if (args.length == 4 && args[0].equals("-in") && args[2].equals("-eval")) {
       fileName = args[1];
       cellName = args[3];
-    }
-    else {
+    } else {
       throw new IllegalArgumentException("Invalid command.");
     }
 
     try {
       file = new FileReader(fileName);
-    }
-    catch (FileNotFoundException e) {
+    } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File not found.");
     }
 
     BasicWorksheetModel model = WorksheetReader.read(builder, file);
+
   }
 }

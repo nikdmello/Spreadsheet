@@ -1,9 +1,9 @@
-package edu.cs3500.spreadsheets.model.visitors;
+package edu.cs3500.spreadsheets.model;
 
-import edu.cs3500.spreadsheets.model.Function;
-import edu.cs3500.spreadsheets.model.Reference;
-
-public class AsStringVisitor implements FormulaVisitor<String>{
+/**
+ * A visitor function object that processes a Formula to a String.
+ */
+public class AsStringVisitor implements FormulaVisitor<String> {
   @Override
   public String visitBoolean(boolean b) {
     return "" + b;

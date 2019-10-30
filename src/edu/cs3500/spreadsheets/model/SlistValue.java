@@ -1,7 +1,9 @@
 package edu.cs3500.spreadsheets.model;
 
-import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
-
+/**
+ * Represents a container for an Slist.
+ * TODO: Explain what Slist is
+ */
 public class SlistValue implements Value {
 
   @Override

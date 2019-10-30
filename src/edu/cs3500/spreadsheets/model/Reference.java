@@ -2,9 +2,6 @@ package edu.cs3500.spreadsheets.model;
 
 import java.util.ArrayList;
 
-import edu.cs3500.spreadsheets.model.visitors.FormulaVisitor;
-import edu.cs3500.spreadsheets.model.visitors.SelfRefVisitor;
-
 /**
  * Represents a reference to a rectangular region of cells in the spreadsheet.
  */
@@ -14,13 +11,21 @@ public class Reference implements Formula {
   private ArrayList<Formula> cellContents;
   public final Worksheet sheet;
 
-  public Reference(Coord c1, Coord c2, Worksheet sheet){
+  /**
+   * Represents a constructor for a Reference with two coordinates, the starting point of the range
+   * of cells and the ending point of the range of cells.
+   */
+  public Reference(Coord c1, Coord c2, Worksheet sheet) {
     this.c1 = c1;
     this.c2 = c2;
     this.sheet = sheet;
   }
 
-  public Reference(Coord c, Worksheet sheet){
+  /**
+   * Represents a constructor with only one coordinate, meaning that this reference only refers to
+   * one cell instead of a range of cells.
+   */
+  public Reference(Coord c, Worksheet sheet) {
     this.c1 = c;
     this.c2 = c;
     this.sheet = sheet;
@@ -28,11 +33,11 @@ public class Reference implements Formula {
 
   @Override
   public Value evaluate() {
-    if(this.hasRepeat()){
+    if (this.hasRepeat()) {
       throw new IllegalArgumentException("Cell cannot reference itself");
     }
 
-    if(c1.equals(c2)){
+    if (c1.equals(c2)) {
       return sheet.getCellAt(c1).getFormula().evaluate();
     }
     throw new IllegalArgumentException("Nothing to evaluate");
@@ -40,6 +45,7 @@ public class Reference implements Formula {
 
   /**
    * Checks to see if a reference references itself.
+   *
    * @return true if the reference references itself
    */
   private boolean hasRepeat() {
@@ -67,7 +73,12 @@ public class Reference implements Formula {
     return formulaList;
   }
 
-  public ArrayList<Coord> getCellCoords() {
+  /**
+   * Returns all the coordinates of cells.
+   *
+   * @return a collection of coordinates.
+   */
+  ArrayList<Coord> getCellCoords() {
     ArrayList<Coord> coordList = new ArrayList<Coord>();
     for (int i = c1.col; i < c2.col; i++) {
       for (int j = c1.row; j < c2.row; j++) {
