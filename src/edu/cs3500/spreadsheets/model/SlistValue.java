@@ -1,5 +1,5 @@
 package edu.cs3500.spreadsheets.model;
-
+//Same comment as Symbol value
 /**
  * Represents a container for an Slist.
  * TODO: Explain what Slist is

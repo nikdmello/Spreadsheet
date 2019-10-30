@@ -2,6 +2,8 @@ package edu.cs3500.spreadsheets.model;
 
 import java.util.Objects;
 
+//Im not sure we need this class, a formula is only a string, double, boolean, reference, or function.
+
 /**
  * Represents a container for a symbol value.
  * TODO: Explain what symbol is

@@ -46,7 +46,7 @@ public class SelfRefVisitor implements FormulaVisitor<Boolean> {
   @Override
   public Boolean visitReference(Reference r) {
     for (Coord c : r.getCellCoords()) {
-      if (this.banned.contains(r.sheet.getCellAt(c).getFormula())) {
+      if (listHasFormula(this.banned, r.sheet.getCellAt(c).getFormula())) {
         return true;
       } else if (r.sheet.getCellAt(c)
               .getFormula()
@@ -61,6 +61,15 @@ public class SelfRefVisitor implements FormulaVisitor<Boolean> {
   public Boolean visitFunc(Function f) {
     for (Formula formula : f.args) {
       if (formula.accept(this)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private static boolean listHasFormula(ArrayList<Formula> arr, Formula f){
+    for(Formula fu : arr){
+      if(fu == f){
         return true;
       }
     }
