@@ -24,7 +24,7 @@ public class RefVisitor implements FormulaVisitor<ArrayList<Formula>> {
 
   @Override
   public ArrayList<Formula> visitReference(Reference r) {
-    return null;
+    return r.getCellFormulas();
   }
 
   @Override

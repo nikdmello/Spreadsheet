@@ -1,5 +1,6 @@
 package edu.cs3500.spreadsheets.model;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 
 /**
@@ -67,6 +68,12 @@ public class SelfRefVisitor implements FormulaVisitor<Boolean> {
     return false;
   }
 
+  /**
+   * Checks to see if the array contains the same formula reference.
+   * @param arr the array to check
+   * @param f the formula to check
+   * @return true if f is found in arr
+   */
   private static boolean listHasFormula(ArrayList<Formula> arr, Formula f){
     for(Formula fu : arr){
       if(fu == f){

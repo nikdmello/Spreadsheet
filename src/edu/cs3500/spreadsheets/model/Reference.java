@@ -61,7 +61,7 @@ public class Reference implements Formula {
     return "ref";
   }
 
-  private ArrayList<Formula> getCellFormulas() {
+  ArrayList<Formula> getCellFormulas() {
     ArrayList<Formula> formulaList = new ArrayList<>();
     for (int i = c1.col; i < c2.col; i++) {
       for (int j = c1.row; j < c2.row; j++) {
