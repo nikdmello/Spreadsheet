@@ -23,7 +23,6 @@ public class BeyondGood {
     String fileName = "";
     String cellName = "";
     FileReader file;
-    Scanner scanner;
     BasicWorksheetBuilder builder = new BasicWorksheetBuilder();
 
     /*
@@ -35,11 +34,8 @@ public class BeyondGood {
 
     Appendable a = new OutputStreamWriter(System.out);
 
-    // Parse data inside spreadsheet
-//    scanner = new Scanner(r);
-
     // Obtain filename and cell name
-    if (args.length >= 3) {
+    if (args.length == 4 && args[0].equals("-in") && args[2].equals("-eval")) {
       fileName = args[1];
       cellName = args[3];
     }
@@ -48,7 +44,6 @@ public class BeyondGood {
     }
     // TODO: check each arg
 
-    // Read file using first two arguments
     try {
       file = new FileReader(fileName);
     }

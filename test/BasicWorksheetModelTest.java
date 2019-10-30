@@ -10,7 +10,7 @@ public class BasicWorksheetModelTest {
 
   @Test
   public void initGrid() {
-    model.initGrid();
+//    model.initGrid();
 
     assertTrue(model.getHashtable().isEmpty());
   }

@@ -11,11 +11,7 @@ public class BasicWorksheetModel implements Worksheet{
   private ArrayList<ArrayList<Cell>> cells;
 
   public BasicWorksheetModel() {
-  }
-
-  @Override
-  public void initGrid() {
-    hashtable = new Hashtable<>();
+    this.hashtable = new Hashtable<>();
   }
 
   public Hashtable<Coord, Cell> getHashtable() {

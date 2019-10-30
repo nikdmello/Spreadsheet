@@ -4,11 +4,11 @@ package edu.cs3500.spreadsheets.model;
  * Interface for any spreadsheet model.
  */
 public interface Worksheet {
-  /**
-   * Initializes the hashtable, which will serve as the grid of cells.
-   * Within this will be the Coord and Cell key-value pairs.
-   */
-  void initGrid();
+//  /**
+//   * Initializes the hashtable, which will serve as the grid of cells.
+//   * Within this will be the Coord and Cell key-value pairs.
+//   */
+//  void initGrid();
 
   /**
    * Creates a new key-value pair and puts it in the hashtable.
