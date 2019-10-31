@@ -38,6 +38,16 @@ public class Reference implements Formula {
     this.c2 = c;
   }
 
+  /**
+   * Copy constructor
+   * @param r Reference to copy
+   */
+  public Reference(Reference r){
+    this.sheet = r.sheet;
+    this.c1 = r.c1;
+    this.c2 = r.c2;
+  }
+
   @Override
   public Value evaluate() {
     if (this.hasRepeat()) {

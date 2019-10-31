@@ -26,6 +26,15 @@ public class Function implements Formula {
     }
   }
 
+  /**
+   * Copy constructor for function
+   * @param f function to copy
+   */
+  public Function(Function f){
+    this.args = f.args;
+    this.type = f.type;
+  }
+
   @Override
   public Value evaluate() {
     switch (this.type) {
@@ -134,7 +143,6 @@ public class Function implements Formula {
         return true;
       }
     }
-
     return false;
   }
 }
