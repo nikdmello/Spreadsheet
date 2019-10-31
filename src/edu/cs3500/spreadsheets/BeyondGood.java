@@ -25,13 +25,6 @@ public class BeyondGood {
     FileReader file;
     BasicWorksheetBuilder builder = new BasicWorksheetBuilder();
 
-    /*
-      TODO: For now, look in the args array to obtain a filename and a cell name,
-      - read the file and build a model from it, 
-      - evaluate all the cells, and
-      - report any errors, or print the evaluated value of the requested cell.
-    */
-
     // Obtain filename and cell name
     if (args.length == 4 && args[0].equals("-in") && args[2].equals("-eval")) {
       fileName = args[1];
@@ -49,7 +42,7 @@ public class BeyondGood {
     BasicWorksheetModel model = WorksheetReader.read(builder, file);
     Coord errorCell = model.evalAll();
     if (errorCell != null) {
-      System.out.println("Error at cell " + Coord.colIndexToName(errorCell.col) + errorCell.row);
+      System.out.print("Error at cell " + Coord.colIndexToName(errorCell.col) + errorCell.row);
     }
 
     int coordCol = Coord.colNameToIndex(cellName.substring(0, 1));
@@ -58,6 +51,12 @@ public class BeyondGood {
 
     Cell cell = model.getCellAt(coord);
     cell.evaluateCell();
-    System.out.println(cell);
+    String ret = "";
+    if (cell.getFormula().type().equals("double")) {
+      ret = String.format("%f", cell.getFormula().evaluate().numberForm());
+    } else {
+      ret = "" + cell;
+    }
+    System.out.print(ret);
   }
 }

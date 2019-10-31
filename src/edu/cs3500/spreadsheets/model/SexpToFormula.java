@@ -3,6 +3,7 @@ package edu.cs3500.spreadsheets.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 import edu.cs3500.spreadsheets.model.BoolValue;
 import edu.cs3500.spreadsheets.model.DoubleValue;
@@ -37,11 +38,10 @@ public class SexpToFormula implements SexpVisitor<Formula> {
 
   @Override
   public Formula visitSymbol(String s) {
-    int coordCol = Coord.colNameToIndex(s.substring(0,1));
-    int coordRow = Integer.parseInt(s.substring(1,2));
-    Coord firstCoord = new Coord(coordCol, coordRow);
-
-    if (s.length() > 2) {
+    if (s.contains(" ") || s.contains(":")) {
+      if(number){
+        stop;
+      }
       int coordCol2 = Coord.colNameToIndex(s.substring(3,4));
       int coordRow2 = Integer.parseInt(s.substring(4,5));
       Coord secondCoord = new Coord(coordCol2, coordRow2);

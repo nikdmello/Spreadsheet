@@ -27,7 +27,6 @@ final public class Cell {
   public void evaluateCell() {
     if (f == null) {
       return;
-      //TODO fix return
     }
     this.f = f.evaluate();
   }
@@ -40,7 +39,6 @@ final public class Cell {
     return this.f;
   }
 
-  //TODO fix toString
   @Override
   public String toString() {
     return this.f.toString();
