@@ -27,27 +27,31 @@ public class FunctionTest {
   }
 
   @Test
-  public void evaluateProdTest(){
+  public void evaluateProdTest() {
     model.createCell(4, 4, new DoubleValue(10));
     model.createCell(4, 5, new DoubleValue(10));
     model.createCell(4, 6,
             new Reference(model,
-                    new Coord(4, 4), new Coord(4, 5), new Coord(4, 6)));
-    ArrayList<Formula> arrf = new ArrayList<>(Arrays.asList(new DoubleValue(5), new DoubleValue(5)));
+                    new Coord(4, 4), new Coord(4, 5),
+                    new Coord(4, 6)));
+    ArrayList<Formula> arrf = new ArrayList<>(Arrays.asList(new DoubleValue(5),
+            new DoubleValue(5)));
     model.createCell(3, 4, new Function(FunctionType.SUM, arrf));
     model.createCell(1, 1, new Function(FunctionType.PRODUCT,
-            new ArrayList<Formula>(Arrays.asList(model.getCellAt(new Coord(3, 4)).getFormula()
-                    , new DoubleValue(10)))));
+            new ArrayList<Formula>(Arrays.asList(model.getCellAt(new Coord(3, 4))
+                    .getFormula(), new DoubleValue(10)))));
     model.getCellAt(new Coord(1, 1)).evaluateCell();
-    ArrayList<Formula> arrfu = new ArrayList<>(Arrays.asList(model.getCellAt(new Coord(4, 6)).getFormula()));
+    ArrayList<Formula> arrfu = new ArrayList<>(Arrays.asList(model.
+            getCellAt(new Coord(4, 6)).getFormula()));
     model.createCell(4, 7, new Function(FunctionType.PRODUCT, arrfu));
     assertEquals(100,
             (int) ((Value) (model.getCellAt(new Coord(1, 1)).getFormula())).numberForm());
-    assertEquals(100, (int) model.getCellAt(new Coord(4, 7)).getFormula().evaluate().numberForm());
+    assertEquals(100, (int) model.getCellAt(new Coord(4, 7))
+            .getFormula().evaluate().numberForm());
   }
 
   @Test
-  public void evaluateLTTest(){
+  public void evaluateLTTest() {
     model.createCell(1, 1, new Function(FunctionType.LT,
             new ArrayList<Formula>(Arrays.asList(new DoubleValue(1), new DoubleValue(2)))));
     model.getCellAt(new Coord(1, 1)).evaluateCell();
@@ -56,7 +60,7 @@ public class FunctionTest {
   }
 
   @Test
-  public void evaluateCatTest(){
+  public void evaluateCatTest() {
     model.createCell(1, 1, new Function(FunctionType.CAT,
             new ArrayList<Formula>(Arrays.asList(new DoubleValue(1), new DoubleValue(2)))));
     model.getCellAt(new Coord(1, 1)).evaluateCell();

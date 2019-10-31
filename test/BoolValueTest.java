@@ -24,6 +24,6 @@ public class BoolValueTest {
 
   @Test
   public void numberForm() {
-    assertEquals(0, (int)bv.numberForm());
+    assertEquals(0, (int) bv.numberForm());
   }
 }

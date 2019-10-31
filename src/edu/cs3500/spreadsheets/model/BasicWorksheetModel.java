@@ -50,7 +50,7 @@ public class BasicWorksheetModel implements Worksheet {
   public Coord evalAll() {
     for (Map.Entry<Coord, Cell> e : hashtable.entrySet()) {
       try {
-        if(!valtable.contains(e.getKey())) {
+        if (!valtable.contains(e.getKey())) {
           e.getValue().evaluateCell();
           valtable.add(e.getKey());
         }

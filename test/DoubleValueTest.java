@@ -24,6 +24,6 @@ public class DoubleValueTest {
 
   @Test
   public void numberForm() {
-    assertEquals(2, (int)dv.numberForm());
+    assertEquals(2, (int) dv.numberForm());
   }
 }

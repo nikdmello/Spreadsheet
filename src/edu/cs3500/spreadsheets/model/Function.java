@@ -28,9 +28,10 @@ public class Function implements Formula {
 
   /**
    * Copy constructor for function
+   *
    * @param f function to copy
    */
-  public Function(Function f){
+  public Function(Function f) {
     this.args = f.args;
     this.type = f.type;
   }

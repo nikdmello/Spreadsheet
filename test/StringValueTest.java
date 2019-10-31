@@ -1,6 +1,4 @@
-
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import edu.cs3500.spreadsheets.model.StringValue;
 
@@ -26,6 +24,6 @@ public class StringValueTest {
 
   @Test
   public void numberForm() {
-    assertEquals(0, (int)sv.numberForm());
+    assertEquals(0, (int) sv.numberForm());
   }
 }

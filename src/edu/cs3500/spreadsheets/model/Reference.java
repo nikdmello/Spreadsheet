@@ -16,9 +16,10 @@ public class Reference implements Formula {
   /**
    * Represents a constructor for a Reference with two coordinates, the starting point of the range
    * of cells and the ending point of the range of cells.
+   *
    * @param sheet a reference sheet
-   * @param c1 Coord 1 to start at
-   * @param c2 Coord 2 to end at
+   * @param c1    Coord 1 to start at
+   * @param c2    Coord 2 to end at
    */
   public Reference(Worksheet sheet, Coord c1, Coord c2, Coord thisCoord) {
     this.sheet = sheet;
@@ -30,8 +31,9 @@ public class Reference implements Formula {
   /**
    * Represents a constructor with only one coordinate, meaning that this reference only refers to
    * one cell instead of a range of cells.
+   *
    * @param sheet Reference sheet
-   * @param c single Coord
+   * @param c     single Coord
    */
   public Reference(Worksheet sheet, Coord c, Coord thisCoord) {
     this.sheet = sheet;
@@ -42,9 +44,10 @@ public class Reference implements Formula {
 
   /**
    * Copy constructor
+   *
    * @param r Reference to copy
    */
-  public Reference(Reference r){
+  public Reference(Reference r) {
     this.sheet = r.sheet;
     this.c1 = r.c1;
     this.c2 = r.c2;
@@ -83,7 +86,7 @@ public class Reference implements Formula {
   }
 
   ArrayList<Formula> getCellFormulas() {
-    if(this.c1.equals(c2)){
+    if (this.c1.equals(c2)) {
       return new ArrayList<Formula>(Arrays.asList(sheet.getCellAt(c1).getFormula()));
     }
     ArrayList<Formula> formulaList = new ArrayList<>();
@@ -105,7 +108,7 @@ public class Reference implements Formula {
    * @return a collection of coordinates.
    */
   ArrayList<Coord> getCellCoords() {
-    if(this.c1.equals(c2)){
+    if (this.c1.equals(c2)) {
       return new ArrayList<Coord>(Arrays.asList(c1));
     }
     ArrayList<Coord> coordList = new ArrayList<Coord>();
