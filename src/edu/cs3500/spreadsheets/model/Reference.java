@@ -23,7 +23,6 @@ public class Reference implements Formula {
     this.sheet = sheet;
     this.c1 = c1;
     this.c2 = c2;
-    //TODO sheet in constructor
   }
 
   /**
@@ -84,10 +83,13 @@ public class Reference implements Formula {
       return new ArrayList<Formula>(Arrays.asList(sheet.getCellAt(c1).getFormula()));
     }
     ArrayList<Formula> formulaList = new ArrayList<>();
-    for (int i = c1.col; i < c2.col; i++) {
-      for (int j = c1.row; j < c2.row; j++) {
-        Formula formula = sheet.getCellAt(new Coord(i, j)).getFormula();
-        formulaList.add(formula);
+    for (int i = c1.col; i < c2.col + 1; i++) {
+      for (int j = c1.row; j < c2.row + 1; j++) {
+        Cell c = sheet.getCellAt(new Coord(i, j));
+        if (c != null) {
+          Formula formula = c.getFormula();
+          formulaList.add(formula);
+        }
       }
     }
     return formulaList;

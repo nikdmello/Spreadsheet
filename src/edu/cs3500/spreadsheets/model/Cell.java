@@ -7,7 +7,6 @@ import java.util.Objects;
  */
 final public class Cell {
   private Formula f;
-  //TODO handle blank cells
 
   /**
    * Constructs a cell containing a formula.
@@ -20,6 +19,7 @@ final public class Cell {
     }
     this.f = f;
   }
+
 
   /**
    * Evaluates the contents in a cell to a single Value.

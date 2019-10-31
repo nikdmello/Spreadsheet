@@ -45,10 +45,10 @@ public class BasicWorksheetModel implements Worksheet {
 
   @Override
   public Coord evalAll() {
-    for(Map.Entry<Coord, Cell> e : hashtable.entrySet()){
+    for (Map.Entry<Coord, Cell> e : hashtable.entrySet()) {
       try {
         e.getValue().evaluateCell();
-      } catch (IllegalArgumentException iae){
+      } catch (IllegalArgumentException iae) {
         return e.getKey();
       }
     }
