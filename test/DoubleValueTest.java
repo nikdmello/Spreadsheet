@@ -4,6 +4,9 @@ import edu.cs3500.spreadsheets.model.DoubleValue;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Represents tests for the double Value.
+ */
 public class DoubleValueTest {
   DoubleValue dv = new DoubleValue(2);
 

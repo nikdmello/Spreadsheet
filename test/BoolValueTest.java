@@ -4,6 +4,9 @@ import edu.cs3500.spreadsheets.model.BoolValue;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Represents tests for the boolean Value.
+ */
 public class BoolValueTest {
   BoolValue bv = new BoolValue(true);
 

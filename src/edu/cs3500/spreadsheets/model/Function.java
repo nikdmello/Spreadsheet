@@ -27,7 +27,7 @@ public class Function implements Formula {
   }
 
   /**
-   * Copy constructor for function
+   * Copy constructor for function.
    *
    * @param f function to copy
    */

@@ -41,6 +41,10 @@ public final class Cell {
     return this.f;
   }
 
+  /**
+   * Updates the formula that is currently in the Cell with the given formula.
+   * @param f the new formula
+   */
   public void changeContents(Formula f) {
     if (f == null) {
       throw new IllegalArgumentException("Cell can not be created with a null formula");

@@ -12,8 +12,8 @@ public class Coord {
   /**
    * Constructs a Coord with a col and row value.
    *
-   * @param col
-   * @param row
+   * @param col x-value of Coord
+   * @param row y-value of Coord
    */
   public Coord(int col, int row) {
     if (row < 1 || col < 1) {

@@ -7,10 +7,13 @@ import edu.cs3500.spreadsheets.model.Reference;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Represents tests for Reference.
+ */
 public class ReferenceTest {
-  BasicWorksheetModel model;
+  private BasicWorksheetModel model;
 
-  public void reset() {
+  private void reset() {
     model = new BasicWorksheetModel();
     model.createCell(1, 1, new DoubleValue(2));
     model.createCell(1, 2, new Reference(model,

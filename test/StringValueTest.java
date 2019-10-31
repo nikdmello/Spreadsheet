@@ -4,6 +4,9 @@ import edu.cs3500.spreadsheets.model.StringValue;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Represents tests for the string Value.
+ */
 public class StringValueTest {
   StringValue sv = new StringValue("Hi");
 

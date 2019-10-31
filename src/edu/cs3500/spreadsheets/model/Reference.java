@@ -43,7 +43,7 @@ public class Reference implements Formula {
   }
 
   /**
-   * Copy constructor
+   * Copy constructor.
    *
    * @param r Reference to copy
    */

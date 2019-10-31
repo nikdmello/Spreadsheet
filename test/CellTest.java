@@ -14,6 +14,9 @@ import edu.cs3500.spreadsheets.model.Value;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Represents tests for the Cell class.
+ */
 public class CellTest {
   BasicWorksheetModel model = new BasicWorksheetModel();
 

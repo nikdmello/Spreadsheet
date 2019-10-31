@@ -1,14 +1,9 @@
 package edu.cs3500.spreadsheets.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import edu.cs3500.spreadsheets.model.BoolValue;
-import edu.cs3500.spreadsheets.model.DoubleValue;
-import edu.cs3500.spreadsheets.model.Formula;
-import edu.cs3500.spreadsheets.model.StringValue;
 import edu.cs3500.spreadsheets.sexp.Sexp;
 import edu.cs3500.spreadsheets.sexp.SexpVisitor;
 
@@ -20,7 +15,7 @@ public class SexpToFormula implements SexpVisitor<Formula> {
   private Coord toCreate;
 
   /**
-   * Constructs a SexpToFormula visitor with a rference sheet to use.
+   * Constructs a SexpToFormula visitor with a reference sheet to use.
    *
    * @param sheet the reference sheet
    */

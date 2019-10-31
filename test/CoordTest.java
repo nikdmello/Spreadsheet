@@ -4,6 +4,9 @@ import edu.cs3500.spreadsheets.model.Coord;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Represents tests for the Coord class.
+ */
 public class CoordTest {
 
   @Test
