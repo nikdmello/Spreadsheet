@@ -23,7 +23,7 @@ public class BasicWorksheetBuilder implements WorksheetReader.WorksheetBuilder<B
       contents = contents.substring(1);
     }
     Sexp sexp = Parser.parse(contents);
-    Formula f = sexp.accept(new SexpToFormula(this.sheet));
+    Formula f = sexp.accept(new SexpToFormula(this.sheet, new Coord(col, row)));
     sheet.createCell(col, row, f);
     return this;
   }

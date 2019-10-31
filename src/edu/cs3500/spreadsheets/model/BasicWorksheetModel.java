@@ -1,5 +1,6 @@
 package edu.cs3500.spreadsheets.model;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import java.util.Map;
  */
 public class BasicWorksheetModel implements Worksheet {
   private Hashtable<Coord, Cell> hashtable;
+  private ArrayList<Coord> valtable;
 
   /**
    * Constructor that initializes the hashtable, which will serve as the grid of cells. Within this
@@ -15,6 +17,7 @@ public class BasicWorksheetModel implements Worksheet {
    */
   public BasicWorksheetModel() {
     this.hashtable = new Hashtable<>();
+    this.valtable = new ArrayList<Coord>();
   }
 
   /**
@@ -47,7 +50,10 @@ public class BasicWorksheetModel implements Worksheet {
   public Coord evalAll() {
     for (Map.Entry<Coord, Cell> e : hashtable.entrySet()) {
       try {
-        e.getValue().evaluateCell();
+        if(!valtable.contains(e.getKey())) {
+          e.getValue().evaluateCell();
+          valtable.add(e.getKey());
+        }
       } catch (IllegalArgumentException iae) {
         return e.getKey();
       }

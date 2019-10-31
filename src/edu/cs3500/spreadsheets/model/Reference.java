@@ -9,6 +9,7 @@ import java.util.Arrays;
 public class Reference implements Formula {
   private Coord c1;
   private Coord c2;
+  private Coord thisCoord;
   private ArrayList<Formula> cellContents;
   public final Worksheet sheet;
 
@@ -19,10 +20,11 @@ public class Reference implements Formula {
    * @param c1 Coord 1 to start at
    * @param c2 Coord 2 to end at
    */
-  public Reference(Worksheet sheet, Coord c1, Coord c2) {
+  public Reference(Worksheet sheet, Coord c1, Coord c2, Coord thisCoord) {
     this.sheet = sheet;
     this.c1 = c1;
     this.c2 = c2;
+    this.thisCoord = thisCoord;
   }
 
   /**
@@ -31,10 +33,11 @@ public class Reference implements Formula {
    * @param sheet Reference sheet
    * @param c single Coord
    */
-  public Reference(Worksheet sheet, Coord c) {
+  public Reference(Worksheet sheet, Coord c, Coord thisCoord) {
     this.sheet = sheet;
     this.c1 = c;
     this.c2 = c;
+    this.thisCoord = thisCoord;
   }
 
   /**
@@ -45,6 +48,7 @@ public class Reference implements Formula {
     this.sheet = r.sheet;
     this.c1 = r.c1;
     this.c2 = r.c2;
+    this.thisCoord = r.thisCoord;
   }
 
   @Override
@@ -65,7 +69,7 @@ public class Reference implements Formula {
    * @return true if the reference references itself
    */
   private boolean hasRepeat() {
-    return this.accept(new SelfRefVisitor(this));
+    return this.accept(new SelfRefVisitor(thisCoord));
   }
 
   @Override
@@ -101,6 +105,9 @@ public class Reference implements Formula {
    * @return a collection of coordinates.
    */
   ArrayList<Coord> getCellCoords() {
+    if(this.c1.equals(c2)){
+      return new ArrayList<Coord>(Arrays.asList(c1));
+    }
     ArrayList<Coord> coordList = new ArrayList<Coord>();
     for (int i = c1.col; i < c2.col; i++) {
       for (int j = c1.row; j < c2.row; j++) {

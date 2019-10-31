@@ -5,8 +5,9 @@ import java.util.Objects;
 /**
  * Represents a cell in a spreadsheet containing a formula.
  */
-final public class Cell {
+public final class Cell {
   private Formula f;
+
 
   /**
    * Constructs a cell containing a formula.
@@ -39,6 +40,12 @@ final public class Cell {
     return this.f;
   }
 
+  public void changeContents(Formula f){
+    if (f == null) {
+      throw new IllegalArgumentException("Cell can not be created with a null formula");
+    }
+    this.f = f;
+  }
   @Override
   public String toString() {
     return this.f.toString();

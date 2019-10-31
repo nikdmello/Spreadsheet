@@ -1,10 +1,14 @@
 import org.junit.Test;
 
+import java.util.Map;
+
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
 import edu.cs3500.spreadsheets.model.BoolValue;
 import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.DoubleValue;
+import edu.cs3500.spreadsheets.model.Formula;
+import edu.cs3500.spreadsheets.model.Reference;
 import edu.cs3500.spreadsheets.model.StringValue;
 
 import static org.junit.Assert.assertEquals;
@@ -61,14 +65,34 @@ public class BasicWorksheetModelTest {
     assertEquals(c.getFormula(), new StringValue("ayyy lmao"));
   }
 
-  @Test
-  public void testCellEmpty() {
 
+  @Test
+  public void testGetCellAt(){
+    Cell cell = model.getCellAt(new Coord(3, 4));
+    assertEquals(model.getHashtable().get(new Coord(3 ,4)), cell);
   }
 
   @Test
-  public void testCellFormula() {
+  public void testCellEmpty() {
+    assertEquals(model.getHashtable().get(new Coord(10, 10)), null);
+  }
 
+  @Test
+  public void testDeleteCell(){
+    model.deleteCellAt(new Coord(3, 4));
+    assertEquals(false, model.getHashtable().contains(new Coord(3, 4)));
+  }
+
+  @Test
+  public void testEvalAll(){
+    assertEquals(null, model.evalAll());
+  }
+
+  @Test
+  public void testEvalAllError(){
+    model.createCell(2, 7,
+            new Reference(model, new Coord(9, 8), new Coord(102, 309)));
+    assertEquals(new Coord(2, 7), model.evalAll());
   }
 
 }

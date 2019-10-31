@@ -16,14 +16,16 @@ import edu.cs3500.spreadsheets.sexp.SexpVisitor;
  * Represents a visitor function object for processing a Sexp to Formula.
  */
 public class SexpToFormula implements SexpVisitor<Formula> {
-  Worksheet currentSheet;
+  private Worksheet currentSheet;
+  private Coord toCreate;
 
   /**
    * Constructs a SexpToFormula visitor with a rference sheet to use.
    * @param sheet the reference sheet
    */
-  public SexpToFormula(Worksheet sheet){
+  public SexpToFormula(Worksheet sheet, Coord toC){
     this.currentSheet = sheet;
+    this.toCreate = toC;
   }
 
   @Override
@@ -39,18 +41,39 @@ public class SexpToFormula implements SexpVisitor<Formula> {
   @Override
   public Formula visitSymbol(String s) {
     if (s.contains(" ") || s.contains(":")) {
-      if(number){
-        stop;
+      boolean hasCol = s.contains(":");
+      String firstC;
+      String secondC;
+      if(hasCol){
+        int colnInd = s.indexOf(":");
+        firstC = s.substring(0, colnInd);
+        secondC = s.substring(colnInd + 1);
       }
-      int coordCol2 = Coord.colNameToIndex(s.substring(3,4));
-      int coordRow2 = Integer.parseInt(s.substring(4,5));
-      Coord secondCoord = new Coord(coordCol2, coordRow2);
-
-      return new Reference(this.currentSheet, firstCoord, secondCoord);
+      else{
+        Scanner scan = new Scanner(s);
+        firstC = scan.next();
+        secondC = scan.next();
+      }
+      return new Reference(this.currentSheet, turnToCoord(firstC), turnToCoord(secondC), toCreate);
     }
     else {
-      return new Reference(this.currentSheet, firstCoord);
+      return new Reference(this.currentSheet, turnToCoord(s), toCreate);
     }
+  }
+
+  private static Coord turnToCoord(String firstC) {
+    String letters;
+    int number;
+    int breakPoint = 0;
+    for(char c : firstC.toCharArray()){
+      if(Character.isDigit(c)){
+        break;
+      }
+      breakPoint++;
+    }
+    letters = firstC.substring(0, breakPoint);
+    number = Integer.parseInt(firstC.substring(breakPoint));
+    return new Coord(Coord.colNameToIndex(letters), number);
   }
 
   @Override
