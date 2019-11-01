@@ -11,10 +11,8 @@ import edu.cs3500.spreadsheets.model.Formula;
 import edu.cs3500.spreadsheets.model.Function;
 import edu.cs3500.spreadsheets.model.FunctionType;
 import edu.cs3500.spreadsheets.model.Reference;
-import edu.cs3500.spreadsheets.model.SexpToFormula;
 import edu.cs3500.spreadsheets.model.StringValue;
 import edu.cs3500.spreadsheets.model.Value;
-import edu.cs3500.spreadsheets.sexp.SSymbol;
 
 import static org.junit.Assert.assertEquals;
 
@@ -118,11 +116,10 @@ public class FunctionTest {
     model.createCell(1,5, new Reference(model, new Coord(1,1),
             new Coord(1,4), new Coord(1,5)));
 
-    Reference ref = new Reference(model, new Coord(1,1), new Coord(1,4), new Coord(1,5));
+    Reference ref = new Reference(model, new Coord(1,1), new Coord(1,4),
+            new Coord(1,5));
     Function sumRegion = new Function(FunctionType.SUM, new ArrayList<>(Arrays.asList(ref)));
 
     assertEquals("28.0", sumRegion.evaluate().toString());
-
-
   }
 }
