@@ -3,7 +3,7 @@ package edu.cs3500.spreadsheets.model;
 import java.util.Objects;
 
 /**
- * Container for an double.
+ * Container for an double, which is a Value.
  */
 public class DoubleValue implements Value {
   private final double value;

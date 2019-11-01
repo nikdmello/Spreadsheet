@@ -4,10 +4,10 @@ import java.util.Objects;
 
 /**
  * Represents a cell in a spreadsheet containing a formula.
+ * The contents of the cell could change.
  */
 public final class Cell {
   private Formula f;
-
 
   /**
    * Constructs a cell containing a formula.
@@ -47,7 +47,7 @@ public final class Cell {
    */
   public void changeContents(Formula f) {
     if (f == null) {
-      throw new IllegalArgumentException("Cell can not be created with a null formula");
+      throw new IllegalArgumentException("Cell can not be created with a null formula.");
     }
     this.f = f;
   }

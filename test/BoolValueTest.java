@@ -3,12 +3,13 @@ import org.junit.Test;
 import edu.cs3500.spreadsheets.model.BoolValue;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Represents tests for the boolean Value.
  */
 public class BoolValueTest {
-  BoolValue bv = new BoolValue(true);
+  private BoolValue bv = new BoolValue(true);
 
   @Test
   public void evaluateTest() {
@@ -22,7 +23,7 @@ public class BoolValueTest {
 
   @Test
   public void isNumeric() {
-    assertEquals(false, bv.isNumeric());
+    assertFalse(bv.isNumeric());
   }
 
   @Test

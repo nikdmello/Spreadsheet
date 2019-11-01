@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
 public class SList implements Sexp {
   private final List<Sexp> contents;
 
-  public SList(Sexp... contents) {
+  SList(Sexp... contents) {
     this(Arrays.asList(contents));
   }
 
-  public SList(List<Sexp> contents) {
+  SList(List<Sexp> contents) {
     this.contents = new ArrayList<>(Objects.requireNonNull(contents));
   }
 

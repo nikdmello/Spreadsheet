@@ -5,11 +5,18 @@ import java.util.Hashtable;
 import java.util.Map;
 
 /**
- * Represents a basic spreadsheet model.
+ * Represents a basic spreadsheet model. The model includes a grid of cells, each of which may
+ * have a formula.
  */
 public class BasicWorksheetModel implements Worksheet {
+  /**
+   * Represents the grid of cells with a Coord associated with a Cell.
+   */
   private Hashtable<Coord, Cell> hashtable;
-  private ArrayList<Coord> valtable;
+  /**
+   * A list of Coords that is used for evaluation purposes.
+   */
+  private ArrayList<Coord> valueTable;
 
   /**
    * Constructor that initializes the hashtable, which will serve as the grid of cells. Within this
@@ -17,7 +24,7 @@ public class BasicWorksheetModel implements Worksheet {
    */
   public BasicWorksheetModel() {
     this.hashtable = new Hashtable<>();
-    this.valtable = new ArrayList<Coord>();
+    this.valueTable = new ArrayList<>();
   }
 
   /**
@@ -50,9 +57,9 @@ public class BasicWorksheetModel implements Worksheet {
   public Coord evalAll() {
     for (Map.Entry<Coord, Cell> e : hashtable.entrySet()) {
       try {
-        if (!valtable.contains(e.getKey())) {
+        if (!valueTable.contains(e.getKey())) {
           e.getValue().evaluateCell();
-          valtable.add(e.getKey());
+          valueTable.add(e.getKey());
         }
       } catch (IllegalArgumentException iae) {
         return e.getKey();

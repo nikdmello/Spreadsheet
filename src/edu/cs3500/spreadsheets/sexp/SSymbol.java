@@ -6,9 +6,9 @@ import java.util.Objects;
  * An arbitrary symbol.
  */
 public class SSymbol implements Sexp {
-  String name;
+  private String name;
 
-  public SSymbol(String name) {
+  SSymbol(String name) {
     this.name = Objects.requireNonNull(name);
   }
 

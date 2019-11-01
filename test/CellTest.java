@@ -18,12 +18,12 @@ import static org.junit.Assert.assertEquals;
  * Represents tests for the Cell class.
  */
 public class CellTest {
-  BasicWorksheetModel model = new BasicWorksheetModel();
+  private BasicWorksheetModel model = new BasicWorksheetModel();
 
   @Test
   public void evaluateCell() {
     model.createCell(1, 1, new Function(FunctionType.SUM,
-            new ArrayList<Formula>(Arrays.asList(new DoubleValue(1), new DoubleValue(2)))));
+            new ArrayList<>(Arrays.asList(new DoubleValue(1), new DoubleValue(2)))));
     model.getCellAt(new Coord(1, 1)).evaluateCell();
     model.createCell(1, 2,
             new Reference(model, new Coord(1, 1), new Coord(1, 2)));
@@ -37,7 +37,7 @@ public class CellTest {
   @Test
   public void getFormula() {
     model.createCell(1, 1, new Function(FunctionType.SUM,
-            new ArrayList<Formula>(Arrays.asList(new DoubleValue(1), new DoubleValue(2)))));
+            new ArrayList<>(Arrays.asList(new DoubleValue(1), new DoubleValue(2)))));
     assertEquals("func", model.getCellAt(new Coord(1, 1)).getFormula().type());
   }
 }

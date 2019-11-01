@@ -9,6 +9,8 @@ import edu.cs3500.spreadsheets.model.Reference;
 import edu.cs3500.spreadsheets.model.StringValue;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -71,19 +73,18 @@ public class BasicWorksheetModelTest {
 
   @Test
   public void testCellEmpty() {
-    assertEquals(model.getHashtable().get(new Coord(10, 10)),
-            null);
+    assertNull(model.getHashtable().get(new Coord(10, 10)));
   }
 
   @Test
   public void testDeleteCell() {
     model.deleteCellAt(new Coord(3, 4));
-    assertEquals(false, model.getHashtable().contains(new Coord(3, 4)));
+    assertFalse(model.getHashtable().contains(new Coord(3, 4)));
   }
 
   @Test
   public void testEvalAll() {
-    assertEquals(null, model.evalAll());
+    assertNull(model.evalAll());
   }
 
   @Test

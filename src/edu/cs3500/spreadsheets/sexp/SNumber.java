@@ -6,9 +6,9 @@ import java.util.Objects;
  * A numeric constant {@link Sexp}.
  */
 public class SNumber implements Sexp {
-  double num;
+  private double num;
 
-  public SNumber(double num) {
+  SNumber(double num) {
     this.num = num;
   }
 

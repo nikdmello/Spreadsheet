@@ -3,7 +3,7 @@ package edu.cs3500.spreadsheets.model;
 import java.util.Objects;
 
 /**
- * Container for a boolean.
+ * Container for a boolean, which is a Value.
  */
 public class BoolValue implements Value {
   private Boolean b;

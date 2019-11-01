@@ -14,7 +14,7 @@ import edu.cs3500.spreadsheets.model.WorksheetReader;
 //TODO: Look at self eval and write last couple tests
 
 /**
- * The main class for our program.
+ * The main class for our program. The spreadsheet program should start from here.
  */
 public class BeyondGood {
   /**

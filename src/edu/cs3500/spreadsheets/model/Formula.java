@@ -15,7 +15,7 @@ public interface Formula {
   /**
    * Accepts a FormulaVisitor visitor and returns R.
    *
-   * @param visitor
+   * @param visitor the formula visitor
    * @return the desired value R
    */
   <R> R accept(FormulaVisitor<R> visitor);

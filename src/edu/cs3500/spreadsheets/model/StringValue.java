@@ -3,7 +3,7 @@ package edu.cs3500.spreadsheets.model;
 import java.util.Objects;
 
 /**
- * Represents a container for a String value.
+ * Represents a container for a String, which is a Value.
  */
 public class StringValue implements Value {
   private final String s;
