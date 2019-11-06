@@ -2,7 +2,6 @@ package edu.cs3500.spreadsheets.model;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Map;
 
 /**
  * Represents a basic spreadsheet model. The model includes a grid of cells, each of which may
@@ -17,6 +16,7 @@ public class BasicWorksheetModel implements Worksheet {
    * A list of Coords that is used for evaluation purposes.
    */
   private ArrayList<Coord> valueTable;
+  private ArrayList<Coord> orderedCoords;
 
   /**
    * Constructor that initializes the hashtable, which will serve as the grid of cells. Within this
@@ -25,6 +25,7 @@ public class BasicWorksheetModel implements Worksheet {
   public BasicWorksheetModel() {
     this.hashtable = new Hashtable<>();
     this.valueTable = new ArrayList<>();
+    this.orderedCoords = new ArrayList<>();
   }
 
   /**
@@ -39,8 +40,15 @@ public class BasicWorksheetModel implements Worksheet {
   @Override
   public void createCell(int col, int row, Formula f) {
     Coord c = new Coord(col, row);
-    Cell cell = new Cell(f);
+    Cell cell;
+    try {
+      cell = new Cell(f.evaluate());
+    }
+    catch (IllegalArgumentException e) {
+      cell = new Cell(f);
+    }
     hashtable.put(c, cell);
+    orderedCoords.add(c);
   }
 
   @Override
@@ -55,18 +63,22 @@ public class BasicWorksheetModel implements Worksheet {
 
   @Override
   public Coord evalAll() {
-    for (Map.Entry<Coord, Cell> e : hashtable.entrySet()) {
+    for (Coord c : orderedCoords) {
       try {
-        if (!valueTable.contains(e.getKey())) {
-          e.getValue().evaluateCell();
-          valueTable.add(e.getKey());
+        if (!valueTable.contains(c)) {
+          hashtable.get(c).evaluateCell();
+          valueTable.add(c);
         }
       } catch (IllegalArgumentException iae) {
-        return e.getKey();
+        return c;
       }
     }
     return null;
   }
 
-
+  @Override
+  public void changeContents(Coord c, Formula f) {
+    Cell cell = new Cell(f);
+    hashtable.put(c, cell);
+  }
 }

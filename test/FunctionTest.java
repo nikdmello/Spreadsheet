@@ -46,8 +46,8 @@ public class FunctionTest {
             new ArrayList<Formula>(Arrays.asList(model.getCellAt(new Coord(3, 4))
                     .getFormula(), new DoubleValue(10)))));
     model.getCellAt(new Coord(1, 1)).evaluateCell();
-    ArrayList<Formula> arrfu = new ArrayList<>(Arrays.asList(model.
-            getCellAt(new Coord(4, 6)).getFormula()));
+    ArrayList<Formula> arrfu = new ArrayList<>(Arrays.asList(model.getCellAt(
+            new Coord(4, 6)).getFormula()));
     model.createCell(4, 7, new Function(FunctionType.PRODUCT, arrfu));
     assertEquals(100,
             (int) ((Value) (model.getCellAt(new Coord(1, 1)).getFormula())).numberForm());
