@@ -22,6 +22,14 @@ public final class Cell {
   }
 
   /**
+   * Copy constructor for a cell.
+   * @param c the cell to copy
+   */
+  public Cell(Cell c) {
+    this.f = c.f;
+  }
+
+  /**
    * Evaluates the contents in a cell to a single Value.
    */
   public void evaluateCell() {

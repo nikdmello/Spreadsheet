@@ -2,6 +2,7 @@ package edu.cs3500.spreadsheets.model;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Map;
 
 /**
  * Represents a basic spreadsheet model. The model includes a grid of cells, each of which may
@@ -34,7 +35,11 @@ public class BasicWorksheetModel implements Worksheet {
    * @return hashtable of coord and cell
    */
   public Hashtable<Coord, Cell> getHashtable() {
-    return hashtable;
+    Hashtable<Coord, Cell> ret = new Hashtable<Coord, Cell>();
+    for(Map.Entry<Coord, Cell> e : hashtable.entrySet()){
+      ret.put(e.getKey(), new Cell(e.getValue()));
+    }
+    return ret;
   }
 
   @Override

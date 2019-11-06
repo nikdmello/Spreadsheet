@@ -1,5 +1,8 @@
 package edu.cs3500.spreadsheets.model;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 /**
  * Interface for any spreadsheet model.
  */
@@ -40,4 +43,10 @@ public interface Worksheet {
    * @param c the coord of the cell to be updated.
    */
   void changeContents(Coord c, Formula f);
+
+  /**
+   * Gets a copy of the hashtable.
+   * @return a copy of the hash table.
+   */
+  Hashtable<Coord, Cell> getHashtable();
 }
