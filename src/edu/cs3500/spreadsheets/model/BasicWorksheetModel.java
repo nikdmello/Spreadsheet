@@ -17,6 +17,10 @@ public class BasicWorksheetModel implements Worksheet {
    * A list of Coords that is used for evaluation purposes.
    */
   private ArrayList<Coord> valueTable;
+  /**
+   * A list of Coords that is ordered (i.e. starting at A1), previously used when sorted Coords
+   * were required.
+   */
   private ArrayList<Coord> orderedCoords;
 
   /**
