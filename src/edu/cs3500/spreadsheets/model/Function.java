@@ -3,11 +3,17 @@ package edu.cs3500.spreadsheets.model;
 import java.util.ArrayList;
 
 /**
- * A function which can be applied to one or more formulas as its arguments.
+ * A function that can be applied to one or more formulas as its arguments.
  */
 public class Function implements Formula {
-  public final ArrayList<Formula> args;
-  private FunctionType type;
+  /**
+   * A collection of Formula arguments in a function.
+   */
+  final ArrayList<Formula> args;
+  /**
+   * The type of function.
+   */
+  final private FunctionType type;
 
   /**
    * Constructs a function and its arguments.
@@ -27,16 +33,19 @@ public class Function implements Formula {
   }
 
   /**
-   * Copy constructor for function
+   * Copy constructor for function.
+   *
    * @param f function to copy
    */
-  public Function(Function f){
+  public Function(Function f) {
     this.args = f.args;
     this.type = f.type;
   }
 
   @Override
   public Value evaluate() {
+    // Hashtable accumulator
+    // Store the evaluated value somehow in the hashtable
     switch (this.type) {
       case SUM:
         return sum();
@@ -61,11 +70,11 @@ public class Function implements Formula {
     return "func";
   }
 
-  private DoubleValue sum() {
+  private DoubleValue sum() throws IllegalArgumentException {
     double sum = 0;
 
     if (allNonNumeric(args)) {
-      return new DoubleValue(0);
+      throw new IllegalArgumentException("Invalid operation.");
     }
 
     for (Formula f : args) {
@@ -105,7 +114,7 @@ public class Function implements Formula {
    * @throws IllegalArgumentException if there are not exactly two arguments
    */
   private Value lessThan() throws IllegalArgumentException {
-    boolean b = false;
+    boolean b;
     if (args.size() != 2 || args.get(0) == null && !args.get(0).evaluate().isNumeric()
         || args.get(1) == null && !args.get(1).evaluate().isNumeric()) {
       throw new IllegalArgumentException("Invalid arguments for less than");

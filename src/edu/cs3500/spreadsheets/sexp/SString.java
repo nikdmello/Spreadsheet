@@ -6,9 +6,9 @@ import java.util.Objects;
  * A string constant {@link Sexp}.
  */
 public class SString implements Sexp {
-  String val;
+  private String val;
 
-  public SString(String name) {
+  SString(String name) {
     this.val = Objects.requireNonNull(name);
   }
 
@@ -19,7 +19,8 @@ public class SString implements Sexp {
 
   @Override
   public String toString() {
-    return "\"" + this.val.replace("\\", "\\\\").replace("\"", "\\\"") + "\"";
+    return "\"" + this.val.replace("\\", "\\\\")
+            .replace("\"", "\\\"") + "\"";
   }
 
   @Override

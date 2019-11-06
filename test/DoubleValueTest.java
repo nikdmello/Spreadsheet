@@ -3,9 +3,13 @@ import org.junit.Test;
 import edu.cs3500.spreadsheets.model.DoubleValue;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+/**
+ * Represents tests for the double Value.
+ */
 public class DoubleValueTest {
-  DoubleValue dv = new DoubleValue(2);
+  private DoubleValue dv = new DoubleValue(2);
 
   @Test
   public void evaluate() {
@@ -19,11 +23,11 @@ public class DoubleValueTest {
 
   @Test
   public void isNumeric() {
-    assertEquals(true, dv.isNumeric());
+    assertTrue(dv.isNumeric());
   }
 
   @Test
   public void numberForm() {
-    assertEquals(2, (int)dv.numberForm());
+    assertEquals(2, (int) dv.numberForm());
   }
 }

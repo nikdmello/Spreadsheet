@@ -1,14 +1,9 @@
 package edu.cs3500.spreadsheets.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import edu.cs3500.spreadsheets.model.BoolValue;
-import edu.cs3500.spreadsheets.model.DoubleValue;
-import edu.cs3500.spreadsheets.model.Formula;
-import edu.cs3500.spreadsheets.model.StringValue;
 import edu.cs3500.spreadsheets.sexp.Sexp;
 import edu.cs3500.spreadsheets.sexp.SexpVisitor;
 
@@ -20,10 +15,11 @@ public class SexpToFormula implements SexpVisitor<Formula> {
   private Coord toCreate;
 
   /**
-   * Constructs a SexpToFormula visitor with a rference sheet to use.
+   * Constructs a SexpToFormula visitor with a reference sheet to use.
+   *
    * @param sheet the reference sheet
    */
-  public SexpToFormula(Worksheet sheet, Coord toC){
+  public SexpToFormula(Worksheet sheet, Coord toC) {
     this.currentSheet = sheet;
     this.toCreate = toC;
   }
@@ -44,19 +40,17 @@ public class SexpToFormula implements SexpVisitor<Formula> {
       boolean hasCol = s.contains(":");
       String firstC;
       String secondC;
-      if(hasCol){
+      if (hasCol) {
         int colnInd = s.indexOf(":");
         firstC = s.substring(0, colnInd);
         secondC = s.substring(colnInd + 1);
-      }
-      else{
+      } else {
         Scanner scan = new Scanner(s);
         firstC = scan.next();
         secondC = scan.next();
       }
       return new Reference(this.currentSheet, turnToCoord(firstC), turnToCoord(secondC), toCreate);
-    }
-    else {
+    } else {
       return new Reference(this.currentSheet, turnToCoord(s), toCreate);
     }
   }
@@ -65,8 +59,8 @@ public class SexpToFormula implements SexpVisitor<Formula> {
     String letters;
     int number;
     int breakPoint = 0;
-    for(char c : firstC.toCharArray()){
-      if(Character.isDigit(c)){
+    for (char c : firstC.toCharArray()) {
+      if (Character.isDigit(c)) {
         break;
       }
       breakPoint++;
@@ -83,17 +77,22 @@ public class SexpToFormula implements SexpVisitor<Formula> {
 
   @Override
   public Formula visitSList(List<Sexp> l) {
-    if(l.size() > 1) {
+    if (l.size() > 1) {
       ArrayList<Formula> arr = new ArrayList<Formula>();
       for (int i = 1; i < l.size(); i++) {
         arr.add(l.get(i).accept(this));
       }
-      switch (l.get(0).toString()){
-        case "SUM": return new Function(FunctionType.SUM, arr);
-        case "PRODUCT": return new Function(FunctionType.PRODUCT, arr);
-        case "<": return new Function(FunctionType.LT, arr);
-        case "CONCAT": return new Function(FunctionType.CAT, arr);
-        default: throw new IllegalArgumentException("Invalid Input");
+      switch (l.get(0).toString()) {
+        case "SUM":
+          return new Function(FunctionType.SUM, arr);
+        case "PRODUCT":
+          return new Function(FunctionType.PRODUCT, arr);
+        case "<":
+          return new Function(FunctionType.LT, arr);
+        case "CONCAT":
+          return new Function(FunctionType.CAT, arr);
+        default:
+          throw new IllegalArgumentException("Invalid Input");
       }
     }
 

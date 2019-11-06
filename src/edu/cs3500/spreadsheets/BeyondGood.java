@@ -2,7 +2,6 @@ package edu.cs3500.spreadsheets;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.OutputStreamWriter;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetBuilder;
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
@@ -10,12 +9,8 @@ import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
 
-//TODO: Last junit test
-//TODO: Ask about imposing a limit for rows and columns
-//TODO: Look at self eval and write last couple tests
-
 /**
- * The main class for our program.
+ * The main class for our program. The spreadsheet program should start from here.
  */
 public class BeyondGood {
   /**

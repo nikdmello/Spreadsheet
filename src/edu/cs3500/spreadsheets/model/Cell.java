@@ -4,23 +4,22 @@ import java.util.Objects;
 
 /**
  * Represents a cell in a spreadsheet containing a formula.
+ * The contents of the cell could change.
  */
 public final class Cell {
   private Formula f;
-
 
   /**
    * Constructs a cell containing a formula.
    *
    * @param f the formula for the cell
    */
-  public Cell(Formula f) {
+  Cell(Formula f) {
     if (f == null) {
       throw new IllegalArgumentException("Cell can not be created with a null formula");
     }
     this.f = f;
   }
-
 
   /**
    * Evaluates the contents in a cell to a single Value.
@@ -33,19 +32,15 @@ public final class Cell {
   }
 
   /**
-   * Getter method ONLY used for testing purposes.
+   * Getter method ONLY used for testing purposes. This would be package-private to avoid mutation,
+   * but it is public for testing purposes.
+   *
    * @return the formula
    */
   public Formula getFormula() {
     return this.f;
   }
 
-  public void changeContents(Formula f){
-    if (f == null) {
-      throw new IllegalArgumentException("Cell can not be created with a null formula");
-    }
-    this.f = f;
-  }
   @Override
   public String toString() {
     return this.f.toString();

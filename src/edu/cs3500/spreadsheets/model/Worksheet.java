@@ -31,7 +31,13 @@ public interface Worksheet {
   /**
    * Evaluates all the cells containing formulas.
    *
-   * @return null on success and a Coord of a broken cell if there is an error
+   * @return Coord of a broken cell if there is an error, or returns null.
    */
   Coord evalAll();
+
+  /**
+   * Updates the formula that is currently in the Cell.
+   * @param c the coord of the cell to be updated.
+   */
+  void changeContents(Coord c, Formula f);
 }

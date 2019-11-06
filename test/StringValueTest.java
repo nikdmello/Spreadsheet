@@ -1,13 +1,15 @@
-
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import edu.cs3500.spreadsheets.model.StringValue;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
+/**
+ * Represents tests for the string Value.
+ */
 public class StringValueTest {
-  StringValue sv = new StringValue("Hi");
+  private StringValue sv = new StringValue("Hi");
 
   @Test
   public void evaluate() {
@@ -21,11 +23,11 @@ public class StringValueTest {
 
   @Test
   public void isNumeric() {
-    assertEquals(false, sv.isNumeric());
+    assertFalse(sv.isNumeric());
   }
 
   @Test
   public void numberForm() {
-    assertEquals(0, (int)sv.numberForm());
+    assertEquals(0, (int) sv.numberForm());
   }
 }
