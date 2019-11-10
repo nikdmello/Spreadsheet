@@ -47,6 +47,28 @@ public class BasicWorksheetModel implements Worksheet {
   }
 
   @Override
+  public int getNumRows() {
+    int furthest = 1;
+    for(Map.Entry<Coord, Cell> e : hashtable.entrySet()){
+      if(e.getKey().row > furthest){
+        furthest = e.getKey().row;
+      }
+    }
+    return furthest;
+  }
+
+  @Override
+  public int getNumCols() {
+    int furthest = 1;
+    for(Map.Entry<Coord, Cell> e : hashtable.entrySet()){
+      if(e.getKey().col > furthest){
+        furthest = e.getKey().col;
+      }
+    }
+    return furthest;
+  }
+
+  @Override
   public void createCell(int col, int row, Formula f) {
     Coord c = new Coord(col, row);
     Cell cell;
@@ -90,4 +112,6 @@ public class BasicWorksheetModel implements Worksheet {
     Cell cell = new Cell(f);
     hashtable.put(c, cell);
   }
+
+
 }

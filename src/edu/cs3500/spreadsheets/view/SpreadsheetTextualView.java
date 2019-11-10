@@ -23,7 +23,7 @@ public class SpreadsheetTextualView implements SpreadsheetView {
   }
 
   @Override
-  public void render() throws IOException {
+  public void render() {
     out.write(toString());
     out.close();
   }

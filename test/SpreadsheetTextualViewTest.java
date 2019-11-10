@@ -39,11 +39,7 @@ public class SpreadsheetTextualViewTest {
   @Test
   public void render() {
     reset();
-    try {
-      view.render();
-    } catch (IOException e){
-      throw new IllegalArgumentException("Bad");
-    }
+    view.render();
   }
 
   @Test
