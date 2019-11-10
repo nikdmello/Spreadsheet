@@ -14,9 +14,9 @@ import edu.cs3500.spreadsheets.view.SpreadsheetView;
 import static org.junit.Assert.*;
 
 public class SpreadsheetTextualViewTest {
-  SpreadsheetTextualView view;
+  private SpreadsheetTextualView view;
 
-  public void reset(){
+  private void reset(){
     String fileName = "spreadsheet.txt";
     FileReader file;
     BasicWorksheetBuilder builder = new BasicWorksheetBuilder();
