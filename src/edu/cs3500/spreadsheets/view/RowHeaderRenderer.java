@@ -17,7 +17,6 @@ class RowHeaderRenderer extends JLabel implements ListCellRenderer {
     setFont(header.getFont());
   }
 
-
   @Override
   public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
     setText((value == null) ? "" : value.toString());

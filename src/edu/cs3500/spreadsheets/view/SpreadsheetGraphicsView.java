@@ -13,22 +13,11 @@ public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
     this.setSize(800, 800);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    this.setLayout(new BorderLayout());
     SpreadsheetTable spreadsheetTable = new SpreadsheetTable();
-    JScrollPane scrollPane = new JScrollPane(spreadsheetTable);
-    this.add(scrollPane, BorderLayout.CENTER);
-    this.pack();
 
     ListModel listModel = new AbstractListModel() {
-
-      String[] headers = {"A"};
-
-      @Override
-      public int getSize() {
-        return headers.length;
-      }
-
-      @Override
+      String[] headers = {"a", "b", "c", "d", "e", "f", "g", "h", "i"};
+      public int getSize() { return headers.length; }
       public Object getElementAt(int index) {
         return headers[index];
       }
@@ -41,9 +30,11 @@ public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
     JList rowHeader = new JList(listModel);
     rowHeader.setFixedCellWidth(50);
     rowHeader.setFixedCellHeight(table.getRowHeight());
+    rowHeader.setCellRenderer(new RowHeaderRenderer(spreadsheetTable));
 
-
-
+    JScrollPane scrollPane = new JScrollPane(spreadsheetTable);
+    scrollPane.setRowHeaderView(rowHeader);
+    getContentPane().add(scrollPane, BorderLayout.CENTER);
 
   }
 
