@@ -10,7 +10,7 @@ public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
   SpreadsheetGraphicsView() {
     super();
     this.setTitle("Microsoft Excel v2.0");
-    this.setSize(100, 100);
+    this.setSize(800, 800);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     this.setLayout(new BorderLayout());
