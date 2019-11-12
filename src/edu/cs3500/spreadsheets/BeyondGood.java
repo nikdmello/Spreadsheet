@@ -8,6 +8,8 @@ import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
 import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
+import edu.cs3500.spreadsheets.view.ModelToTable;
+import edu.cs3500.spreadsheets.view.SpreadsheetGraphicsView;
 
 /**
  * The main class for our program. The spreadsheet program should start from here.
@@ -57,5 +59,8 @@ public class BeyondGood {
       ret = "" + cell;
     }
     System.out.print(ret);
+    ModelToTable mtt = new ModelToTable(model);
+    SpreadsheetGraphicsView view = new SpreadsheetGraphicsView(mtt);
+    view.render();
   }
 }

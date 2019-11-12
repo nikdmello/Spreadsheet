@@ -1,38 +1,40 @@
 package edu.cs3500.spreadsheets.view;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
 
-  SpreadsheetGraphicsView() {
+  ModelToTable mtt;
+
+  public SpreadsheetGraphicsView(ModelToTable mtt) {
     super();
+    this.mtt = mtt;
     this.setTitle("Microsoft Excel v2.0");
-    this.setSize(800, 800);
+    this.setSize(500, 300);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    SpreadsheetTable spreadsheetTable = new SpreadsheetTable();
+    RowListModel listModel = new RowListModel(this.mtt);
 
-    ListModel listModel = new AbstractListModel() {
-      String[] headers = {"a", "b", "c", "d", "e", "f", "g", "h", "i"};
-      public int getSize() { return headers.length; }
-      public Object getElementAt(int index) {
-        return headers[index];
+    DefaultTableModel defaultTableModel = new DefaultTableModel(listModel.getSize(), mtt.colNames().length);
+    for(int i = 0; i < mtt.numRows(); i++){
+      for(int j = 0; j < mtt.numCols(); j++){
+        defaultTableModel.setValueAt(this.mtt.translate()[j][i], i, j);
       }
-    };
-
-    DefaultTableModel defaultTableModel = new DefaultTableModel(listModel.getSize(), 10);
+    }
     JTable table = new JTable(defaultTableModel);
     table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-    JList rowHeader = new JList(listModel);
+    JList<String> rowHeader = new JList<String>(listModel);
     rowHeader.setFixedCellWidth(50);
     rowHeader.setFixedCellHeight(table.getRowHeight());
-    rowHeader.setCellRenderer(new RowHeaderRenderer(spreadsheetTable));
+    rowHeader.setCellRenderer(new RowHeaderRenderer(table));
 
-    JScrollPane scrollPane = new JScrollPane(spreadsheetTable);
+    JScrollPane scrollPane = new JScrollPane(table);
     scrollPane.setRowHeaderView(rowHeader);
     getContentPane().add(scrollPane, BorderLayout.CENTER);
 
@@ -40,6 +42,13 @@ public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
 
   @Override
   public void render() {
+    SpreadsheetGraphicsView view = new SpreadsheetGraphicsView(mtt);
+    view.addWindowListener(new WindowAdapter() {
+      public void windowClosing(WindowEvent e) {
+        System.exit(0);
+      }
+    });
+    view.setVisible(true);
   }
-
 }
+
