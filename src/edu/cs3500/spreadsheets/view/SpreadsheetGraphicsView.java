@@ -7,9 +7,13 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
 
-  ModelToTable mtt;
+/**
+ * Represents the graphical view of the Spreadsheet. This view uses the Java Swing library,
+ * specifically the JTable to display the contents of the Spreadsheet.
+ */
+public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
+  private ModelToTable mtt;
 
   public SpreadsheetGraphicsView(ModelToTable mtt) {
     super();
@@ -20,12 +24,20 @@ public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
 
     RowListModel listModel = new RowListModel(this.mtt);
 
-    DefaultTableModel defaultTableModel = new DefaultTableModel(listModel.getSize(), mtt.colNames().length);
-    for(int i = 0; i < mtt.numRows(); i++){
-      for(int j = 0; j < mtt.numCols(); j++){
+    DefaultTableModel defaultTableModel = new DefaultTableModel(listModel.getSize(), mtt.colNames().length) {
+      @Override
+      public boolean isCellEditable(int row, int column) {
+        return false;
+      }
+    };
+
+    // Populates the table with Cells.
+    for (int i = 0; i < mtt.numRows(); i++) {
+      for (int j = 0; j < mtt.numCols(); j++) {
         defaultTableModel.setValueAt(this.mtt.translate()[j][i], i, j);
       }
     }
+
     JTable table = new JTable(defaultTableModel);
     table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 

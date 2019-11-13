@@ -5,8 +5,15 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 
+/**
+ *TODO
+ */
 class RowHeaderRenderer extends JLabel implements ListCellRenderer {
 
+  /**
+   * TODO
+   * @param table
+   */
   RowHeaderRenderer(JTable table) {
     JTableHeader header = table.getTableHeader();
     setOpaque(true);
@@ -18,7 +25,8 @@ class RowHeaderRenderer extends JLabel implements ListCellRenderer {
   }
 
   @Override
-  public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+  public Component getListCellRendererComponent(JList list, Object value, int index,
+                                                boolean isSelected, boolean cellHasFocus) {
     setText((value == null) ? "" : value.toString());
     return this;
   }

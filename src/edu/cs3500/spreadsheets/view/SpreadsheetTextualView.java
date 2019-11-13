@@ -9,6 +9,9 @@ import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.Worksheet;
 
+/**
+ * Renders a textual view of the Spreadsheet that displays in the terminal.
+ */
 public class SpreadsheetTextualView implements SpreadsheetView {
   private final Worksheet sheet;
   private PrintWriter out;
