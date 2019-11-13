@@ -22,15 +22,34 @@ public class BeyondGood {
    */
   public static void main(String[] args) {
     String fileName;
+    String newFileName;
     String cellName = "";
     FileReader file;
     BasicWorksheetBuilder builder = new BasicWorksheetBuilder();
+
+    /*
+    TODO
+    -in some-filename -save some-new-filename — opens the first file, and saves it as the second file, using the textual view you created
+    -in some-filename -gui — opens your graphical view and loads the requested file and evaluates it
+    -gui — opens your graphical view with a blank new spreadsheet
+   */
 
     // Obtain filename and cell name
     if (args.length == 4 && args[0].equals("-in") && args[2].equals("-eval")) {
       fileName = args[1];
       cellName = args[3];
-    } else {
+    }
+    else if (args.length == 4 && args[0].equals("-in") && args[2].equals("-save")) {
+      fileName = args[1];
+      newFileName = args[3];
+    }
+    else if (args.length == 3 && args[0].equals("-in") && args[2].equals("-gui")) {
+      return;
+    }
+    else if (args.length == 1 && args[0].equals("-gui")) {
+      return;
+    }
+    else {
       throw new IllegalArgumentException("Invalid command.");
     }
 
@@ -59,8 +78,11 @@ public class BeyondGood {
       ret = "" + cell;
     }
     System.out.print(ret);
+
     ModelToTable mtt = new ModelToTable(model);
     SpreadsheetGraphicsView view = new SpreadsheetGraphicsView(mtt);
     view.render();
   }
+
+
 }

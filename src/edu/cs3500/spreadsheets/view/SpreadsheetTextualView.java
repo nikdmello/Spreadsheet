@@ -1,7 +1,6 @@
 package edu.cs3500.spreadsheets.view;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
@@ -16,11 +15,16 @@ public class SpreadsheetTextualView implements SpreadsheetView {
   private final Worksheet sheet;
   private PrintWriter out;
 
+  /**
+   * Constructs a textual view of the Spreadsheet.
+   *
+   * @param sheet the Spreadsheet model.
+   */
   public SpreadsheetTextualView(Worksheet sheet) {
     this.sheet = sheet;
     try {
       this.out = new PrintWriter("excel.txt");
-    } catch (FileNotFoundException f){
+    } catch (FileNotFoundException f) {
       throw new IllegalArgumentException("File not found");
     }
   }
@@ -32,15 +36,15 @@ public class SpreadsheetTextualView implements SpreadsheetView {
   }
 
   @Override
-  public String toString(){
+  public String toString() {
     String ret = "";
-    for(Map.Entry<Coord, Cell> e : this.sheet.getHashtable().entrySet()){
+    for (Map.Entry<Coord, Cell> e : this.sheet.getHashtable().entrySet()) {
       if (e.getValue().getFormula().type().equals("double")) {
         ret += Coord.colIndexToName(e.getKey().col) + e.getKey().row + " "
-                + String.format("%f", e.getValue().getFormula().evaluate().numberForm()) + "\n";
+               + String.format("%f", e.getValue().getFormula().evaluate().numberForm()) + "\n";
       } else {
         ret += "" + Coord.colIndexToName(e.getKey().col) + e.getKey().row
-                + " " + e.getValue() + "\n";
+               + " " + e.getValue() + "\n";
       }
     }
     return ret;

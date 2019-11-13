@@ -2,16 +2,12 @@ import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetBuilder;
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
 import edu.cs3500.spreadsheets.view.SpreadsheetTextualView;
-import edu.cs3500.spreadsheets.view.SpreadsheetView;
-
-import static org.junit.Assert.*;
 
 /**
  * Represents testing for the textual view of the Spreadsheet. This basic textual view only

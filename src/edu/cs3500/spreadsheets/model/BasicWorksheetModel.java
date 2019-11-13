@@ -5,8 +5,8 @@ import java.util.Hashtable;
 import java.util.Map;
 
 /**
- * Represents a basic spreadsheet model. The model includes a grid of cells, each of which may
- * have a formula.
+ * Represents a basic spreadsheet model. The model includes a grid of cells, each of which may have
+ * a formula.
  */
 public class BasicWorksheetModel implements Worksheet {
   /**
@@ -18,8 +18,8 @@ public class BasicWorksheetModel implements Worksheet {
    */
   private ArrayList<Coord> valueTable;
   /**
-   * A list of Coords that is ordered (i.e. starting at A1), previously used when sorted Coords
-   * were required.
+   * A list of Coords that is ordered (i.e. starting at A1), previously used when sorted Coords were
+   * required.
    */
   private ArrayList<Coord> orderedCoords;
 
@@ -40,7 +40,7 @@ public class BasicWorksheetModel implements Worksheet {
    */
   public Hashtable<Coord, Cell> getHashtable() {
     Hashtable<Coord, Cell> ret = new Hashtable<Coord, Cell>();
-    for(Map.Entry<Coord, Cell> e : hashtable.entrySet()){
+    for (Map.Entry<Coord, Cell> e : hashtable.entrySet()) {
       ret.put(e.getKey(), new Cell(e.getValue()));
     }
     return ret;
@@ -49,8 +49,8 @@ public class BasicWorksheetModel implements Worksheet {
   @Override
   public int getNumRows() {
     int furthest = 1;
-    for(Map.Entry<Coord, Cell> e : hashtable.entrySet()){
-      if(e.getKey().row > furthest){
+    for (Map.Entry<Coord, Cell> e : hashtable.entrySet()) {
+      if (e.getKey().row > furthest) {
         furthest = e.getKey().row;
       }
     }
@@ -60,8 +60,8 @@ public class BasicWorksheetModel implements Worksheet {
   @Override
   public int getNumCols() {
     int furthest = 1;
-    for(Map.Entry<Coord, Cell> e : hashtable.entrySet()){
-      if(e.getKey().col > furthest){
+    for (Map.Entry<Coord, Cell> e : hashtable.entrySet()) {
+      if (e.getKey().col > furthest) {
         furthest = e.getKey().col;
       }
     }
@@ -74,8 +74,7 @@ public class BasicWorksheetModel implements Worksheet {
     Cell cell;
     try {
       cell = new Cell(f.evaluate());
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       cell = new Cell(f);
     }
     hashtable.put(c, cell);
