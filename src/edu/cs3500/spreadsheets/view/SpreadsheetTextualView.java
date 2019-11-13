@@ -20,10 +20,10 @@ public class SpreadsheetTextualView implements SpreadsheetView {
    *
    * @param sheet the Spreadsheet model.
    */
-  public SpreadsheetTextualView(Worksheet sheet) {
+  public SpreadsheetTextualView(Worksheet sheet, String file) {
     this.sheet = sheet;
     try {
-      this.out = new PrintWriter("excel.txt");
+      this.out = new PrintWriter(file);
     } catch (FileNotFoundException f) {
       throw new IllegalArgumentException("File not found");
     }

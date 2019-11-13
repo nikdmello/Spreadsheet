@@ -10,6 +10,8 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
+import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
+
 
 /**
  * Represents the graphical view of the Spreadsheet. This view uses the Java Swing library,
@@ -68,10 +70,11 @@ public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
     this.setTitle("Microsoft Excel v2.0");
     this.setSize(500, 300);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.modelToTable = new ModelToTable(new BasicWorksheetModel());
 
     RowListModel listModel = new RowListModel(this.modelToTable);
-
     DefaultTableModel defaultTableModel = new DefaultTableModel(listModel.getSize(), 0) {
+
       // Ensures that the cells cannot be edited by clients directly from the view.
       @Override
       public boolean isCellEditable(int row, int column) {
