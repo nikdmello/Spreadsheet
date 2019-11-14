@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
 
-
 /**
  * Represents the graphical view of the Spreadsheet. This view uses the Java Swing library,
  * specifically the JTable to display the contents of the Spreadsheet.

@@ -2,15 +2,12 @@ import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetBuilder;
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
-import edu.cs3500.spreadsheets.view.SpreadsheetGraphicsView;
 import edu.cs3500.spreadsheets.view.SpreadsheetTextualView;
-import edu.cs3500.spreadsheets.view.SpreadsheetView;
 
 import static org.junit.Assert.*;
 
@@ -18,7 +15,7 @@ public class SpreadsheetTextualViewTest {
   private SpreadsheetTextualView view;
 
   private void reset() {
-    String fileName = "spreadsheet.txt";
+    String fileName = "spreadsheet2.txt";
     FileReader file;
     BasicWorksheetBuilder builder = new BasicWorksheetBuilder();
 
@@ -34,12 +31,7 @@ public class SpreadsheetTextualViewTest {
       System.out.print("Error at cell " + Coord.colIndexToName(errorCell.col) + errorCell.row);
     }
 
-    view = new SpreadsheetTextualView(model, "excel.txt");
-  }
-
-  @Test
-  public void render() {
-    reset();
+    view = new SpreadsheetTextualView(model, "excel2.txt");
     view.render();
   }
 
@@ -51,7 +43,7 @@ public class SpreadsheetTextualViewTest {
     assertEquals(test, view.toString());
     view.render();
 
-    String fileName = "excel.txt";
+    String fileName = "spreadsheet.txt";
     FileReader file;
     BasicWorksheetBuilder builder = new BasicWorksheetBuilder();
 
