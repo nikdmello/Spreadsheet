@@ -2,7 +2,6 @@ package edu.cs3500.spreadsheets;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.PrintWriter;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetBuilder;
@@ -31,13 +30,6 @@ public class BeyondGood {
     BasicWorksheetModel model;
     BasicWorksheetBuilder builder = new BasicWorksheetBuilder();
 
-    /*
-    TODO
-    -in some-filename -save some-new-filename — opens the first file, and saves it as the second file, using the textual view you created
-    -in some-filename -gui — opens your graphical view and loads the requested file and evaluates it
-    -gui — opens your graphical view with a blank new spreadsheet
-   */
-
     // Obtain filename and cell name
     if (args.length == 4 && args[0].equals("-in") && args[2].equals("-eval")) {
       fileName = args[1];
@@ -46,7 +38,7 @@ public class BeyondGood {
       model = buildModel(builder, file);
       Coord errorCell = model.evalAll();
 
-      if(checkErrorCell(errorCell)){
+      if (checkErrorCell(errorCell)) {
         return;
       }
 
@@ -57,51 +49,43 @@ public class BeyondGood {
       cell.evaluateCell();
       String ret = cellString(cell);
       System.out.print(ret);
-      return;
-    }
-    else if (args.length == 4 && args[0].equals("-in") && args[2].equals("-save")) {
+    } else if (args.length == 4 && args[0].equals("-in") && args[2].equals("-save")) {
       fileName = args[1];
       newFileName = args[3];
       file = getFile(fileName);
       model = buildModel(builder, file);
       Coord errorCell = model.evalAll();
-      if(checkErrorCell(errorCell)){
+      if (checkErrorCell(errorCell)) {
         try {
           PrintWriter writer = new PrintWriter(newFileName);
           writer.write("Error at cell " + Coord.colIndexToName(errorCell.col) + errorCell.row);
           return;
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
           throw new IllegalArgumentException("File not found");
         }
       }
       SpreadsheetTextualView view = new SpreadsheetTextualView(model, newFileName);
       view.render();
-      return;
-    }
-    else if (args.length == 3 && args[0].equals("-in") && args[2].equals("-gui")) {
+    } else if (args.length == 3 && args[0].equals("-in") && args[2].equals("-gui")) {
       fileName = args[1];
       file = getFile(fileName);
       model = buildModel(builder, file);
       ModelToTable mtt = new ModelToTable(model);
       SpreadsheetGraphicsView view = new SpreadsheetGraphicsView(mtt);
       view.render();
-      return;
-    }
-    else if (args.length == 1 && args[0].equals("-gui")) {
-      SpreadsheetGraphicsView guiview = new SpreadsheetGraphicsView();
-      guiview.render();
-      return;
-    }
-    else {
+    } else if (args.length == 1 && args[0].equals("-gui")) {
+      SpreadsheetGraphicsView guiView = new SpreadsheetGraphicsView();
+      guiView.render();
+    } else {
       throw new IllegalArgumentException("Invalid command.");
     }
   }
 
-  static BasicWorksheetModel buildModel(BasicWorksheetBuilder builder, FileReader file){
+  private static BasicWorksheetModel buildModel(BasicWorksheetBuilder builder, FileReader file) {
     return WorksheetReader.read(builder, file);
   }
 
-  static FileReader getFile(String fileName){
+  private static FileReader getFile(String fileName) {
     try {
       return new FileReader(fileName);
     } catch (FileNotFoundException e) {
@@ -109,7 +93,7 @@ public class BeyondGood {
     }
   }
 
-  static String cellString(Cell cell){
+  private static String cellString(Cell cell) {
     if (cell.getFormula().type().equals("double")) {
       return String.format("%f", cell.getFormula().evaluate().numberForm());
     } else {
@@ -117,7 +101,7 @@ public class BeyondGood {
     }
   }
 
-  static Boolean checkErrorCell(Coord errorCell){
+  private static Boolean checkErrorCell(Coord errorCell) {
     if (errorCell != null) {
       System.out.print("Error at cell " + Coord.colIndexToName(errorCell.col) + errorCell.row);
       return true;

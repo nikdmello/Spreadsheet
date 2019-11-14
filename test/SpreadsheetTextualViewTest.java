@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 public class SpreadsheetTextualViewTest {
   private SpreadsheetTextualView view;
 
-  private void reset(){
+  private void reset() {
     String fileName = "spreadsheet.txt";
     FileReader file;
     BasicWorksheetBuilder builder = new BasicWorksheetBuilder();
@@ -47,7 +47,7 @@ public class SpreadsheetTextualViewTest {
   public void testToString() {
     reset();
     String test = "B3 false\nA3 284.000000\nB2 256.000000\nA2 28.000000\nD1 12.000000\n"
-            + "C1 9.000000\nB1 4.000000\nA4 400.000000\nA1 3.000000\n";
+                  + "C1 9.000000\nB1 4.000000\nA4 400.000000\nA1 3.000000\n";
     assertEquals(test, view.toString());
     view.render();
 

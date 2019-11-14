@@ -22,6 +22,7 @@ public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
 
   /**
    * Constructs a Spreadsheet graphical view with the wrapper class.
+   *
    * @param mtt wrapper class.
    */
   public SpreadsheetGraphicsView(ModelToTable mtt) {
@@ -73,7 +74,8 @@ public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
     this.modelToTable = new ModelToTable(new BasicWorksheetModel());
 
     RowListModel listModel = new RowListModel(this.modelToTable);
-    DefaultTableModel defaultTableModel = new DefaultTableModel(listModel.getSize(), 0) {
+    DefaultTableModel defaultTableModel = new DefaultTableModel(listModel.getSize(),
+            0) {
 
       // Ensures that the cells cannot be edited by clients directly from the view.
       @Override
