@@ -62,4 +62,11 @@ public interface Worksheet {
    * @return Number of rows in the spreadsheet
    */
   int getNumCols();
+
+  /**
+   * Reevaluates when a change is made to a spreadsheet.
+   * @param c the coord to re evaluate
+   * @return Coord of an errant if there is one
+   */
+  Coord reEval(Coord c);
 }

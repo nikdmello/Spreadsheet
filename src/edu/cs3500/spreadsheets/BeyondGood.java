@@ -9,6 +9,7 @@ import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
 import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
+import edu.cs3500.spreadsheets.view.GUIView;
 import edu.cs3500.spreadsheets.view.ModelToTable;
 import edu.cs3500.spreadsheets.view.SpreadsheetGraphicsView;
 import edu.cs3500.spreadsheets.view.SpreadsheetTextualView;
@@ -76,6 +77,12 @@ public class BeyondGood {
     } else if (args.length == 1 && args[0].equals("-gui")) {
       SpreadsheetGraphicsView guiView = new SpreadsheetGraphicsView();
       guiView.render();
+    } else if (args.length == 1 && args[0].equals("-edit")) {
+      fileName = args[1];
+      file = getFile(fileName);
+      model = buildModel(builder, file);
+      ModelToTable mtt = new ModelToTable(model);
+      GUIView guiView = new GUIView(mtt);
     } else {
       throw new IllegalArgumentException("Invalid command.");
     }
@@ -108,6 +115,4 @@ public class BeyondGood {
     }
     return false;
   }
-
-
 }

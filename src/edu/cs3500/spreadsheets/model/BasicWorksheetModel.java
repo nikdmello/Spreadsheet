@@ -69,6 +69,21 @@ public class BasicWorksheetModel implements Worksheet {
   }
 
   @Override
+  public Coord reEval(Coord c) {
+      for (Map.Entry<Coord, Cell> e : hashtable.entrySet()){
+        try {
+          if (e.getValue().getFormula().hasRef(c)) {
+            e.getValue().revertFormula();
+            e.getValue().evaluateCell();
+          }
+        } catch(IllegalArgumentException iae){
+          return e.getKey();
+        }
+      }
+      return null;
+  }
+
+  @Override
   public void createCell(int col, int row, Formula f) {
     Coord c = new Coord(col, row);
     Cell cell;

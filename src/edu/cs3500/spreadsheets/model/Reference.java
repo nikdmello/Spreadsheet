@@ -85,6 +85,16 @@ public class Reference implements Formula {
     return "ref";
   }
 
+  @Override
+  public boolean hasRef(Coord c) {
+    for(Coord co : this.getCellCoords()){
+      if(co.equals(c)){
+        return true;
+      }
+    }
+    return false;
+  }
+
   ArrayList<Formula> getCellFormulas() {
     if (this.c1.equals(c2)) {
       return new ArrayList<Formula>(Arrays.asList(sheet.getCellAt(c1).getFormula()));

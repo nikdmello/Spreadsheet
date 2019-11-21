@@ -28,6 +28,11 @@ public class DoubleValue implements Value {
   }
 
   @Override
+  public boolean hasRef(Coord c) {
+    return false;
+  }
+
+  @Override
   public <R> R accept(FormulaVisitor<R> visitor) {
     return visitor.visitDouble(this.value);
   }
