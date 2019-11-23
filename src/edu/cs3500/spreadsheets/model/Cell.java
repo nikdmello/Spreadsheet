@@ -8,6 +8,8 @@ import java.util.Objects;
  */
 public final class Cell {
   private Formula f;
+  private Formula originalFormula;
+  private boolean error;
 
   /**
    * Constructs a cell containing a formula.
@@ -19,6 +21,8 @@ public final class Cell {
       throw new IllegalArgumentException("Cell can not be created with a null formula");
     }
     this.f = f;
+    this.originalFormula = f;
+    this.error = false;
   }
 
   /**
@@ -27,6 +31,7 @@ public final class Cell {
    */
   public Cell(Cell c) {
     this.f = c.f;
+    this.originalFormula = c.originalFormula;
   }
 
   /**
@@ -46,7 +51,37 @@ public final class Cell {
    * @return the formula
    */
   public Formula getFormula() {
-    return this.f;
+    return this.f.accept(new FormulaCopyConstructor());
+  }
+
+  /**
+   * Gets the original non evaluated formula of a cell
+   * @return the original formula
+   */
+  public Formula unevaluatedFormula(){
+    return this.originalFormula;
+  }
+
+  /**
+   * The formula becomes the unevaluated version of the formula.
+   */
+  public void revertFormula(){
+    this.f = this.originalFormula;
+  }
+
+  /**
+   * Checks to see if the cell is errant.
+   * @return true if there is an error
+   */
+  public boolean errorCell(){
+    return this.error;
+  }
+
+  /**
+   * Sets the cells error value to true.
+   */
+  void setError(){
+    this.error = true;
   }
 
   @Override

@@ -1,39 +1,40 @@
 package edu.cs3500.spreadsheets.view;
 
-import java.awt.BorderLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-import javax.swing.JFrame;
-import javax.swing.JTable;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
-
+import edu.cs3500.spreadsheets.model.Coord;
 
 /**
  * Represents the graphical view of the Spreadsheet. This view uses the Java Swing library,
  * specifically the JTable to display the contents of the Spreadsheet.
  */
-public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
+public class GUITableGraphics extends JPanel {
   private ModelToTable modelToTable;
+  DefaultTableModel defaultTableModel;
+  private JTable table;
+  private Coord selectedCell;
+  JTextField tfield;
 
   /**
    * Constructs a Spreadsheet graphical view with the wrapper class.
+   *
    * @param mtt wrapper class.
    */
-  public SpreadsheetGraphicsView(ModelToTable mtt) {
+  public GUITableGraphics(ModelToTable mtt, JTextField tf) {
     super();
     this.modelToTable = mtt;
-    this.setTitle("Microsoft Excel v2.0");
-    this.setSize(500, 300);
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.tfield = tf;
 
     RowListModel listModel = new RowListModel(this.modelToTable);
 
-    DefaultTableModel defaultTableModel = new DefaultTableModel(listModel.getSize(),
+    defaultTableModel = new DefaultTableModel(listModel.getSize(),
             mtt.colNames().length) {
       // Ensures that the cells cannot be edited by clients directly from the view.
       @Override
@@ -49,7 +50,7 @@ public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
       }
     }
 
-    JTable table = new JTable(defaultTableModel);
+    table = new JTable(defaultTableModel);
     table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
     JList<String> rowHeader = new JList<String>(listModel);
@@ -59,21 +60,31 @@ public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
 
     JScrollPane scrollPane = new JScrollPane(table);
     scrollPane.setRowHeaderView(rowHeader);
-    getContentPane().add(scrollPane, BorderLayout.CENTER);
+    scrollPane.setPreferredSize(new Dimension(640, 480));
+    this.add(scrollPane, BorderLayout.CENTER);
+
+    MouseListener mouseTable = new MouseAdapter() {
+      @Override
+      public void mouseReleased(MouseEvent e) {
+        int row = table.getSelectedRow();
+        int col = table.getSelectedColumn();
+        selectedCell = new Coord(col + 1, row + 1);
+        tfield.setText(modelToTable.translate()[col][row]);
+      }
+    };
+    table.addMouseListener(mouseTable);
   }
 
   /**
    * Constructs a Spreadsheet graphical view with a new Spreadsheet.
    */
-  public SpreadsheetGraphicsView() {
+  public GUITableGraphics() {
     super();
-    this.setTitle("Microsoft Excel v2.0");
-    this.setSize(500, 300);
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.modelToTable = new ModelToTable(new BasicWorksheetModel());
 
     RowListModel listModel = new RowListModel(this.modelToTable);
-    DefaultTableModel defaultTableModel = new DefaultTableModel(listModel.getSize(), 0) {
+    DefaultTableModel defaultTableModel = new DefaultTableModel(listModel.getSize(),
+            0) {
 
       // Ensures that the cells cannot be edited by clients directly from the view.
       @Override
@@ -83,7 +94,10 @@ public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
     };
 
     JTable table = new JTable(defaultTableModel);
+    table.setPreferredSize(new Dimension(640, 480));
     table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+    table.setRowSelectionAllowed(true);
+    table.setColumnSelectionAllowed(true);
 
     JList<String> rowHeader = new JList<String>(listModel);
     rowHeader.setFixedCellWidth(50);
@@ -92,18 +106,30 @@ public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
 
     JScrollPane scrollPane = new JScrollPane(table);
     scrollPane.setRowHeaderView(rowHeader);
-    getContentPane().add(scrollPane, BorderLayout.CENTER);
+    scrollPane.setPreferredSize(new Dimension(640, 480));
+    this.add(scrollPane, BorderLayout.CENTER);
+
+    MouseListener mouseTable = new MouseAdapter() {
+      @Override
+      public void mouseReleased(MouseEvent e) {
+        int row = table.getSelectedRow();
+        int col = table.getSelectedColumn();
+        selectedCell = new Coord(col, row);
+        tfield.setText(modelToTable.translate()[col][row]);
+      }
+    };
+    table.addMouseListener(mouseTable);
   }
 
-  @Override
-  public void render() {
-    SpreadsheetGraphicsView view = new SpreadsheetGraphicsView(modelToTable);
-    view.addWindowListener(new WindowAdapter() {
-      public void windowClosing(WindowEvent e) {
-        System.exit(0);
-      }
-    });
-    view.setVisible(true);
+  public Coord selectedCell(){
+    if(selectedCell == null){
+      return null;
+    }
+    return new Coord(selectedCell);
+  }
+
+  public void updateTable(int col, int row){
+    defaultTableModel.setValueAt(modelToTable.translate()[col][row], row, col);
+    defaultTableModel.fireTableDataChanged();
   }
 }
-

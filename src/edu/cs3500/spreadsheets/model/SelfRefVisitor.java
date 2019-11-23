@@ -20,8 +20,7 @@ public class SelfRefVisitor implements FormulaVisitor<Boolean> {
 
   /**
    * Constructs a SelfRefVisitor with the coordinate to ban and a list of already banned Coords.
-   *
-   * @param c     Coord to ban
+   * @param c Coord to ban
    * @param soFar formulas banned so far
    */
   private SelfRefVisitor(Coord c, ArrayList<Coord> soFar) {

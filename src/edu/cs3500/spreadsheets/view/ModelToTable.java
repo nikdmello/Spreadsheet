@@ -25,7 +25,7 @@ public class ModelToTable {
    *
    * @return number of Spreadsheet columns.
    */
-  int numCols() {
+  public int numCols() {
     return sheet.getNumCols();
   }
 
@@ -34,7 +34,7 @@ public class ModelToTable {
    *
    * @return number of Spreadsheet rows.
    */
-  int numRows() {
+  public int numRows() {
     return sheet.getNumRows();
   }
 
@@ -45,7 +45,7 @@ public class ModelToTable {
    *
    * @return column names.
    */
-  String[] colNames() {
+  public String[] colNames() {
     if (sheet.getNumCols() < 10) {
       String[] defaultCols = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
       return defaultCols;
@@ -64,7 +64,7 @@ public class ModelToTable {
    *
    * @return column names.
    */
-  String[] rowNames() {
+  public String[] rowNames() {
     if (sheet.getNumRows() < 10) {
       String[] defaultRows = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
       return defaultRows;
@@ -82,20 +82,22 @@ public class ModelToTable {
    *
    * @return 2D String array of Cell formulas.
    */
-  String[][] translate() {
+  public String[][] translate() {
     String[][] translation = new String[sheet.getNumCols()][sheet.getNumRows()];
     for (int i = 0; i < sheet.getNumCols(); i++) {
       for (int j = 0; j < sheet.getNumRows(); j++) {
         Coord check = new Coord(i + 1, j + 1);
         if (sheet.getHashtable().containsKey(check)) {
           Cell cell = sheet.getHashtable().get(check);
-          if (cell.getFormula().type().equals("double")) {
+          if (cell.errorCell()) {
+            translation[i][j] = "Error";
+          } else if (cell.getFormula().type().equals("double")) {
             translation[i][j] = String.format("%.02f", cell.getFormula().evaluate().numberForm());
           } else {
             translation[i][j] = "" + cell;
           }
         } else {
-          translation[i][j] = null;
+          translation[i][j] = "";
         }
       }
     }

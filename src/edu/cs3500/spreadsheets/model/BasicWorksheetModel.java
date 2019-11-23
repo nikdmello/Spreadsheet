@@ -54,6 +54,9 @@ public class BasicWorksheetModel implements Worksheet {
         furthest = e.getKey().row;
       }
     }
+    if(furthest < 26){
+      return 26;
+    }
     return furthest;
   }
 
@@ -65,7 +68,26 @@ public class BasicWorksheetModel implements Worksheet {
         furthest = e.getKey().col;
       }
     }
+    if(furthest < 26){
+      return 26;
+    }
     return furthest;
+  }
+
+  @Override
+  public Coord reEval(Coord c) {
+      for (Map.Entry<Coord, Cell> e : hashtable.entrySet()){
+        try {
+          if (e.getValue().getFormula().hasRef(c)) {
+            e.getValue().revertFormula();
+            e.getValue().evaluateCell();
+          }
+        } catch(IllegalArgumentException iae){
+          e.getValue().setError();
+          return e.getKey();
+        }
+      }
+      return null;
   }
 
   @Override
@@ -100,6 +122,7 @@ public class BasicWorksheetModel implements Worksheet {
           valueTable.add(c);
         }
       } catch (IllegalArgumentException iae) {
+        hashtable.get(c).setError();
         return c;
       }
     }

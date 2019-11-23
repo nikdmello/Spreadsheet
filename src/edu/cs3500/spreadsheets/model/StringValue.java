@@ -28,6 +28,11 @@ public class StringValue implements Value {
   }
 
   @Override
+  public boolean hasRef(Coord c) {
+    return false;
+  }
+
+  @Override
   public boolean isNumeric() {
     return false;
   }

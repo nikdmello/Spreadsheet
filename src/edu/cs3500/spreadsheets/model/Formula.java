@@ -26,4 +26,11 @@ public interface Formula {
    * @return string type
    */
   String type();
+
+  /**
+   * Checks if the cell has a reference to the specified cell.
+   * @param c specified cell
+   * @return true if it has the reference
+   */
+  boolean hasRef(Coord c);
 }

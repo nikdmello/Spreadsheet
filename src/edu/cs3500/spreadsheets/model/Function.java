@@ -10,6 +10,7 @@ public class Function implements Formula {
    * A collection of Formula arguments in a function.
    */
   final ArrayList<Formula> args;
+  private final ArrayList<Formula> originalArgs;
   /**
    * The type of function.
    */
@@ -21,7 +22,9 @@ public class Function implements Formula {
    * @param args the formulas to be operated on.
    */
   public Function(FunctionType type, ArrayList<Formula> args) {
-    this.args = new ArrayList<>();
+    this.args = new ArrayList<Formula>();
+    this.originalArgs = new ArrayList<Formula>();
+    this.originalArgs.addAll(args);
     this.type = type;
     for (Formula f : args) {
       if (f.type().equals("ref")) {
@@ -38,6 +41,7 @@ public class Function implements Formula {
    * @param f function to copy
    */
   public Function(Function f) {
+    this.originalArgs = f.originalArgs;
     this.args = f.args;
     this.type = f.type;
   }
@@ -66,6 +70,16 @@ public class Function implements Formula {
   @Override
   public String type() {
     return "func";
+  }
+
+  @Override
+  public boolean hasRef(Coord c) {
+    for(Formula f : originalArgs){
+      if(f.hasRef(c)){
+        return true;
+      }
+    }
+    return false;
   }
 
   private DoubleValue sum() throws IllegalArgumentException {
