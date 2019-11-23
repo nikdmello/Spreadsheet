@@ -89,13 +89,15 @@ public class ModelToTable {
         Coord check = new Coord(i + 1, j + 1);
         if (sheet.getHashtable().containsKey(check)) {
           Cell cell = sheet.getHashtable().get(check);
-          if (cell.getFormula().type().equals("double")) {
+          if (cell.errorCell()) {
+            translation[i][j] = "Error";
+          } else if (cell.getFormula().type().equals("double")) {
             translation[i][j] = String.format("%.02f", cell.getFormula().evaluate().numberForm());
           } else {
             translation[i][j] = "" + cell;
           }
         } else {
-          translation[i][j] = null;
+          translation[i][j] = "";
         }
       }
     }

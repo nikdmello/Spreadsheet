@@ -9,6 +9,7 @@ import java.util.Objects;
 public final class Cell {
   private Formula f;
   private Formula originalFormula;
+  private boolean error;
 
   /**
    * Constructs a cell containing a formula.
@@ -21,6 +22,7 @@ public final class Cell {
     }
     this.f = f;
     this.originalFormula = f;
+    this.error = false;
   }
 
   /**
@@ -65,6 +67,21 @@ public final class Cell {
    */
   public void revertFormula(){
     this.f = this.originalFormula;
+  }
+
+  /**
+   * Checks to see if the cell is errant.
+   * @return true if there is an error
+   */
+  public boolean errorCell(){
+    return this.error;
+  }
+
+  /**
+   * Sets the cells error value to true.
+   */
+  void setError(){
+    this.error = true;
   }
 
   @Override

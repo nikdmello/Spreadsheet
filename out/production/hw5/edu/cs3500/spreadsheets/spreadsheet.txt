@@ -15,3 +15,5 @@ B3 =(< A3 10)
 
 # Computes the distance formula all in one step
 A4 =(SUM (SUM (PRODUCT (SUM C1 A1) (SUM C1 A1)) (PRODUCT (SUM D1 B1) (SUM D1 B1))))
+
+A21 =(SUM A21:A23)

@@ -54,6 +54,9 @@ public class BasicWorksheetModel implements Worksheet {
         furthest = e.getKey().row;
       }
     }
+    if(furthest < 26){
+      return 26;
+    }
     return furthest;
   }
 
@@ -64,6 +67,9 @@ public class BasicWorksheetModel implements Worksheet {
       if (e.getKey().col > furthest) {
         furthest = e.getKey().col;
       }
+    }
+    if(furthest < 26){
+      return 26;
     }
     return furthest;
   }
@@ -77,6 +83,7 @@ public class BasicWorksheetModel implements Worksheet {
             e.getValue().evaluateCell();
           }
         } catch(IllegalArgumentException iae){
+          e.getValue().setError();
           return e.getKey();
         }
       }
@@ -115,6 +122,7 @@ public class BasicWorksheetModel implements Worksheet {
           valueTable.add(c);
         }
       } catch (IllegalArgumentException iae) {
+        hashtable.get(c).setError();
         return c;
       }
     }

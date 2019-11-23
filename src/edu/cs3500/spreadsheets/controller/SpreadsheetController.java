@@ -6,4 +6,8 @@ public interface SpreadsheetController {
    * Launches a spreadsheet into editor mode.
    */
   void launchEditor();
+
+  void cellRequest(int row, int col, String formula);
+
+  void delCell(int row, int col);
 }

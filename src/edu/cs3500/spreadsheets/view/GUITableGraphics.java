@@ -1,11 +1,15 @@
 package edu.cs3500.spreadsheets.view;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
+import edu.cs3500.spreadsheets.model.Coord;
 
 /**
  * Represents the graphical view of the Spreadsheet. This view uses the Java Swing library,
@@ -13,19 +17,24 @@ import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
  */
 public class GUITableGraphics extends JPanel {
   private ModelToTable modelToTable;
+  DefaultTableModel defaultTableModel;
+  private JTable table;
+  private Coord selectedCell;
+  JTextField tfield;
 
   /**
    * Constructs a Spreadsheet graphical view with the wrapper class.
    *
    * @param mtt wrapper class.
    */
-  public GUITableGraphics(ModelToTable mtt) {
+  public GUITableGraphics(ModelToTable mtt, JTextField tf) {
     super();
     this.modelToTable = mtt;
+    this.tfield = tf;
 
     RowListModel listModel = new RowListModel(this.modelToTable);
 
-    DefaultTableModel defaultTableModel = new DefaultTableModel(listModel.getSize(),
+    defaultTableModel = new DefaultTableModel(listModel.getSize(),
             mtt.colNames().length) {
       // Ensures that the cells cannot be edited by clients directly from the view.
       @Override
@@ -41,7 +50,7 @@ public class GUITableGraphics extends JPanel {
       }
     }
 
-    JTable table = new JTable(defaultTableModel);
+    table = new JTable(defaultTableModel);
     table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
     JList<String> rowHeader = new JList<String>(listModel);
@@ -53,6 +62,17 @@ public class GUITableGraphics extends JPanel {
     scrollPane.setRowHeaderView(rowHeader);
     scrollPane.setPreferredSize(new Dimension(640, 480));
     this.add(scrollPane, BorderLayout.CENTER);
+
+    MouseListener mouseTable = new MouseAdapter() {
+      @Override
+      public void mouseReleased(MouseEvent e) {
+        int row = table.getSelectedRow();
+        int col = table.getSelectedColumn();
+        selectedCell = new Coord(col + 1, row + 1);
+        tfield.setText(modelToTable.translate()[col][row]);
+      }
+    };
+    table.addMouseListener(mouseTable);
   }
 
   /**
@@ -76,6 +96,8 @@ public class GUITableGraphics extends JPanel {
     JTable table = new JTable(defaultTableModel);
     table.setPreferredSize(new Dimension(640, 480));
     table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+    table.setRowSelectionAllowed(true);
+    table.setColumnSelectionAllowed(true);
 
     JList<String> rowHeader = new JList<String>(listModel);
     rowHeader.setFixedCellWidth(50);
@@ -86,5 +108,28 @@ public class GUITableGraphics extends JPanel {
     scrollPane.setRowHeaderView(rowHeader);
     scrollPane.setPreferredSize(new Dimension(640, 480));
     this.add(scrollPane, BorderLayout.CENTER);
+
+    MouseListener mouseTable = new MouseAdapter() {
+      @Override
+      public void mouseReleased(MouseEvent e) {
+        int row = table.getSelectedRow();
+        int col = table.getSelectedColumn();
+        selectedCell = new Coord(col, row);
+        tfield.setText(modelToTable.translate()[col][row]);
+      }
+    };
+    table.addMouseListener(mouseTable);
+  }
+
+  public Coord selectedCell(){
+    if(selectedCell == null){
+      return null;
+    }
+    return new Coord(selectedCell);
+  }
+
+  public void updateTable(int col, int row){
+    defaultTableModel.setValueAt(modelToTable.translate()[col][row], row, col);
+    defaultTableModel.fireTableDataChanged();
   }
 }

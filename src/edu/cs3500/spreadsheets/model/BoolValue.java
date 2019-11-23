@@ -23,6 +23,11 @@ public class BoolValue implements Value {
   }
 
   @Override
+  public boolean hasRef(Coord c) {
+    return false;
+  }
+
+  @Override
   public <R> R accept(FormulaVisitor<R> visitor) {
     return visitor.visitBoolean(this.b);
   }

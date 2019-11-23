@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 
+import edu.cs3500.spreadsheets.controller.SpreadsheetGUIController;
 import edu.cs3500.spreadsheets.model.BasicWorksheetBuilder;
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
 import edu.cs3500.spreadsheets.model.Cell;
@@ -78,11 +79,8 @@ public class BeyondGood {
       SpreadsheetGraphicsView guiView = new SpreadsheetGraphicsView();
       guiView.render();
     } else if (args.length == 1 && args[0].equals("-edit")) {
-      fileName = args[1];
-      file = getFile(fileName);
-      model = buildModel(builder, file);
-      ModelToTable mtt = new ModelToTable(model);
-      GUIView guiView = new GUIView(mtt);
+      SpreadsheetGUIController controller = new SpreadsheetGUIController(new BasicWorksheetModel());
+      controller.launchEditor();
     } else {
       throw new IllegalArgumentException("Invalid command.");
     }
