@@ -25,7 +25,7 @@ public class ModelToTable {
    *
    * @return number of Spreadsheet columns.
    */
-  public int numCols() {
+  int numCols() {
     return sheet.getNumCols();
   }
 
@@ -34,7 +34,7 @@ public class ModelToTable {
    *
    * @return number of Spreadsheet rows.
    */
-  public int numRows() {
+  int numRows() {
     return sheet.getNumRows();
   }
 
@@ -45,7 +45,7 @@ public class ModelToTable {
    *
    * @return column names.
    */
-  public String[] colNames() {
+  String[] colNames() {
     if (sheet.getNumCols() < 10) {
       String[] defaultCols = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
       return defaultCols;
@@ -64,7 +64,7 @@ public class ModelToTable {
    *
    * @return column names.
    */
-  public String[] rowNames() {
+  String[] rowNames() {
     if (sheet.getNumRows() < 10) {
       String[] defaultRows = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
       return defaultRows;
@@ -82,7 +82,7 @@ public class ModelToTable {
    *
    * @return 2D String array of Cell formulas.
    */
-  public String[][] translate() {
+  String[][] translate() {
     String[][] translation = new String[sheet.getNumCols()][sheet.getNumRows()];
     for (int i = 0; i < sheet.getNumCols(); i++) {
       for (int j = 0; j < sheet.getNumRows(); j++) {

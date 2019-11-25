@@ -15,15 +15,12 @@ import edu.cs3500.spreadsheets.controller.ControllerViewRequester;
 import edu.cs3500.spreadsheets.model.Coord;
 
 public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
-  private ModelToTable mtt;
   private GUITableGraphics table;
   private ControllerViewRequester cvr;
-  private JPanel topBar;
   private JTextField formulaBar;
 
   public GUIView(ModelToTable mtt, ControllerViewRequester cvr) {
     super();
-    this.mtt = mtt;
     this.cvr = cvr;
 
     //initialize the top bar
@@ -39,7 +36,7 @@ public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
     formulaBar = new JTextField();
     formulaBar.setPreferredSize(new Dimension(540, 30));
     FlowLayout tbarlay = new FlowLayout();
-    topBar = new JPanel();
+    JPanel topBar = new JPanel();
     topBar.setLayout(tbarlay);
     topBar.add(acceptButton);
     topBar.add(delButton);
@@ -74,17 +71,17 @@ public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     String action = e.getActionCommand();
-    if(action.equals("OkPressed")){
-      if(formulaBar.getText().equals("")){
+    if (action.equals("OkPressed")) {
+      if (formulaBar.getText().equals("")) {
         return;
       }
-      if(table.selectedCell() == null){
+      if (table.selectedCell() == null) {
         return;
       }
       this.cvr.requestCell(table.selectedCell().row,
               table.selectedCell().col, formulaBar.getText());
     }
-    if(action.equals("Del")){
+    if (action.equals("Del")) {
       this.cvr.delCell(table.selectedCell().row, table.selectedCell().col);
       this.formulaBar.setText("");
     }

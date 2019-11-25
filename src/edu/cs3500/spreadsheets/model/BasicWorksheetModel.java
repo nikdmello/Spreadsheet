@@ -55,7 +55,7 @@ public class BasicWorksheetModel implements Worksheet {
       }
     }
     if(furthest < 26){
-      return 26;
+      return 50;
     }
     return furthest;
   }
@@ -69,7 +69,7 @@ public class BasicWorksheetModel implements Worksheet {
       }
     }
     if(furthest < 26){
-      return 26;
+      return 50;
     }
     return furthest;
   }

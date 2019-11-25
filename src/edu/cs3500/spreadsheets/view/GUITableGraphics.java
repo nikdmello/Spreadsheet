@@ -1,6 +1,8 @@
 package edu.cs3500.spreadsheets.view;
 
 import java.awt.*;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -17,17 +19,17 @@ import edu.cs3500.spreadsheets.model.Coord;
  */
 public class GUITableGraphics extends JPanel {
   private ModelToTable modelToTable;
-  DefaultTableModel defaultTableModel;
+  private DefaultTableModel defaultTableModel;
   private JTable table;
   private Coord selectedCell;
-  JTextField tfield;
+  private JTextField tfield;
 
   /**
    * Constructs a Spreadsheet graphical view with the wrapper class.
    *
    * @param mtt wrapper class.
    */
-  public GUITableGraphics(ModelToTable mtt, JTextField tf) {
+  GUITableGraphics(ModelToTable mtt, JTextField tf) {
     super();
     this.modelToTable = mtt;
     this.tfield = tf;
@@ -61,6 +63,26 @@ public class GUITableGraphics extends JPanel {
     JScrollPane scrollPane = new JScrollPane(table);
     scrollPane.setRowHeaderView(rowHeader);
     scrollPane.setPreferredSize(new Dimension(640, 480));
+
+    // track scroll movement but no adjustment value changed
+
+    AdjustmentListener hListener = new AdjustmentListener() {
+      public void adjustmentValueChanged(AdjustmentEvent e) {
+        System.out.println("Horizontal: ");
+      }
+    };
+
+    JScrollBar hBar = scrollPane.getHorizontalScrollBar();
+    hBar.addAdjustmentListener(hListener);
+    AdjustmentListener vListener = new AdjustmentListener() {
+      public void adjustmentValueChanged(AdjustmentEvent e) {
+        
+        System.out.println("Vertical: ");
+      }
+    };
+    JScrollBar vBar = scrollPane.getVerticalScrollBar();
+    vBar.addAdjustmentListener(vListener);
+
     this.add(scrollPane, BorderLayout.CENTER);
 
     MouseListener mouseTable = new MouseAdapter() {
