@@ -76,7 +76,7 @@ public class GUITableGraphics extends JPanel {
     hBar.addAdjustmentListener(hListener);
     AdjustmentListener vListener = new AdjustmentListener() {
       public void adjustmentValueChanged(AdjustmentEvent e) {
-        
+
         System.out.println("Vertical: ");
       }
     };
