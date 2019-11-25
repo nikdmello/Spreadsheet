@@ -71,4 +71,11 @@ public interface Worksheet {
   Coord reEval(Coord c);
 
   void setErrorAt(Coord c);
+
+  void addRow();
+
+  /**
+   * Adds a column in the spreadsheet.
+   */
+  void addCol();
 }

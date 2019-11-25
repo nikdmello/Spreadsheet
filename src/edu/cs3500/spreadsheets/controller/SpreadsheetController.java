@@ -35,4 +35,14 @@ public interface SpreadsheetController {
    * @param text name of file
    */
   void saveFile(String text);
+
+  /**
+   * Adds a row in the spreadsheet.
+   */
+  void addRow();
+
+  /**
+   * Adds a column in the spreadsheet.
+   */
+  void addCol();
 }

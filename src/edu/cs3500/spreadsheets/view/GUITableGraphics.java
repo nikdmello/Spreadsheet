@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import edu.cs3500.spreadsheets.controller.ControllerViewRequester;
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
 import edu.cs3500.spreadsheets.model.Coord;
 
@@ -23,16 +24,18 @@ public class GUITableGraphics extends JPanel {
   private JTable table;
   private Coord selectedCell;
   private JTextField tfield;
+  private ControllerViewRequester cvr;
 
   /**
    * Constructs a Spreadsheet graphical view with the wrapper class.
    *
    * @param mtt wrapper class.
    */
-  GUITableGraphics(ModelToTable mtt, JTextField tf) {
+  GUITableGraphics(ModelToTable mtt, JTextField tf, ControllerViewRequester cvr) {
     super();
     this.modelToTable = mtt;
     this.tfield = tf;
+    this.cvr = cvr;
 
     RowListModel listModel = new RowListModel(this.modelToTable);
 
@@ -68,7 +71,7 @@ public class GUITableGraphics extends JPanel {
 
     AdjustmentListener hListener = new AdjustmentListener() {
       public void adjustmentValueChanged(AdjustmentEvent e) {
-        System.out.println("Horizontal: ");
+        cvr.addCol();
       }
     };
 
@@ -76,8 +79,7 @@ public class GUITableGraphics extends JPanel {
     hBar.addAdjustmentListener(hListener);
     AdjustmentListener vListener = new AdjustmentListener() {
       public void adjustmentValueChanged(AdjustmentEvent e) {
-
-        System.out.println("Vertical: ");
+        cvr.addRow();
       }
     };
     JScrollBar vBar = scrollPane.getVerticalScrollBar();

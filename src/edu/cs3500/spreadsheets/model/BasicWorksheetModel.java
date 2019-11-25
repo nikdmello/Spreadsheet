@@ -103,6 +103,16 @@ public class BasicWorksheetModel implements Worksheet {
   }
 
   @Override
+  public void addRow() {
+    this.rows += 1;
+  }
+
+  @Override
+  public void addCol() {
+    this.cols += 1;
+  }
+
+  @Override
   public void createCell(int col, int row, Formula f) {
     Coord c = new Coord(col, row);
     Cell cell;
