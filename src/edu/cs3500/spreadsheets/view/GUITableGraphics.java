@@ -121,14 +121,18 @@ public class GUITableGraphics extends JPanel {
     table.addMouseListener(mouseTable);
   }
 
-  public Coord selectedCell(){
+  /**
+   *
+   * @return
+   */
+  Coord selectedCell(){
     if(selectedCell == null){
       return null;
     }
     return new Coord(selectedCell);
   }
 
-  public void updateTable(){
+  void updateTable(){
     String[][] translated = this.modelToTable.translate();
     for (int i = 0; i < modelToTable.numRows(); i++) {
       for (int j = 0; j < modelToTable.numCols(); j++) {

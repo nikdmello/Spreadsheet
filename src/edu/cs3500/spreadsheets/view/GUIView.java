@@ -10,6 +10,9 @@ import javax.swing.*;
 
 import edu.cs3500.spreadsheets.controller.ControllerViewRequester;
 
+/**
+ * Represents an editable view of a spreadsheet.
+ */
 public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
   private ModelToTable mtt;
   private GUITableGraphics table;
@@ -19,6 +22,11 @@ public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
   private JTextField formulaBar;
   private JTextField fileBar;
 
+  /**
+   * Creates and initializes the view.
+   * @param mtt The model to view translator
+   * @param cvr the view to controller translator
+   */
   public GUIView(ModelToTable mtt, ControllerViewRequester cvr) {
     super();
     this.mtt = mtt;

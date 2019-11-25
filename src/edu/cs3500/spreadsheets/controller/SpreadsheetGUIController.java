@@ -1,5 +1,4 @@
 package edu.cs3500.spreadsheets.controller;
-import java.awt.event.WindowEvent;
 import java.io.FileReader;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetBuilder;
@@ -16,11 +15,18 @@ import edu.cs3500.spreadsheets.view.GUIView;
 import edu.cs3500.spreadsheets.view.ModelToTable;
 import edu.cs3500.spreadsheets.view.SpreadsheetTextualView;
 
+/**
+ * A controller to run the GUI Spreadsheet view.
+ */
 public class SpreadsheetGUIController implements SpreadsheetController{
   private Worksheet sheet;
   private ModelToTable mtt;
   private GUIView view;
 
+  /**
+   * Constructs the Gui view controller
+   * @param sheet the worksheet to be edited
+   */
   public SpreadsheetGUIController(Worksheet sheet){
     this.sheet = sheet;
     this.mtt = new ModelToTable(sheet);

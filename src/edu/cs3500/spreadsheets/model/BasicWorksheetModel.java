@@ -24,6 +24,11 @@ public class BasicWorksheetModel implements Worksheet {
   private ArrayList<Coord> orderedCoords;
 
   /**
+   * The number of rows and cols to be displayed.
+   */
+  private int cols, rows;
+
+  /**
    * Constructor that initializes the hashtable, which will serve as the grid of cells. Within this
    * hashtable will be the Coord and Cell key-value pairs.
    */
@@ -55,7 +60,7 @@ public class BasicWorksheetModel implements Worksheet {
       }
     }
     if(furthest < 26){
-      return 26;
+      return rows;
     }
     return furthest;
   }
@@ -69,7 +74,7 @@ public class BasicWorksheetModel implements Worksheet {
       }
     }
     if(furthest < 26){
-      return 26;
+      return cols;
     }
     return furthest;
   }
