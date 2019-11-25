@@ -1,5 +1,4 @@
 package edu.cs3500.spreadsheets.model;
-
 import java.util.ArrayList;
 
 /**
@@ -10,11 +9,11 @@ public class Function implements Formula {
    * A collection of Formula arguments in a function.
    */
   final ArrayList<Formula> args;
-  private final ArrayList<Formula> originalArgs;
+  final ArrayList<Formula> originalArgs;
   /**
    * The type of function.
    */
-  final private FunctionType type;
+  final FunctionType type;
 
   /**
    * Constructs a function and its arguments.
@@ -165,5 +164,30 @@ public class Function implements Formula {
       }
     }
     return false;
+  }
+
+  @Override
+  public String toString(){
+    String funcargs = "";
+    for(int i = 0; i < this.originalArgs.size(); i++){
+      if(originalArgs.size() - 1 - i == 0){
+        funcargs += originalArgs.get(i).toString();
+      }
+      else{
+        funcargs += originalArgs.get(i).toString() + " ";
+      }
+    }
+    switch (this.type) {
+      case SUM:
+        return "=(SUM " + funcargs + ")";
+      case PRODUCT:
+        return "=(PRODUCT " + funcargs + ")";
+      case LT:
+        return "=(> " + funcargs + ")";
+      case CAT:
+        return "=(CAT " + funcargs + ")";
+      default:
+        throw new IllegalArgumentException("Function not found.");
+    }
   }
 }

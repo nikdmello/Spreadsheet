@@ -58,7 +58,7 @@ public class SelfRefVisitor implements FormulaVisitor<Boolean> {
 
   @Override
   public Boolean visitFunc(Function f) {
-    for (Formula formula : f.args) {
+    for (Formula formula : f.originalArgs) {
       if (formula.accept(this)) {
         return true;
       }

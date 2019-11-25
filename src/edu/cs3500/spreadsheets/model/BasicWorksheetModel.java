@@ -24,6 +24,11 @@ public class BasicWorksheetModel implements Worksheet {
   private ArrayList<Coord> orderedCoords;
 
   /**
+   * The number of rows and cols to be displayed.
+   */
+  private int cols, rows;
+
+  /**
    * Constructor that initializes the hashtable, which will serve as the grid of cells. Within this
    * hashtable will be the Coord and Cell key-value pairs.
    */
@@ -55,7 +60,7 @@ public class BasicWorksheetModel implements Worksheet {
       }
     }
     if(furthest < 26){
-      return 50;
+      return rows;
     }
     return furthest;
   }
@@ -69,25 +74,30 @@ public class BasicWorksheetModel implements Worksheet {
       }
     }
     if(furthest < 26){
-      return 50;
+      return cols;
     }
     return furthest;
   }
 
   @Override
   public Coord reEval(Coord c) {
-      for (Map.Entry<Coord, Cell> e : hashtable.entrySet()){
+      for (Coord co : orderedCoords){
         try {
-          if (e.getValue().getFormula().hasRef(c)) {
-            e.getValue().revertFormula();
-            e.getValue().evaluateCell();
+          if (hashtable.get(co).unevaluatedFormula().hasRef(c)) {
+            hashtable.get(co).revertFormula();
+            hashtable.get(co).evaluateCell();
           }
         } catch(IllegalArgumentException iae){
-          e.getValue().setError();
-          return e.getKey();
+          hashtable.get(co).setError();
+          return co;
         }
       }
       return null;
+  }
+
+  @Override
+  public void setErrorAt(Coord c) {
+    hashtable.get(c).setError();
   }
 
   @Override
@@ -95,7 +105,7 @@ public class BasicWorksheetModel implements Worksheet {
     Coord c = new Coord(col, row);
     Cell cell;
     try {
-      cell = new Cell(f.evaluate());
+      cell = new Cell(f.accept(new FormulaCopyConstructor()).evaluate(), f);
     } catch (IllegalArgumentException e) {
       cell = new Cell(f);
     }
@@ -131,7 +141,7 @@ public class BasicWorksheetModel implements Worksheet {
 
   @Override
   public void changeContents(Coord c, Formula f) {
-    Cell cell = new Cell(f);
+    Cell cell = new Cell(f.evaluate(), f);
     hashtable.put(c, cell);
   }
 

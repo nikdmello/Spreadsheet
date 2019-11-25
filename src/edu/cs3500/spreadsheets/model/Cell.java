@@ -21,7 +21,7 @@ public final class Cell {
       throw new IllegalArgumentException("Cell can not be created with a null formula");
     }
     this.f = f;
-    this.originalFormula = f;
+    this.originalFormula = f.accept(new FormulaCopyConstructor());
     this.error = false;
   }
 
@@ -32,6 +32,18 @@ public final class Cell {
   public Cell(Cell c) {
     this.f = c.f;
     this.originalFormula = c.originalFormula;
+    this.error =c.error;
+  }
+
+  /**
+   * Allows for quick construction while creating cells.
+   * @param evaluate evaluated cell
+   * @param f original formula
+   */
+  public Cell(Value evaluate, Formula f) {
+    this.f = evaluate;
+    this.originalFormula = f;
+    this.error = false;
   }
 
   /**
@@ -66,7 +78,7 @@ public final class Cell {
    * The formula becomes the unevaluated version of the formula.
    */
   public void revertFormula(){
-    this.f = this.originalFormula;
+    this.f = this.originalFormula.accept(new RevertVisitor());
   }
 
   /**
