@@ -122,8 +122,8 @@ public class GUITableGraphics extends JPanel {
   }
 
   /**
-   *
-   * @return
+   *Gets the selected cell from the table.
+   * @return the coord of the selected cell
    */
   Coord selectedCell(){
     if(selectedCell == null){
@@ -132,6 +132,9 @@ public class GUITableGraphics extends JPanel {
     return new Coord(selectedCell);
   }
 
+  /**
+   * Updates the table to match the model.
+   */
   void updateTable(){
     String[][] translated = this.modelToTable.translate();
     for (int i = 0; i < modelToTable.numRows(); i++) {

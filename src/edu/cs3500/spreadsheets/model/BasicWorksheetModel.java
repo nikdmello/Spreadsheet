@@ -36,6 +36,8 @@ public class BasicWorksheetModel implements Worksheet {
     this.hashtable = new Hashtable<>();
     this.valueTable = new ArrayList<>();
     this.orderedCoords = new ArrayList<>();
+    this.cols = 50;
+    this.rows = 50;
   }
 
   /**
