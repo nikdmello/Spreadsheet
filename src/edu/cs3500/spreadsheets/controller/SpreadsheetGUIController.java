@@ -1,18 +1,25 @@
 package edu.cs3500.spreadsheets.controller;
+import java.awt.event.WindowEvent;
+import java.io.FileReader;
+
+import edu.cs3500.spreadsheets.model.BasicWorksheetBuilder;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.Formula;
+import edu.cs3500.spreadsheets.model.SelfRefVisitor;
 import edu.cs3500.spreadsheets.model.SexpToFormula;
 import edu.cs3500.spreadsheets.model.StringValue;
 import edu.cs3500.spreadsheets.model.Worksheet;
+import edu.cs3500.spreadsheets.model.WorksheetReader;
 import edu.cs3500.spreadsheets.sexp.Parser;
 import edu.cs3500.spreadsheets.sexp.Sexp;
 import edu.cs3500.spreadsheets.view.GUIView;
 import edu.cs3500.spreadsheets.view.ModelToTable;
+import edu.cs3500.spreadsheets.view.SpreadsheetTextualView;
 
 public class SpreadsheetGUIController implements SpreadsheetController{
   private Worksheet sheet;
   private ModelToTable mtt;
-  GUIView view;
+  private GUIView view;
 
   public SpreadsheetGUIController(Worksheet sheet){
     this.sheet = sheet;
@@ -46,6 +53,7 @@ public class SpreadsheetGUIController implements SpreadsheetController{
     //update: update the cell and re eval, errors are displayed on screen to user
     Coord c = new Coord(col, row);
     Formula f = toCreate.accept(new SexpToFormula(sheet, c));
+
     if(sheet.getHashtable().containsKey(c)){
       sheet.changeContents(c, f);
       sheet.reEval(c);
@@ -55,7 +63,13 @@ public class SpreadsheetGUIController implements SpreadsheetController{
 
     //new cell: create cell and evaluate all, this will not be taxing since cells are already evaled
     //This is necessary to see if there is an error in the cell
-    sheet.createCell(col, row, f);
+    if(f.accept(new SelfRefVisitor(c))){
+      sheet.createCell(col, row, f);
+      sheet.setErrorAt(c);
+    }
+    else{
+      sheet.createCell(col, row, f);
+    }
     sheet.evalAll();
     view.render();
   }
@@ -65,7 +79,24 @@ public class SpreadsheetGUIController implements SpreadsheetController{
     Coord cell = new Coord(col, row);
     if(sheet.getHashtable().containsKey(cell)){
       sheet.deleteCellAt(cell);
+      sheet.evalAll();
+      view.render();
     }
+  }
+
+  @Override
+  public void loadFile(FileReader file) {
+    this.sheet = WorksheetReader.read(new BasicWorksheetBuilder(), file);
+    this.mtt = new ModelToTable(this.sheet);
+    this.view.setVisible(false);
+    this.view.dispose();
+    this.view = new GUIView(mtt, new ControllerViewRequester(this));
+  }
+
+  @Override
+  public void saveFile(String text) {
+    SpreadsheetTextualView saved = new SpreadsheetTextualView(this.sheet, text);
+    saved.render();
   }
 
 }

@@ -69,4 +69,6 @@ public interface Worksheet {
    * @return Coord of an errant if there is one
    */
   Coord reEval(Coord c);
+
+  void setErrorAt(Coord c);
 }

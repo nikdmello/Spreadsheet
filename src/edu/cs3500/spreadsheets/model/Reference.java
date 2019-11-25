@@ -10,8 +10,7 @@ public class Reference implements Formula {
   private Coord c1;
   private Coord c2;
   private Coord thisCoord;
-  private ArrayList<Formula> cellContents;
-  public final Worksheet sheet;
+  final Worksheet sheet;
 
   /**
    * Represents a constructor for a Reference with two coordinates, the starting point of the range
@@ -87,9 +86,19 @@ public class Reference implements Formula {
 
   @Override
   public boolean hasRef(Coord c) {
-    for(Coord co : this.getCellCoords()){
-      if(co.equals(c)){
-        return true;
+    if(c1.equals(c2)){
+      if(!(sheet.getCellAt(c1) == null)) {
+        return c1.equals(c) || sheet.getCellAt(c1).unevaluatedFormula().hasRef(c);
+      }
+      else{
+        return false;
+      }
+    }
+    for (Coord co : this.getCellCoords()) {
+      if (!(sheet.getCellAt(co) == null)) {
+        if(co.equals(c) || sheet.getCellAt(co).unevaluatedFormula().hasRef(c)){
+          return true;
+        }
       }
     }
     return false;
@@ -97,6 +106,9 @@ public class Reference implements Formula {
 
   ArrayList<Formula> getCellFormulas() {
     if (this.c1.equals(c2)) {
+      if(sheet.getCellAt(c1) == null){
+        return new ArrayList<Formula>();
+      }
       return new ArrayList<Formula>(Arrays.asList(sheet.getCellAt(c1).getFormula()));
     }
     ArrayList<Formula> formulaList = new ArrayList<>();
@@ -131,5 +143,12 @@ public class Reference implements Formula {
     return coordList;
   }
 
+  @Override
+  public String toString() {
+    if (c1.equals(c2)) {
+      return Coord.colIndexToName(c1.col) + c1.row;
+    }
+    return Coord.colIndexToName(c1.col) + c1.row + ":" + Coord.colIndexToName(c2.col) + c2.row;
+  }
 
 }

@@ -44,8 +44,8 @@ public class GUITableGraphics extends JPanel {
     };
 
     // Populates the table with Cells.
-    for (int i = 0; i < mtt.numRows(); i++) {
-      for (int j = 0; j < mtt.numCols(); j++) {
+    for (int i = 0; i < modelToTable.numRows(); i++) {
+      for (int j = 0; j < modelToTable.numCols(); j++) {
         defaultTableModel.setValueAt(this.modelToTable.translate()[j][i], i, j);
       }
     }
@@ -69,7 +69,7 @@ public class GUITableGraphics extends JPanel {
         int row = table.getSelectedRow();
         int col = table.getSelectedColumn();
         selectedCell = new Coord(col + 1, row + 1);
-        tfield.setText(modelToTable.translate()[col][row]);
+        tfield.setText(modelToTable.formTranslate()[col][row]);
       }
     };
     table.addMouseListener(mouseTable);
@@ -115,7 +115,7 @@ public class GUITableGraphics extends JPanel {
         int row = table.getSelectedRow();
         int col = table.getSelectedColumn();
         selectedCell = new Coord(col, row);
-        tfield.setText(modelToTable.translate()[col][row]);
+        tfield.setText(modelToTable.formTranslate()[col][row]);
       }
     };
     table.addMouseListener(mouseTable);
@@ -128,8 +128,12 @@ public class GUITableGraphics extends JPanel {
     return new Coord(selectedCell);
   }
 
-  public void updateTable(int col, int row){
-    defaultTableModel.setValueAt(modelToTable.translate()[col][row], row, col);
-    defaultTableModel.fireTableDataChanged();
+  public void updateTable(){
+    String[][] translated = this.modelToTable.translate();
+    for (int i = 0; i < modelToTable.numRows(); i++) {
+      for (int j = 0; j < modelToTable.numCols(); j++) {
+        defaultTableModel.setValueAt(translated[j][i], i, j);
+      }
+    }
   }
 }

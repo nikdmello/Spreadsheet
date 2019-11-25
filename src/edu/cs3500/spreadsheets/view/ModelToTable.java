@@ -103,4 +103,24 @@ public class ModelToTable {
     }
     return translation;
   }
+
+  public String[][] formTranslate(){
+    String[][] translation = new String[sheet.getNumCols()][sheet.getNumRows()];
+    for (int i = 0; i < sheet.getNumCols(); i++) {
+      for (int j = 0; j < sheet.getNumRows(); j++) {
+        Coord check = new Coord(i + 1, j + 1);
+        if (sheet.getHashtable().containsKey(check)) {
+          Cell cell = sheet.getHashtable().get(check);
+          if (cell.errorCell()) {
+            translation[i][j] = "Error";
+          } else{
+            translation[i][j] = sheet.getHashtable().get(new Coord(i + 1, j + 1)).unevaluatedFormula().toString();
+          }
+        } else {
+          translation[i][j] = "";
+        }
+      }
+    }
+    return translation;
+  }
 }

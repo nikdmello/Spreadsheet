@@ -3,23 +3,21 @@ package edu.cs3500.spreadsheets.view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
 import edu.cs3500.spreadsheets.controller.ControllerViewRequester;
-import edu.cs3500.spreadsheets.model.Coord;
 
 public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
   private ModelToTable mtt;
   private GUITableGraphics table;
   private ControllerViewRequester cvr;
   private JPanel topBar;
+  private JPanel bottomBar;
   private JTextField formulaBar;
+  private JTextField fileBar;
 
   public GUIView(ModelToTable mtt, ControllerViewRequester cvr) {
     super();
@@ -50,9 +48,30 @@ public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
     table = new GUITableGraphics(mtt, formulaBar);
     table.setPreferredSize(new Dimension(640, 480));
 
+    //initialize bottom bar
+    //initialize the top bar
+    JButton loadtButton = new JButton("Load");
+    loadtButton.setPreferredSize(new Dimension(70, 30));
+    loadtButton.addActionListener(this);
+    loadtButton.setActionCommand("load");
+    JButton saveButton = new JButton("Save");
+    saveButton.setPreferredSize(new Dimension(70, 30));
+    saveButton.addActionListener(this);
+    saveButton.setActionCommand("save");
+    fileBar = new JTextField();
+    fileBar.setPreferredSize(new Dimension(500, 30));
+    FlowLayout bbarlay = new FlowLayout();
+    bottomBar = new JPanel();
+    bottomBar.setLayout(bbarlay);
+    bottomBar.add(loadtButton);
+    bottomBar.add(saveButton);
+    bottomBar.add(fileBar);
+    bottomBar.setVisible(true);
+
     //add them to the frame
     getContentPane().add(topBar, BorderLayout.NORTH);
     getContentPane().add(table, BorderLayout.CENTER);
+    getContentPane().add(bottomBar, BorderLayout.SOUTH);
 
     //make the window
     this.setTitle("Microsoft Excel v2.0");
@@ -68,7 +87,7 @@ public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
 
   @Override
   public void render() {
-    table.updateTable(table.selectedCell().col, table.selectedCell().row);
+    table.updateTable();
   }
 
   @Override
@@ -87,6 +106,16 @@ public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
     if(action.equals("Del")){
       this.cvr.delCell(table.selectedCell().row, table.selectedCell().col);
       this.formulaBar.setText("");
+    }
+    if(action.equals("load")){
+      if(!fileBar.getText().equals("")){
+        this.cvr.loadFile(fileBar.getText());
+      }
+    }
+    if(action.equals("save")){
+      if(!fileBar.getText().equals("")){
+        this.cvr.saveFile(fileBar.getText());
+      }
     }
   }
 }
