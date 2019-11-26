@@ -62,9 +62,9 @@ public class ModelToTable {
    * D11, this method will return values from 1 to 11 in a String array. Returns a minimum number of
    * rows despite the amount of Spreadsheet contents, just like Excel does.
    *
-   * @return column names.
+   * @return row names.
    */
-  public String[] rowNames() {
+  String[] rowNames() {
     if (sheet.getNumRows() < 10) {
       String[] defaultRows = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
       return defaultRows;

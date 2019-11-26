@@ -61,7 +61,7 @@ public class BasicWorksheetModel implements Worksheet {
         furthest = e.getKey().row;
       }
     }
-    if(furthest < 26){
+    if(furthest < rows){
       return rows;
     }
     return furthest;
@@ -75,7 +75,7 @@ public class BasicWorksheetModel implements Worksheet {
         furthest = e.getKey().col;
       }
     }
-    if(furthest < 26){
+    if(furthest < cols){
       return cols;
     }
     return furthest;
@@ -100,6 +100,16 @@ public class BasicWorksheetModel implements Worksheet {
   @Override
   public void setErrorAt(Coord c) {
     hashtable.get(c).setError();
+  }
+
+  @Override
+  public void addCols() {
+    this.cols += 50;
+  }
+
+  @Override
+  public void addRows() {
+    this.rows += 50;
   }
 
   @Override

@@ -57,7 +57,14 @@ public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
     table.setPreferredSize(new Dimension(640, 480));
 
     //initialize bottom bar
-    //initialize the top bar
+    JButton colButton = new JButton("Col");
+    colButton.setPreferredSize(new Dimension(70, 30));
+    colButton.addActionListener(this);
+    colButton.setActionCommand("col");
+    JButton rowButton = new JButton("Row");
+    rowButton.setPreferredSize(new Dimension(70, 30));
+    rowButton.addActionListener(this);
+    rowButton.setActionCommand("row");
     JButton loadtButton = new JButton("Load");
     loadtButton.setPreferredSize(new Dimension(70, 30));
     loadtButton.addActionListener(this);
@@ -67,10 +74,12 @@ public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
     saveButton.addActionListener(this);
     saveButton.setActionCommand("save");
     fileBar = new JTextField();
-    fileBar.setPreferredSize(new Dimension(500, 30));
+    fileBar.setPreferredSize(new Dimension(360, 30));
     FlowLayout bbarlay = new FlowLayout();
     bottomBar = new JPanel();
     bottomBar.setLayout(bbarlay);
+    bottomBar.add(colButton);
+    bottomBar.add(rowButton);
     bottomBar.add(loadtButton);
     bottomBar.add(saveButton);
     bottomBar.add(fileBar);
@@ -124,6 +133,16 @@ public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
       if(!fileBar.getText().equals("")){
         this.cvr.saveFile(fileBar.getText());
       }
+    }
+    if(action.equals("col")){
+      this.cvr.requestCols();
+      this.table.addCol();
+      this.render();
+    }
+    if(action.equals("row")){
+      this.cvr.requestRows();
+      this.table.addRow();
+      this.render();
     }
   }
 }

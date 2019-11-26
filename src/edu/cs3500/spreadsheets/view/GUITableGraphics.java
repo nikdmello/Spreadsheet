@@ -17,22 +17,24 @@ import edu.cs3500.spreadsheets.model.Coord;
  */
 public class GUITableGraphics extends JPanel {
   private ModelToTable modelToTable;
-  DefaultTableModel defaultTableModel;
+  private DefaultTableModel defaultTableModel;
+  private RowListModel listModel;
   private JTable table;
   private Coord selectedCell;
-  JTextField tfield;
+  private JTextField tfield;
+  private JScrollPane scrollPane;
 
   /**
    * Constructs a Spreadsheet graphical view with the wrapper class.
    *
    * @param mtt wrapper class.
    */
-  public GUITableGraphics(ModelToTable mtt, JTextField tf) {
+  GUITableGraphics(ModelToTable mtt, JTextField tf) {
     super();
     this.modelToTable = mtt;
     this.tfield = tf;
 
-    RowListModel listModel = new RowListModel(this.modelToTable);
+    listModel = new RowListModel(this.modelToTable);
 
     defaultTableModel = new DefaultTableModel(listModel.getSize(),
             mtt.colNames().length) {
@@ -58,7 +60,7 @@ public class GUITableGraphics extends JPanel {
     rowHeader.setFixedCellHeight(table.getRowHeight());
     rowHeader.setCellRenderer(new RowHeaderRenderer(table));
 
-    JScrollPane scrollPane = new JScrollPane(table);
+    scrollPane = new JScrollPane(table);
     scrollPane.setRowHeaderView(rowHeader);
     scrollPane.setPreferredSize(new Dimension(640, 480));
     this.add(scrollPane, BorderLayout.CENTER);
@@ -122,11 +124,12 @@ public class GUITableGraphics extends JPanel {
   }
 
   /**
-   *Gets the selected cell from the table.
+   * Gets the selected cell from the table.
+   *
    * @return the coord of the selected cell
    */
-  Coord selectedCell(){
-    if(selectedCell == null){
+  Coord selectedCell() {
+    if (selectedCell == null) {
       return null;
     }
     return new Coord(selectedCell);
@@ -135,12 +138,32 @@ public class GUITableGraphics extends JPanel {
   /**
    * Updates the table to match the model.
    */
-  void updateTable(){
+  void updateTable() {
     String[][] translated = this.modelToTable.translate();
     for (int i = 0; i < modelToTable.numRows(); i++) {
       for (int j = 0; j < modelToTable.numCols(); j++) {
         defaultTableModel.setValueAt(translated[j][i], i, j);
       }
     }
+  }
+
+  /**
+   * Adds rows to be displayed
+   */
+  void addRow(){
+    defaultTableModel.setNumRows(defaultTableModel.getRowCount() + 50);
+    listModel = new RowListModel(this.modelToTable);
+    JList<String> rowHeader = new JList<String>(listModel);
+    rowHeader.setFixedCellWidth(50);
+    rowHeader.setFixedCellHeight(table.getRowHeight());
+    rowHeader.setCellRenderer(new RowHeaderRenderer(table));
+    scrollPane.setRowHeaderView(rowHeader);
+  }
+
+  /**
+   * Adds columns to be displayed
+   */
+  void addCol(){
+    defaultTableModel.setColumnCount(defaultTableModel.getColumnCount() + 50);
   }
 }

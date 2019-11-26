@@ -105,4 +105,13 @@ public class SpreadsheetGUIController implements SpreadsheetController{
     saved.render();
   }
 
+  @Override
+  public void addCols() {
+    this.sheet.addCols();
+  }
+
+  @Override
+  public void addRows() {
+    this.sheet.addRows();
+  }
 }

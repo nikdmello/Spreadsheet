@@ -7,7 +7,7 @@ import java.io.FileReader;
  * Allows the view to request changes to the model from the controller.
  */
 public class ControllerViewRequester {
-  SpreadsheetController control;
+  private SpreadsheetController control;
 
   /**
    * Constructs a controller wrapper to handle communications between view and controller.
@@ -70,5 +70,19 @@ public class ControllerViewRequester {
    */
   public void saveFile(String text) {
     control.saveFile(text);
+  }
+
+  /**
+   * Requests more columns
+   */
+  public void requestCols() {
+    control.addCols();
+  }
+
+  /**
+   * Requests more rows
+   */
+  public void requestRows() {
+    control.addRows();
   }
 }

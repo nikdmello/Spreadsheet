@@ -39,36 +39,55 @@ public interface Worksheet {
 
   /**
    * Updates the formula that is currently in the Cell.
+   *
    * @param c the coord of the cell to be updated.
    */
   void changeContents(Coord c, Formula f);
 
   /**
    * Gets a copy of the hashtable.
+   *
    * @return a copy of the hash table.
    */
   Hashtable<Coord, Cell> getHashtable();
 
   /**
-   * Finds the cell farthest down and returns its row number.
-   * This lets the user know how many rows are in the sheet.
+   * Finds the cell farthest down and returns its row number. This lets the user know how many rows
+   * are in the sheet.
+   *
    * @return Number of rows in the spreadsheet
    */
   int getNumRows();
 
   /**
-   * Finds the cell farthest to the right and returns its column number.
-   * This lets the user know how many columns are in the sheet.
+   * Finds the cell farthest to the right and returns its column number. This lets the user know how
+   * many columns are in the sheet.
+   *
    * @return Number of rows in the spreadsheet
    */
   int getNumCols();
 
   /**
    * Reevaluates when a change is made to a spreadsheet.
+   *
    * @param c the coord to re evaluate
    * @return Coord of an errant if there is one
    */
   Coord reEval(Coord c);
 
+  /**
+   * Sets the cell as an error
+   * @param c coord of cell
+   */
   void setErrorAt(Coord c);
+
+  /**
+   * Adds columns possible to create cells.
+   */
+  void addCols();
+
+  /**
+   * Adds rows possible to create cells.
+   */
+  void addRows();
 }
