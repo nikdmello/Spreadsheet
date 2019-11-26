@@ -2,6 +2,7 @@ package edu.cs3500.spreadsheets.controller;
 import java.io.FileReader;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetBuilder;
+import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.Formula;
 import edu.cs3500.spreadsheets.model.SelfRefVisitor;
@@ -22,7 +23,7 @@ public class SpreadsheetGUIController implements SpreadsheetController{
   private Worksheet sheet;
   private ModelToTable mtt;
   private GUIView view;
-
+  private boolean hasStarted;
   /**
    * Constructs the Gui view controller
    * @param sheet the worksheet to be edited
@@ -35,6 +36,7 @@ public class SpreadsheetGUIController implements SpreadsheetController{
   @Override
   public void launchEditor() {
     this.view = new GUIView(mtt, new ControllerViewRequester(this));
+    hasStarted = true;
   }
 
   @Override
@@ -107,14 +109,19 @@ public class SpreadsheetGUIController implements SpreadsheetController{
 
   @Override
   public void addRow() {
-    sheet.addRow();
-    view.render();
+    if (hasStarted) {
+      sheet.addRow();
+      view.render();
+    }
   }
 
   @Override
   public void addCol() {
-    sheet.addCol();
-    view.render();
+    if (hasStarted) {
+//      sheet.createCell(sheet.getNumCols() + 1, sheet.getNumRows(), new StringValue(""));
+      sheet.addCol();
+      view.render();
+    }
   }
 
 }

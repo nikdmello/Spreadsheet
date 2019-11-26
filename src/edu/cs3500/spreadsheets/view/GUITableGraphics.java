@@ -12,7 +12,11 @@ import javax.swing.table.DefaultTableModel;
 
 import edu.cs3500.spreadsheets.controller.ControllerViewRequester;
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
+import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Coord;
+import edu.cs3500.spreadsheets.model.DoubleValue;
+import edu.cs3500.spreadsheets.model.Formula;
+import edu.cs3500.spreadsheets.model.StringValue;
 
 /**
  * Represents the graphical view of the Spreadsheet. This view uses the Java Swing library,
@@ -25,6 +29,8 @@ public class GUITableGraphics extends JPanel {
   private Coord selectedCell;
   private JTextField tfield;
   private ControllerViewRequester cvr;
+  private RowListModel listModel;
+
 
   /**
    * Constructs a Spreadsheet graphical view with the wrapper class.
@@ -36,8 +42,8 @@ public class GUITableGraphics extends JPanel {
     this.modelToTable = mtt;
     this.tfield = tf;
     this.cvr = cvr;
+    this.listModel = new RowListModel(this.modelToTable);
 
-    RowListModel listModel = new RowListModel(this.modelToTable);
 
     defaultTableModel = new DefaultTableModel(listModel.getSize(),
             mtt.colNames().length) {
@@ -68,18 +74,20 @@ public class GUITableGraphics extends JPanel {
     scrollPane.setPreferredSize(new Dimension(640, 480));
 
     // track scroll movement but no adjustment value changed
-
     AdjustmentListener hListener = new AdjustmentListener() {
       public void adjustmentValueChanged(AdjustmentEvent e) {
         cvr.addCol();
+        defaultTableModel.addRow(new Object[]{"Column1", "Column2"});
+        System.out.println("h");
       }
     };
-
     JScrollBar hBar = scrollPane.getHorizontalScrollBar();
     hBar.addAdjustmentListener(hListener);
+
     AdjustmentListener vListener = new AdjustmentListener() {
       public void adjustmentValueChanged(AdjustmentEvent e) {
         cvr.addRow();
+        System.out.println("v");
       }
     };
     JScrollBar vBar = scrollPane.getVerticalScrollBar();
@@ -160,6 +168,17 @@ public class GUITableGraphics extends JPanel {
    * Updates the table to match the model.
    */
   void updateTable(){
+    this.listModel = new RowListModel(this.modelToTable);
+
+    defaultTableModel = new DefaultTableModel(listModel.getSize(),
+            modelToTable.colNames().length) {
+      // Ensures that the cells cannot be edited by clients directly from the view.
+      @Override
+      public boolean isCellEditable(int row, int column) {
+        return false;
+      }
+    };
+
     String[][] translated = this.modelToTable.translate();
     for (int i = 0; i < modelToTable.numRows(); i++) {
       for (int j = 0; j < modelToTable.numCols(); j++) {

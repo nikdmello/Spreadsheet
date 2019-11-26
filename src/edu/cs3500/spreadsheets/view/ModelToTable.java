@@ -108,7 +108,7 @@ public class ModelToTable {
    * Gets the formula to display in the formula top bar.
    * @return an array map of formulas to be displayed
    */
-  public String[][] formTranslate(){
+  String[][] formTranslate(){
     String[][] translation = new String[sheet.getNumCols()][sheet.getNumRows()];
     for (int i = 0; i < sheet.getNumCols(); i++) {
       for (int j = 0; j < sheet.getNumRows(); j++) {
