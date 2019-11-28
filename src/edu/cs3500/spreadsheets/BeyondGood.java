@@ -10,7 +10,6 @@ import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
 import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
-import edu.cs3500.spreadsheets.view.GUIView;
 import edu.cs3500.spreadsheets.view.ModelToTable;
 import edu.cs3500.spreadsheets.view.SpreadsheetGraphicsView;
 import edu.cs3500.spreadsheets.view.SpreadsheetTextualView;

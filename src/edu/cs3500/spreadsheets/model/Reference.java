@@ -86,17 +86,16 @@ public class Reference implements Formula {
 
   @Override
   public boolean hasRef(Coord c) {
-    if(c1.equals(c2)){
-      if(!(sheet.getCellAt(c1) == null)) {
+    if (c1.equals(c2)) {
+      if (sheet.getCellAt(c1) != null) {
         return c1.equals(c) || sheet.getCellAt(c1).unevaluatedFormula().hasRef(c);
-      }
-      else{
+      } else {
         return false;
       }
     }
     for (Coord co : this.getCellCoords()) {
-      if (!(sheet.getCellAt(co) == null)) {
-        if(co.equals(c) || sheet.getCellAt(co).unevaluatedFormula().hasRef(c)){
+      if (sheet.getCellAt(co) != null) {
+        if (co.equals(c) || sheet.getCellAt(co).unevaluatedFormula().hasRef(c)) {
           return true;
         }
       }
@@ -106,7 +105,7 @@ public class Reference implements Formula {
 
   ArrayList<Formula> getCellFormulas() {
     if (this.c1.equals(c2)) {
-      if(sheet.getCellAt(c1) == null){
+      if (sheet.getCellAt(c1) == null) {
         return new ArrayList<Formula>();
       }
       return new ArrayList<Formula>(Arrays.asList(sheet.getCellAt(c1).getFormula()));

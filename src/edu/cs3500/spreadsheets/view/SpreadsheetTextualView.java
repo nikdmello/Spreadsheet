@@ -41,10 +41,10 @@ public class SpreadsheetTextualView implements SpreadsheetView {
     for (Map.Entry<Coord, Cell> e : this.sheet.getHashtable().entrySet()) {
       if (e.getValue().getFormula().type().equals("double")) {
         ret += Coord.colIndexToName(e.getKey().col) + e.getKey().row + " "
-               + String.format("%f", e.getValue().getFormula().evaluate().numberForm()) + "\n";
+                + String.format("%f", e.getValue().getFormula().evaluate().numberForm()) + "\n";
       } else {
         ret += "" + Coord.colIndexToName(e.getKey().col) + e.getKey().row
-               + " " + e.getValue() + "\n";
+                + " " + e.getValue() + "\n";
       }
     }
     return ret;

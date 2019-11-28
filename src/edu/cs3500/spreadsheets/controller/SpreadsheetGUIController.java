@@ -1,4 +1,5 @@
 package edu.cs3500.spreadsheets.controller;
+
 import java.io.FileReader;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetBuilder;
@@ -18,16 +19,17 @@ import edu.cs3500.spreadsheets.view.SpreadsheetTextualView;
 /**
  * A controller to run the GUI Spreadsheet view.
  */
-public class SpreadsheetGUIController implements SpreadsheetController{
+public class SpreadsheetGUIController implements SpreadsheetController {
   private Worksheet sheet;
   private ModelToTable mtt;
   private GUIView view;
 
   /**
-   * Constructs the Gui view controller
+   * Constructs the Gui view controller.
+   *
    * @param sheet the worksheet to be edited
    */
-  public SpreadsheetGUIController(Worksheet sheet){
+  public SpreadsheetGUIController(Worksheet sheet) {
     this.sheet = sheet;
     this.mtt = new ModelToTable(sheet);
   }
@@ -38,18 +40,18 @@ public class SpreadsheetGUIController implements SpreadsheetController{
   }
 
   @Override
-  public void cellRequest(int row, int col, String formula){
+  public void cellRequest(int row, int col, String formula) {
 
     //creates the requested formula
     Sexp toCreate;
-    try{
+    try {
       toCreate = Parser.parse(formula);
-    } catch (IllegalArgumentException iae){
+    } catch (IllegalArgumentException iae) {
       toCreate = null;
     }
 
     //if it is bad then it creates a cell signifying an error
-    if(toCreate == null){
+    if (toCreate == null) {
       sheet.createCell(col, row, new StringValue("Error"));
       view.render();
       return;
@@ -60,7 +62,7 @@ public class SpreadsheetGUIController implements SpreadsheetController{
     Coord c = new Coord(col, row);
     Formula f = toCreate.accept(new SexpToFormula(sheet, c));
 
-    if(sheet.getHashtable().containsKey(c)){
+    if (sheet.getHashtable().containsKey(c)) {
       sheet.changeContents(c, f);
       sheet.reEval(c);
       view.render();
@@ -69,11 +71,10 @@ public class SpreadsheetGUIController implements SpreadsheetController{
 
     //new cell: create cell and evaluate all, this will not be taxing since cells are already evaled
     //This is necessary to see if there is an error in the cell
-    if(f.accept(new SelfRefVisitor(c))){
+    if (f.accept(new SelfRefVisitor(c))) {
       sheet.createCell(col, row, f);
       sheet.setErrorAt(c);
-    }
-    else{
+    } else {
       sheet.createCell(col, row, f);
     }
     sheet.evalAll();
@@ -83,7 +84,7 @@ public class SpreadsheetGUIController implements SpreadsheetController{
   @Override
   public void delCell(int row, int col) {
     Coord cell = new Coord(col, row);
-    if(sheet.getHashtable().containsKey(cell)){
+    if (sheet.getHashtable().containsKey(cell)) {
       sheet.deleteCellAt(cell);
       sheet.evalAll();
       view.render();

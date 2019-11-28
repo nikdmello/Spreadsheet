@@ -1,11 +1,16 @@
 package edu.cs3500.spreadsheets.view;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JList;
 import javax.swing.table.DefaultTableModel;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
@@ -148,9 +153,9 @@ public class GUITableGraphics extends JPanel {
   }
 
   /**
-   * Adds rows to be displayed
+   * Adds rows to be displayed.
    */
-  void addRow(){
+  void addRow() {
     defaultTableModel.setNumRows(defaultTableModel.getRowCount() + 50);
     listModel = new RowListModel(this.modelToTable);
     JList<String> rowHeader = new JList<String>(listModel);
@@ -161,9 +166,9 @@ public class GUITableGraphics extends JPanel {
   }
 
   /**
-   * Adds columns to be displayed
+   * Adds columns to be displayed.
    */
-  void addCol(){
+  void addCol() {
     defaultTableModel.setColumnCount(defaultTableModel.getColumnCount() + 50);
   }
 }

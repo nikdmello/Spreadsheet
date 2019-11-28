@@ -26,7 +26,8 @@ public class BasicWorksheetModel implements Worksheet {
   /**
    * The number of rows and cols to be displayed.
    */
-  private int cols, rows;
+  private int cols;
+  private int rows;
 
   /**
    * Constructor that initializes the hashtable, which will serve as the grid of cells. Within this
@@ -61,7 +62,7 @@ public class BasicWorksheetModel implements Worksheet {
         furthest = e.getKey().row;
       }
     }
-    if(furthest < rows){
+    if (furthest < rows) {
       return rows;
     }
     return furthest;
@@ -75,7 +76,7 @@ public class BasicWorksheetModel implements Worksheet {
         furthest = e.getKey().col;
       }
     }
-    if(furthest < cols){
+    if (furthest < cols) {
       return cols;
     }
     return furthest;
@@ -83,18 +84,18 @@ public class BasicWorksheetModel implements Worksheet {
 
   @Override
   public Coord reEval(Coord c) {
-      for (Coord co : orderedCoords){
-        try {
-          if (hashtable.get(co).unevaluatedFormula().hasRef(c)) {
-            hashtable.get(co).revertFormula();
-            hashtable.get(co).evaluateCell();
-          }
-        } catch(IllegalArgumentException iae){
-          hashtable.get(co).setError();
-          return co;
+    for (Coord co : orderedCoords) {
+      try {
+        if (hashtable.get(co).unevaluatedFormula().hasRef(c)) {
+          hashtable.get(co).revertFormula();
+          hashtable.get(co).evaluateCell();
         }
+      } catch (IllegalArgumentException iae) {
+        hashtable.get(co).setError();
+        return co;
       }
-      return null;
+    }
+    return null;
   }
 
   @Override

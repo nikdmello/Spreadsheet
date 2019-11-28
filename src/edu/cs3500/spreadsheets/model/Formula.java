@@ -29,6 +29,7 @@ public interface Formula {
 
   /**
    * Checks if the cell has a reference to the specified cell.
+   *
    * @param c specified cell
    * @return true if it has the reference
    */

@@ -1,5 +1,8 @@
 package edu.cs3500.spreadsheets.model;
 
+/**
+ * Provides copy constructors for all formulas.
+ */
 public class FormulaCopyConstructor implements FormulaVisitor<Formula> {
   @Override
   public Formula visitBoolean(boolean b) {

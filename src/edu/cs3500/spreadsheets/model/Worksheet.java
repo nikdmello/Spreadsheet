@@ -76,7 +76,8 @@ public interface Worksheet {
   Coord reEval(Coord c);
 
   /**
-   * Sets the cell as an error
+   * Sets the cell as an error.
+   *
    * @param c coord of cell
    */
   void setErrorAt(Coord c);

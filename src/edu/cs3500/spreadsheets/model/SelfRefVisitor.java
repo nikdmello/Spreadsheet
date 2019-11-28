@@ -20,7 +20,8 @@ public class SelfRefVisitor implements FormulaVisitor<Boolean> {
 
   /**
    * Constructs a SelfRefVisitor with the coordinate to ban and a list of already banned Coords.
-   * @param c Coord to ban
+   *
+   * @param c     Coord to ban
    * @param soFar formulas banned so far
    */
   private SelfRefVisitor(Coord c, ArrayList<Coord> soFar) {
@@ -49,7 +50,7 @@ public class SelfRefVisitor implements FormulaVisitor<Boolean> {
       if (banned.contains(c)) {
         return true;
       } else if (r.sheet.getCellAt(c) != null
-                 && r.sheet.getCellAt(c).getFormula().accept(new SelfRefVisitor(c, this.banned))) {
+              && r.sheet.getCellAt(c).getFormula().accept(new SelfRefVisitor(c, this.banned))) {
         return true;
       }
     }

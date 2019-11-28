@@ -1,12 +1,17 @@
 package edu.cs3500.spreadsheets.view;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
 
 import edu.cs3500.spreadsheets.controller.ControllerViewRequester;
 
@@ -24,6 +29,7 @@ public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
 
   /**
    * Creates and initializes the view.
+   *
    * @param mtt The model to view translator
    * @param cvr the view to controller translator
    */
@@ -110,36 +116,36 @@ public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     String action = e.getActionCommand();
-    if(action.equals("OkPressed")){
-      if(formulaBar.getText().equals("")){
+    if (action.equals("OkPressed")) {
+      if (formulaBar.getText().equals("")) {
         return;
       }
-      if(table.selectedCell() == null){
+      if (table.selectedCell() == null) {
         return;
       }
       this.cvr.requestCell(table.selectedCell().row,
               table.selectedCell().col, formulaBar.getText());
     }
-    if(action.equals("Del")){
+    if (action.equals("Del")) {
       this.cvr.delCell(table.selectedCell().row, table.selectedCell().col);
       this.formulaBar.setText("");
     }
-    if(action.equals("load")){
-      if(!fileBar.getText().equals("")){
+    if (action.equals("load")) {
+      if (!fileBar.getText().equals("")) {
         this.cvr.loadFile(fileBar.getText());
       }
     }
-    if(action.equals("save")){
-      if(!fileBar.getText().equals("")){
+    if (action.equals("save")) {
+      if (!fileBar.getText().equals("")) {
         this.cvr.saveFile(fileBar.getText());
       }
     }
-    if(action.equals("col")){
+    if (action.equals("col")) {
       this.cvr.requestCols();
       this.table.addCol();
       this.render();
     }
-    if(action.equals("row")){
+    if (action.equals("row")) {
       this.cvr.requestRows();
       this.table.addRow();
       this.render();

@@ -1,4 +1,5 @@
 package edu.cs3500.spreadsheets.model;
+
 import java.util.ArrayList;
 
 /**
@@ -75,8 +76,8 @@ public class Function implements Formula {
 
   @Override
   public boolean hasRef(Coord c) {
-    for(Formula f : originalArgs){
-      if(f.hasRef(c)){
+    for (Formula f : originalArgs) {
+      if (f.hasRef(c)) {
         return true;
       }
     }
@@ -129,7 +130,7 @@ public class Function implements Formula {
   private Value lessThan() throws IllegalArgumentException {
     boolean b;
     if (args.size() != 2 || args.get(0) == null && !args.get(0).evaluate().isNumeric()
-        || args.get(1) == null && !args.get(1).evaluate().isNumeric()) {
+            || args.get(1) == null && !args.get(1).evaluate().isNumeric()) {
       throw new IllegalArgumentException("Invalid arguments for less than");
     }
 
@@ -169,13 +170,12 @@ public class Function implements Formula {
   }
 
   @Override
-  public String toString(){
+  public String toString() {
     String funcargs = "";
-    for(int i = 0; i < this.originalArgs.size(); i++){
-      if(originalArgs.size() - 1 - i == 0){
+    for (int i = 0; i < this.originalArgs.size(); i++) {
+      if (originalArgs.size() - 1 - i == 0) {
         funcargs += originalArgs.get(i).toString();
-      }
-      else{
+      } else {
         funcargs += originalArgs.get(i).toString() + " ";
       }
     }

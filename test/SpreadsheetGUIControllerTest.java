@@ -1,7 +1,7 @@
-package edu.cs3500.spreadsheets.controller;
-
 import org.junit.Test;
 
+import edu.cs3500.spreadsheets.controller.SpreadsheetController;
+import edu.cs3500.spreadsheets.controller.SpreadsheetGUIController;
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
 import edu.cs3500.spreadsheets.model.BoolValue;
 import edu.cs3500.spreadsheets.model.Coord;
@@ -11,6 +11,9 @@ import edu.cs3500.spreadsheets.model.Worksheet;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests the GUI controller.
+ */
 public class SpreadsheetGUIControllerTest {
   Worksheet sheet = new BasicWorksheetModel();
   SpreadsheetController controller = new SpreadsheetGUIController(sheet);
@@ -37,5 +40,19 @@ public class SpreadsheetGUIControllerTest {
     controller.delCell(1, 4);
     controller.delCell(1, 6);
     assertEquals(sheet.getHashtable().size(), 0);
+  }
+
+  //load and save files is already tested functionality from the previous assignments.
+
+  @Test
+  public void addCols() {
+    sheet.addRows();
+    assertEquals(100, sheet.getNumRows());
+  }
+
+  @Test
+  public void addRows() {
+    sheet.addCols();
+    assertEquals(100, sheet.getNumCols());
   }
 }

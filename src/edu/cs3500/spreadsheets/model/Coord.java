@@ -75,7 +75,7 @@ public class Coord {
     }
     Coord coord = (Coord) o;
     return row == coord.row
-           && col == coord.col;
+            && col == coord.col;
   }
 
   @Override

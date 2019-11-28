@@ -2,6 +2,9 @@ package edu.cs3500.spreadsheets.controller;
 
 import java.io.FileReader;
 
+/**
+ * Outlines a controller for a spreadsheet program.
+ */
 public interface SpreadsheetController {
 
   /**
@@ -11,14 +14,16 @@ public interface SpreadsheetController {
 
   /**
    * Creates a new cell in the model.
-   * @param row cell row
-   * @param col cell column
+   *
+   * @param row     cell row
+   * @param col     cell column
    * @param formula cell formula
    */
   void cellRequest(int row, int col, String formula);
 
   /**
    * Deletes a cell in the model.
+   *
    * @param row cell row
    * @param col cell column
    */
@@ -26,12 +31,14 @@ public interface SpreadsheetController {
 
   /**
    * Loads a file into the view.
+   *
    * @param file the file to load
    */
   void loadFile(FileReader file);
 
   /**
-   * Saves the current state of the editor in a file
+   * Saves the current state of the editor in a file.
+   *
    * @param text name of file
    */
   void saveFile(String text);

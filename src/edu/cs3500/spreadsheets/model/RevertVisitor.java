@@ -1,5 +1,8 @@
 package edu.cs3500.spreadsheets.model;
 
+/**
+ * Reverts formulas to original arguments.
+ */
 public class RevertVisitor implements FormulaVisitor<Formula> {
   @Override
   public Formula visitBoolean(boolean b) {

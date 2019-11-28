@@ -3,8 +3,7 @@ package edu.cs3500.spreadsheets.model;
 import java.util.Objects;
 
 /**
- * Represents a cell in a spreadsheet containing a formula.
- * The contents of the cell could change.
+ * Represents a cell in a spreadsheet containing a formula. The contents of the cell could change.
  */
 public final class Cell {
   private Formula f;
@@ -27,18 +26,20 @@ public final class Cell {
 
   /**
    * Copy constructor for a cell.
+   *
    * @param c the cell to copy
    */
   public Cell(Cell c) {
     this.f = c.f;
     this.originalFormula = c.originalFormula;
-    this.error =c.error;
+    this.error = c.error;
   }
 
   /**
    * Allows for quick construction while creating cells.
+   *
    * @param evaluate evaluated cell
-   * @param f original formula
+   * @param f        original formula
    */
   public Cell(Value evaluate, Formula f) {
     this.f = evaluate;
@@ -67,32 +68,34 @@ public final class Cell {
   }
 
   /**
-   * Gets the original non evaluated formula of a cell
+   * Gets the original non evaluated formula of a cell.
+   *
    * @return the original formula
    */
-  public Formula unevaluatedFormula(){
+  public Formula unevaluatedFormula() {
     return this.originalFormula;
   }
 
   /**
    * The formula becomes the unevaluated version of the formula.
    */
-  public void revertFormula(){
+  public void revertFormula() {
     this.f = this.originalFormula.accept(new RevertVisitor());
   }
 
   /**
    * Checks to see if the cell is errant.
+   *
    * @return true if there is an error
    */
-  public boolean errorCell(){
+  public boolean errorCell() {
     return this.error;
   }
 
   /**
    * Sets the cells error value to true.
    */
-  void setError(){
+  void setError() {
     this.error = true;
   }
 

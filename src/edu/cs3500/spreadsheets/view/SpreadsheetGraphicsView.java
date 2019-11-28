@@ -22,6 +22,7 @@ public class SpreadsheetGraphicsView extends JFrame implements SpreadsheetView {
 
   /**
    * Constructs a Spreadsheet graphical view with the wrapper class.
+   *
    * @param mtt wrapper class.
    */
   public SpreadsheetGraphicsView(ModelToTable mtt) {
