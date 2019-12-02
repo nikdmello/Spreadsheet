@@ -1,17 +1,12 @@
 package edu.cs3500.spreadsheets.view;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import javax.swing.*;
 
 import edu.cs3500.spreadsheets.controller.ControllerViewRequester;
 
@@ -19,7 +14,7 @@ import edu.cs3500.spreadsheets.controller.ControllerViewRequester;
  * Represents an editable view of a spreadsheet.
  */
 public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
-  private ModelToTable mtt;
+  private ModelToView mtt;
   private GUITableGraphics table;
   private ControllerViewRequester cvr;
   private JPanel topBar;
@@ -33,7 +28,7 @@ public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
    * @param mtt The model to view translator
    * @param cvr the view to controller translator
    */
-  public GUIView(ModelToTable mtt, ControllerViewRequester cvr) {
+  public GUIView(ModelToView mtt, ControllerViewRequester cvr) {
     super();
     this.mtt = mtt;
     this.cvr = cvr;

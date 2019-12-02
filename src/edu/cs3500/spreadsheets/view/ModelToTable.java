@@ -8,7 +8,7 @@ import edu.cs3500.spreadsheets.model.Worksheet;
  * This wrapper class takes the contents of the Spreadsheet from the Hashtable and returns the
  * values as String[] to be used in the JTable.
  */
-public class ModelToTable {
+public class ModelToTable implements ModelToView {
   private final Worksheet sheet;
 
   /**
@@ -64,7 +64,7 @@ public class ModelToTable {
    *
    * @return row names.
    */
-  String[] rowNames() {
+  public String[] rowNames() {
     if (sheet.getNumRows() < 10) {
       String[] defaultRows = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
       return defaultRows;

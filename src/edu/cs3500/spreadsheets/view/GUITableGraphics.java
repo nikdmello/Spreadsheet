@@ -1,16 +1,11 @@
 package edu.cs3500.spreadsheets.view;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.JList;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
@@ -21,7 +16,7 @@ import edu.cs3500.spreadsheets.model.Coord;
  * specifically the JTable to display the contents of the Spreadsheet.
  */
 public class GUITableGraphics extends JPanel {
-  private ModelToTable modelToTable;
+  private ModelToView modelToTable;
   private DefaultTableModel defaultTableModel;
   private RowListModel listModel;
   private JTable table;
@@ -34,7 +29,7 @@ public class GUITableGraphics extends JPanel {
    *
    * @param mtt wrapper class.
    */
-  GUITableGraphics(ModelToTable mtt, JTextField tf) {
+  GUITableGraphics(ModelToView mtt, JTextField tf) {
     super();
     this.modelToTable = mtt;
     this.tfield = tf;

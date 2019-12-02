@@ -1,6 +1,6 @@
 package edu.cs3500.spreadsheets.view;
 
-import javax.swing.AbstractListModel;
+import javax.swing.*;
 
 /**
  * Represents the row list data model that provides a list with the rows as an array of Strings.
@@ -14,7 +14,7 @@ public class RowListModel extends AbstractListModel {
    *
    * @param mtt wrapper class.
    */
-  RowListModel(ModelToTable mtt) {
+  RowListModel(ModelToView mtt) {
     rows = mtt.rowNames();
   }
 
