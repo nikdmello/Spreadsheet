@@ -39,14 +39,12 @@ public interface Worksheet {
 
   /**
    * Updates the formula that is currently in the Cell.
-   *
    * @param c the coord of the cell to be updated.
    */
   void changeContents(Coord c, Formula f);
 
   /**
    * Gets a copy of the hashtable.
-   *
    * @return a copy of the hash table.
    */
   Hashtable<Coord, Cell> getHashtable();
@@ -69,7 +67,6 @@ public interface Worksheet {
 
   /**
    * Reevaluates when a change is made to a spreadsheet.
-   *
    * @param c the coord to re evaluate
    * @return Coord of an errant if there is one
    */

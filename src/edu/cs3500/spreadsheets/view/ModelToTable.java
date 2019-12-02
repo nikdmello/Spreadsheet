@@ -106,7 +106,6 @@ public class ModelToTable implements ModelToView {
 
   /**
    * Gets the formula to display in the formula top bar.
-   *
    * @return an array map of formulas to be displayed
    */
   public String[][] formTranslate() {

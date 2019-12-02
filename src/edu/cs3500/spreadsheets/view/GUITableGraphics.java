@@ -124,8 +124,7 @@ public class GUITableGraphics extends JPanel {
   }
 
   /**
-   * Gets the selected cell from the table.
-   *
+   *Gets the selected cell from the table.
    * @return the coord of the selected cell
    */
   Coord selectedCell() {

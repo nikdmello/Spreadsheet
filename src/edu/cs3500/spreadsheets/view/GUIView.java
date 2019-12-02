@@ -54,7 +54,7 @@ public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
     topBar.setVisible(true);
 
     //initialize table
-    table = new GUITableGraphics(mtt, formulaBar);
+    table = new GUITableGraphics(mtt, formulaBar, cvr);
     table.setPreferredSize(new Dimension(640, 480));
 
     //initialize bottom bar

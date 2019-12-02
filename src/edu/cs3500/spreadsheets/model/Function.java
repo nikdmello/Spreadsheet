@@ -48,8 +48,6 @@ public class Function implements Formula {
 
   @Override
   public Value evaluate() {
-    // Hashtable accumulator
-    // Store the evaluated value somehow in the hashtable
     switch (this.type) {
       case SUM:
         return sum();

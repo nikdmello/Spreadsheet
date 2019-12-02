@@ -11,7 +11,6 @@ public class ControllerViewRequester {
 
   /**
    * Constructs a controller wrapper to handle communications between view and controller.
-   *
    * @param control the controller
    */
   ControllerViewRequester(SpreadsheetController control) {
@@ -33,8 +32,7 @@ public class ControllerViewRequester {
   }
 
   /**
-   * Requests that a cell be deleted in the controller.
-   *
+   * Requests that a cell be deleted in the controller
    * @param row row of cell to be deleted
    * @param col col of cell to be deleted
    */
@@ -44,20 +42,18 @@ public class ControllerViewRequester {
 
   /**
    * Requests a file be loaded.
-   *
    * @param text the name of the file
    */
   public void loadFile(String text) {
     FileReader file = getFile(text);
-    if (file == null) {
+    if(file == null){
       return;
     }
     control.loadFile(file);
   }
 
   /**
-   * Reads in a flie to the program.
-   *
+   * Reads in a flie to the program
    * @param fileName name of file
    * @return the file
    */
@@ -70,8 +66,7 @@ public class ControllerViewRequester {
   }
 
   /**
-   * Tells the controller to save the current editor as a file.
-   *
+   * Tells the controller to save the current editor as a file
    * @param text the file name
    */
   public void saveFile(String text) {

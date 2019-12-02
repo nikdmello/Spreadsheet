@@ -23,7 +23,6 @@ public interface SpreadsheetController {
 
   /**
    * Deletes a cell in the model.
-   *
    * @param row cell row
    * @param col cell column
    */
@@ -31,7 +30,6 @@ public interface SpreadsheetController {
 
   /**
    * Loads a file into the view.
-   *
    * @param file the file to load
    */
   void loadFile(FileReader file);
