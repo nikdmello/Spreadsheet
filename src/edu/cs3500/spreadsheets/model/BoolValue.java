@@ -64,4 +64,8 @@ public class BoolValue implements Value {
   public int hashCode() {
     return Objects.hash(b);
   }
+
+  public boolean booleanForm() {
+    return b;
+  }
 }
