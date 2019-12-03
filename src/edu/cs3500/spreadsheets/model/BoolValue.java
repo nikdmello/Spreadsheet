@@ -2,6 +2,8 @@ package edu.cs3500.spreadsheets.model;
 
 import java.util.Objects;
 
+import edu.cs3500.spreadsheets.provider.view.ValueVisitor;
+
 /**
  * Container for a boolean, which is a Value.
  */
@@ -40,6 +42,11 @@ public class BoolValue implements Value {
   @Override
   public double numberForm() {
     return 0;
+  }
+
+  @Override
+  public <R> R acceptV(ValueVisitor<R> v) {
+    return v.visitBoolean(this);
   }
 
   @Override

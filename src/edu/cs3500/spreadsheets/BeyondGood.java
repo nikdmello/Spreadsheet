@@ -2,6 +2,7 @@ package edu.cs3500.spreadsheets;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import edu.cs3500.spreadsheets.controller.SpreadsheetGUIController;
@@ -10,6 +11,7 @@ import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
 import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
+import edu.cs3500.spreadsheets.provider.view.ProviderControlAdapter;
 import edu.cs3500.spreadsheets.view.ModelToTable;
 import edu.cs3500.spreadsheets.view.SpreadsheetGraphicsView;
 import edu.cs3500.spreadsheets.view.SpreadsheetTextualView;
@@ -80,6 +82,13 @@ public class BeyondGood {
     } else if (args.length == 1 && args[0].equals("-edit")) {
       SpreadsheetGUIController controller = new SpreadsheetGUIController(new BasicWorksheetModel());
       controller.launchEditor();
+    } else if (args.length == 1 && args[0].equals("-provider")) {
+      ProviderControlAdapter cap = new ProviderControlAdapter();
+      try {
+        cap.start();
+      } catch (IOException i) {
+        throw new IllegalArgumentException("Something went wrong!");
+      }
     } else {
       throw new IllegalArgumentException("Invalid command.");
     }

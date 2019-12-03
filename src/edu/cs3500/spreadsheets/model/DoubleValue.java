@@ -2,6 +2,8 @@ package edu.cs3500.spreadsheets.model;
 
 import java.util.Objects;
 
+import edu.cs3500.spreadsheets.provider.view.ValueVisitor;
+
 /**
  * Container for an double, which is a Value.
  */
@@ -45,6 +47,11 @@ public class DoubleValue implements Value {
   @Override
   public double numberForm() {
     return value;
+  }
+
+  @Override
+  public <R> R acceptV(ValueVisitor<R> v) {
+    return v.visitNumber(this);
   }
 
   @Override

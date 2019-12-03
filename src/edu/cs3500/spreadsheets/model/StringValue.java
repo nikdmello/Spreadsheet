@@ -2,6 +2,8 @@ package edu.cs3500.spreadsheets.model;
 
 import java.util.Objects;
 
+import edu.cs3500.spreadsheets.provider.view.ValueVisitor;
+
 /**
  * Represents a container for a String, which is a Value.
  */
@@ -40,6 +42,11 @@ public class StringValue implements Value {
   @Override
   public double numberForm() {
     return 0;
+  }
+
+  @Override
+  public <R> R acceptV(ValueVisitor<R> v) {
+    return v.visitString(this);
   }
 
   @Override
