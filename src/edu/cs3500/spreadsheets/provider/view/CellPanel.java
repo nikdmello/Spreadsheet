@@ -10,8 +10,6 @@ import java.util.function.Consumer;
 import javax.swing.*;
 
 import edu.cs3500.spreadsheets.model.Coord;
-import edu.cs3500.spreadsheets.model.ROWorksheet;
-import edu.cs3500.spreadsheets.wexp.SingleStringView;
 
 /**
  * Represents a JPanel for individual cells that update themselves when scrolling.

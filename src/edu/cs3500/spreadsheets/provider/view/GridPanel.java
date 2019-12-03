@@ -8,8 +8,6 @@ import java.util.function.Consumer;
 
 import javax.swing.*;
 
-import edu.cs3500.spreadsheets.model.ROWorksheet;
-
 class GridPanel extends JPanel {
 
   private static final int COLS = 12;

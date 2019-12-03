@@ -104,6 +104,16 @@ public class BasicWorksheetModel implements Worksheet {
   }
 
   @Override
+  public void addCols() {
+    this.cols += 50;
+  }
+
+  @Override
+  public void addRows() {
+    this.rows += 50;
+  }
+
+  @Override
   public void createCell(int col, int row, Formula f) {
     Coord c = new Coord(col, row);
     Cell cell;
