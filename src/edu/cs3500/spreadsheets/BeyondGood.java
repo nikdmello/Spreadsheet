@@ -79,7 +79,7 @@ public class BeyondGood {
     } else if (args.length == 1 && args[0].equals("-gui")) {
       SpreadsheetGraphicsView guiView = new SpreadsheetGraphicsView();
       guiView.render();
-    } else if (args.length == 1 && args[0].equals("-edit")) {
+    } else if (modeEdit(args)) {
       SpreadsheetGUIController controller = new SpreadsheetGUIController(new BasicWorksheetModel());
       controller.launchEditor();
     } else if (args.length == 1 && args[0].equals("-provider")) {
@@ -118,6 +118,15 @@ public class BeyondGood {
     if (errorCell != null) {
       System.out.print("Error at cell " + Coord.colIndexToName(errorCell.col) + errorCell.row);
       return true;
+    }
+    return false;
+  }
+
+  private static boolean modeEdit(String[] arr) {
+    for (String s : arr) {
+      if (s.equals("-edit")) {
+        return true;
+      }
     }
     return false;
   }

@@ -2,14 +2,26 @@ package edu.cs3500.spreadsheets.provider.view;
 
 import java.io.IOException;
 
+import edu.cs3500.spreadsheets.controller.ControllerViewRequester;
+import edu.cs3500.spreadsheets.controller.SpreadsheetController;
+import edu.cs3500.spreadsheets.controller.SpreadsheetGUIController;
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
+import edu.cs3500.spreadsheets.model.Worksheet;
+import edu.cs3500.spreadsheets.view.ModelToTable;
 
 
 public class ProviderControlAdapter implements WorksheetController {
   WorksheetView view;
 
   public ProviderControlAdapter() {
-    this.view = new VisualWorksheetView(new ProviderModelAdapter(new BasicWorksheetModel()));
+    Worksheet sheet = new BasicWorksheetModel();
+    this.view = new VisualWorksheetView(new ProviderModelAdapter(sheet));
+    SpreadsheetController controller = new SpreadsheetGUIController(sheet);
+    ControllerViewRequester cvr = new ControllerViewRequester(controller);
+    EditListenerImpl eli = new EditListenerImpl(cvr);
+    this.view.setEditListener(eli);
+    ProviderViewAdapter pva = new ProviderViewAdapter(new ModelToTable(sheet), cvr, view);
+    controller.setView(pva);
   }
 
   @Override

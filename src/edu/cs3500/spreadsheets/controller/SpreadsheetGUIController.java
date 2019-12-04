@@ -1,4 +1,5 @@
 package edu.cs3500.spreadsheets.controller;
+
 import java.io.FileReader;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetBuilder;
@@ -113,5 +114,15 @@ public class SpreadsheetGUIController implements SpreadsheetController {
   @Override
   public void addRows() {
     this.sheet.addRows();
+  }
+
+  /**
+   * Sets the controller to work with a new view
+   *
+   * @param view the view to work with
+   */
+  @Override
+  public void setView(GUIView view) {
+    this.view = view;
   }
 }

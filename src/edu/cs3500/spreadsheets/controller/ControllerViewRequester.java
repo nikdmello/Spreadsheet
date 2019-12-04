@@ -11,9 +11,10 @@ public class ControllerViewRequester {
 
   /**
    * Constructs a controller wrapper to handle communications between view and controller.
+   *
    * @param control the controller
    */
-  ControllerViewRequester(SpreadsheetController control) {
+  public ControllerViewRequester(SpreadsheetController control) {
     this.control = control;
   }
 

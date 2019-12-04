@@ -2,6 +2,8 @@ package edu.cs3500.spreadsheets.controller;
 
 import java.io.FileReader;
 
+import edu.cs3500.spreadsheets.view.GUIView;
+
 /**
  * Outlines a controller for a spreadsheet program.
  */
@@ -50,4 +52,11 @@ public interface SpreadsheetController {
    * Adds columns possible to create cells in.
    */
   void addRows();
+
+  /**
+   * Sets the controller to work with a new view
+   *
+   * @param view the view to work with
+   */
+  void setView(GUIView view);
 }

@@ -34,7 +34,7 @@ public class ProviderModelAdapter implements ROWorksheet {
   @Override
   public WValue evaluate(int col, int row) {
     Coord c = new Coord(col, row);
-    if (sheet.getHashtable().contains(c)) {
+    if (sheet.getHashtable().containsKey(c)) {
       return sheet.getCellAt(c).getFormula().evaluate().acceptV(new ValueToWValue());
     }
     return WBlank.INSTANCE;
