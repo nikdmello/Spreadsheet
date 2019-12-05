@@ -7,6 +7,9 @@ import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.Worksheet;
 
+/**
+ * An adapter for the model.
+ */
 public class ProviderModelAdapter implements ROWorksheet {
   private Worksheet sheet;
 
