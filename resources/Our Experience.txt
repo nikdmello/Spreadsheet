@@ -1,0 +1,8 @@
+What do you wish you had done differently in your design/implementation? 
+We felt that using the JTable had several benefits, but we firstly had to create a wrapper class to use the data of our model's hashtable in our spreadsheet view. We also had some difficulty with the implementation of the infinite scrolling, but we were able to implement this in a different manner: we created buttons to increase the amount of rows and columns of the spreadsheet according to the user's preference.
+
+Did you learn any lessons from the code given to you, or the updates you had to make for your customers?
+The code that we received did not encapsulate the model entirely thus we had to use the adapter pattern to make their implementation compatible with our model. Additionally, we used the JTable from the Swing library as the basis of our design for our spreadsheet view whereas our providers did not, so it was interesting to observe and understand their design choices. It seems that there is a higher degree of customizability that arises from our providers view design as opposed to ours.
+
+What was your experience like with your providers?
+Our providers were very communicative and would respond to our inquiries without long delays. We did not receive much implementation details, so we did have some difficulty at first, but our providers were quick to reply to the doubts we had. Overall, we had a very positive experience with our providers.

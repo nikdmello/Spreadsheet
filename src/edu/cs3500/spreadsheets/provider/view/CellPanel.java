@@ -1,13 +1,16 @@
 package edu.cs3500.spreadsheets.provider.view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.font.LineMetrics;
 import java.awt.geom.Rectangle2D;
 import java.util.function.Consumer;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 import edu.cs3500.spreadsheets.model.Coord;
 
@@ -26,7 +29,8 @@ class CellPanel extends JPanel implements MouseListener {
 
   private boolean selected;
 
-  CellPanel(edu.cs3500.spreadsheets.provider.view.GridPanel.ScrollOffsetManager scroll, int col, int row,
+  CellPanel(edu.cs3500.spreadsheets.provider.view.GridPanel.ScrollOffsetManager scroll,
+            int col, int row,
             ROWorksheet worksheet, Consumer<CellPanel> gridConsumer,
             Consumer<String> frameConsumer) {
     this.scroll = scroll;

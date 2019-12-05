@@ -1,6 +1,6 @@
 package edu.cs3500.spreadsheets.view;
 
-import javax.swing.*;
+import javax.swing.AbstractListModel;
 
 /**
  * Represents the row list data model that provides a list with the rows as an array of Strings.

@@ -54,7 +54,7 @@ public interface SpreadsheetController {
   void addRows();
 
   /**
-   * Sets the controller to work with a new view
+   * Sets the controller to work with a new view.
    *
    * @param view the view to work with
    */

@@ -8,9 +8,9 @@ import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.Worksheet;
 
 public class ProviderModelAdapter implements ROWorksheet {
-  Worksheet sheet;
+  private Worksheet sheet;
 
-  public ProviderModelAdapter(Worksheet sheet) {
+  ProviderModelAdapter(Worksheet sheet) {
     this.sheet = sheet;
   }
 

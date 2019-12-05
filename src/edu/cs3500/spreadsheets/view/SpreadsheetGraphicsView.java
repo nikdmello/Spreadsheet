@@ -1,8 +1,6 @@
 package edu.cs3500.spreadsheets.view;
 
 import java.awt.BorderLayout;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 

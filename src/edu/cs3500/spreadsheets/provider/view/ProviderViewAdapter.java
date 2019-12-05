@@ -10,7 +10,7 @@ import edu.cs3500.spreadsheets.view.ModelToView;
  * Adapts the provider view to our model.
  */
 public class ProviderViewAdapter extends GUIView {
-  WorksheetView pview;
+  private WorksheetView pview;
 
   /**
    * Creates and initializes the view.
@@ -18,7 +18,7 @@ public class ProviderViewAdapter extends GUIView {
    * @param mtt The model to view translator
    * @param cvr the view to controller translator
    */
-  public ProviderViewAdapter(ModelToView mtt, ControllerViewRequester cvr, WorksheetView pv) {
+  ProviderViewAdapter(ModelToView mtt, ControllerViewRequester cvr, WorksheetView pv) {
     super(mtt, cvr);
     this.pview = pv;
     super.dispose();

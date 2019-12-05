@@ -12,11 +12,12 @@ import edu.cs3500.spreadsheets.model.Worksheet;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Tests the GUI controller.
+ * Tests the GUI controller for actions such as clearing cell's contents and adding rows
+ * and columns.
  */
 public class SpreadsheetGUIControllerTest {
-  Worksheet sheet = new BasicWorksheetModel();
-  SpreadsheetController controller = new SpreadsheetGUIController(sheet);
+  private Worksheet sheet = new BasicWorksheetModel();
+  private SpreadsheetController controller = new SpreadsheetGUIController(sheet);
 
   @Test
   public void cellRequestTest() {

@@ -4,6 +4,9 @@ import edu.cs3500.spreadsheets.model.BoolValue;
 import edu.cs3500.spreadsheets.model.DoubleValue;
 import edu.cs3500.spreadsheets.model.StringValue;
 
+/**
+ * A visitor function object that converts a Value to a WValue.
+ */
 public class ValueToWValue implements ValueVisitor<WValue> {
 
   @Override

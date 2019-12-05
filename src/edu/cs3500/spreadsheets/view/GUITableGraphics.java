@@ -1,12 +1,17 @@
 package edu.cs3500.spreadsheets.view;
 
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JList;
 
 import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
 import edu.cs3500.spreadsheets.model.Coord;

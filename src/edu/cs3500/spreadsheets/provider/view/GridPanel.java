@@ -1,12 +1,16 @@
 package edu.cs3500.spreadsheets.provider.view;
 
-import java.awt.*;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.function.Consumer;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 class GridPanel extends JPanel {
 

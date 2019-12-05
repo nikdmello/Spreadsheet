@@ -9,10 +9,15 @@ import edu.cs3500.spreadsheets.model.BasicWorksheetModel;
 import edu.cs3500.spreadsheets.model.Worksheet;
 import edu.cs3500.spreadsheets.view.ModelToTable;
 
-
+/**
+ * An adapter for the worksheet.
+ */
 public class ProviderControlAdapter implements WorksheetController {
-  WorksheetView view;
+  private WorksheetView view;
 
+  /**
+   * Constructs a worksheet.
+   */
   public ProviderControlAdapter() {
     Worksheet sheet = new BasicWorksheetModel();
     this.view = new VisualWorksheetView(new ProviderModelAdapter(sheet));

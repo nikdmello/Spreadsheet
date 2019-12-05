@@ -1,5 +1,8 @@
 package edu.cs3500.spreadsheets.view;
 
+/**
+ * The model to view interface represents the methods that are to be used in the view.
+ */
 public interface ModelToView {
 
   /**

@@ -1,0 +1,20 @@
+Design critique
+The design of the providers' code is clear and logical. Their code has an interface 'Wexp', which is an expression for worksheets. Similarly we had our own separate interface 'Value'. We did not have to change any of their code, but we had to make their view code compatible with our model. We achieved this by creating a value visitor interface and a value visitor function object that converts our Value into a Wexp, which can then be used in the view. 
+
+
+Implementation critique
+While the overall implementation was smooth, there were a few issues that we ran into. After we instantiated the view, the 'enter' key would not work because we were unaware that we had to add an edit listener. They had included the method to achieve this as part of the view interface, so it was not too hard to implement. It would have been helpful to have received some implementation instructions that could have prevented such an issue.
+
+
+Documentation critique
+The providers' code is mostly readable because most of their classes include relevant and thoughtful Javadoc. In addition, some methods that are hard to understand, such as those in GridPanel.java, include comments that explain its purpose. A couple classes did not include Javadoc, but nevertheless my partner and I did not have a very difficult time understanding the providers' code.
+
+
+Design/code limitations and suggestions.
+We thought that the providers' model should not have been directly passed into the view. Although it was a read-only view, it did not encapsulate many parts of the model that we, the customers, did not have access to. We were therefore forced to make more adapters and another visitor to encompass their design and make it work with our model. My main suggestion would be to look at what classes are exposed from the model and limit it to java library classes and no custom classes. Overall, the providers did a great job with their code.
+
+
+
+
+
+

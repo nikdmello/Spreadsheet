@@ -1,12 +1,17 @@
 package edu.cs3500.spreadsheets.view;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import edu.cs3500.spreadsheets.controller.ControllerViewRequester;
 
@@ -14,11 +19,8 @@ import edu.cs3500.spreadsheets.controller.ControllerViewRequester;
  * Represents an editable view of a spreadsheet.
  */
 public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
-  private ModelToView mtt;
   private GUITableGraphics table;
   private ControllerViewRequester cvr;
-  private JPanel topBar;
-  private JPanel bottomBar;
   private JTextField formulaBar;
   private JTextField fileBar;
 
@@ -30,7 +32,6 @@ public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
    */
   public GUIView(ModelToView mtt, ControllerViewRequester cvr) {
     super();
-    this.mtt = mtt;
     this.cvr = cvr;
 
     //initialize the top bar
@@ -46,7 +47,7 @@ public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
     formulaBar = new JTextField();
     formulaBar.setPreferredSize(new Dimension(540, 30));
     FlowLayout tbarlay = new FlowLayout();
-    topBar = new JPanel();
+    JPanel topBar = new JPanel();
     topBar.setLayout(tbarlay);
     topBar.add(acceptButton);
     topBar.add(delButton);
@@ -77,7 +78,7 @@ public class GUIView extends JFrame implements SpreadsheetView, ActionListener {
     fileBar = new JTextField();
     fileBar.setPreferredSize(new Dimension(360, 30));
     FlowLayout bbarlay = new FlowLayout();
-    bottomBar = new JPanel();
+    JPanel bottomBar = new JPanel();
     bottomBar.setLayout(bbarlay);
     bottomBar.add(colButton);
     bottomBar.add(rowButton);
